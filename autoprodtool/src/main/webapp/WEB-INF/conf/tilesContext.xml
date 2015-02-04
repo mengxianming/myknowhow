@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- commonLayout: left main bottom -->
+	<definition name="commonLayout" template="/WEB-INF/views/layout/layout-common.jsp">
+        <put-attribute name="left" value="/WEB-INF/views/nav.jsp" />
+		<put-attribute name="main" value="" />
+	</definition>   
+    
+    <definition name="tiles:/*" extends="commonLayout">
+        <put-attribute name="main" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+    <definition name="tiles:/*/*" extends="commonLayout">
+        <put-attribute name="main" value="/WEB-INF/views/{1}/{2}.jsp" />
+    </definition>
+    <definition name="tiles:/*/*/*" extends="commonLayout">
+        <put-attribute name="main" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+    </definition>
+    <definition name="tiles:/*/*/*/*" extends="commonLayout">
+        <put-attribute name="main" value="/WEB-INF/views/{1}/{2}/{3}/{4}.jsp" />
+    </definition>
+	
+</tiles-definitions>

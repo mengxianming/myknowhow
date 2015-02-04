@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/jdbc 
+			http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<context:component-scan base-package="com.study.autoprodtool">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<context:property-placeholder file-encoding="UTF-8" location="WEB-INF/conf/application.properties" />
+
+	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" autowire="byName"> -->
+	<!-- <property name="basenames"> -->
+	<!-- <list> -->
+	<!-- <value>${basePackagePath}/resources/validation</value> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- <property name="defaultEncoding" value="UTF-8" /> -->
+	<!-- <property name="useCodeAsDefaultMessage" value="true" /> -->
+	<!-- </bean> -->
+
+	<!-- <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"> -->
+	<!-- <property name="staticMethod" value="${basePackage}.common.ErrorCode.setMessageSource" /> -->
+	<!-- <property name="arguments"> -->
+	<!-- <list> -->
+	<!-- <ref bean="messageSource" /> -->
+	<!-- </list> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+
+
+	<!-- SqlSessionFactory設定 -->
+	<bean id="hibSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<value>${basePackagePath}/entity</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibSessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception"
+				no-rollback-for="java.lang.RuntimeException" />
+			<tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="select*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="txPointcut" expression="execution(public * ${basePackage}.service..*.*(..))" />
+		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice" />
+	</aop:config>
+
+
+	<bean id="logAspect" class="${basePackage}.common.LogAspect">
+		<property name="beforeLevel" value="${LogAspect.beforeLevel}" />
+		<property name="includParameterLog" value="${LogAspect.includeParameter}" />
+		<property name="parameterLevel" value="${LogAspect.parameterLevel}" />
+		<property name="afterLevel" value="${LogAspect.afterLevel}" />
+		<property name="aroundLevel" value="${LogAspect.aroundLevel}" />
+		<property name="throwingLevel" value="${LogAspect.throwingLevel}" />
+	</bean>
+
+	<aop:config>
+		<aop:aspect id="controllerLogAspect" ref="logAspect">
+			<aop:pointcut id="controllerPointcut" expression="execution(public * ${basePackage}.web..*.*(..))" />
+
+			<aop:before pointcut-ref="controllerPointcut" method="doBefore" />
+			<aop:after pointcut-ref="controllerPointcut" method="doAfter" />
+			<aop:around pointcut-ref="controllerPointcut" method="doAround" />
+			<aop:after-throwing pointcut-ref="controllerPointcut" method="doThrowing" throwing="ex" />
+		</aop:aspect>
+		<aop:aspect id="daoLogAspect" ref="logAspect">
+			<aop:pointcut id="daoPointcut" expression="execution(public * ${basePackage}.dao..*.*(..))" />
+			<aop:before pointcut-ref="daoPointcut" method="doBefore" />
+			<aop:after pointcut-ref="daoPointcut" method="doAfter" />
+			<aop:around pointcut-ref="daoPointcut" method="doAround" />
+			<aop:after-throwing pointcut-ref="daoPointcut" method="doThrowing" throwing="ex" />
+		</aop:aspect>
+		<aop:aspect id="serviceLogAspect" ref="logAspect">
+			<aop:pointcut id="servicePointcut" expression="execution(public * ${basePackage}.service..*.*(..))" />
+			<aop:before pointcut-ref="servicePointcut" method="doBefore" />
+			<aop:after pointcut-ref="servicePointcut" method="doAfter" />
+			<aop:around pointcut-ref="servicePointcut" method="doAround" />
+			<aop:after-throwing pointcut-ref="servicePointcut" method="doThrowing" throwing="ex" />
+		</aop:aspect>
+	</aop:config>
+
+	<beans profile="product">
+		<!-- DataSource設定 -->
+		<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+		<!-- <property name="jndiName" value="java:comp/env/jdbc/settings_db" /> -->
+		<!-- <property name="resourceRef" value="true" /> -->
+		<!-- </bean> -->
+		<!-- localデータソース設定 -->
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="${db.jdbc.driverClassName}" />
+			<property name="url" value="${db.jdbc.url}" />
+			<property name="username" value="${db.jdbc.username}" />
+			<property name="password" value="${db.jdbc.password}" />
+		</bean>
+	</beans>
+
+	<beans profile="develop">
+		<jdbc:embedded-database id="dataSource" type="HSQL">
+		</jdbc:embedded-database>
+	</beans>
+
+</beans> 
