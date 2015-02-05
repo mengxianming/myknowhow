@@ -4,104 +4,106 @@
 <!DOCTYPE html">
 <html>
 <body>
+    <div style="float:right; padding: 10px 20px;">
+    <button>ヘルプ</button><br><br>
+    <button>戻る</button>
+    </div>
 	<h1>ユーザー情報</h1>
-	<table>
+	<table class="table">
 		<tbody>
 			<tr>
-				<td>ユーザID</td>
+				<th colspan="2">ユーザID</th>
 				<td>${user.loginName}</td>
 			</tr>
 			<tr>
-				<td>ユーザ識別</td>
+				<th colspan="2">ユーザ識別</th>
 				<td>${user.role}</td>
 			</tr>
 			<tr>
-				<td>ムービーユーザ識別</td>
+				<th colspan="2">ムービーユーザ識別</th>
 				<td>${user.movieFlag == true ? 'ムービー利用可' : 'ムービー利用不可'}</td>
 			</tr>
 			<tr>
-				<td>Successユーザ識別</td>
+				<th colspan="2">Successユーザ識別</th>
 				<td>${user.successRole}</td>
 			</tr>
-			<tr class="blank_row"/>
+			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
-				<td rowspan="4">氏名</td>
-				<td>日本語</td>
+				<th rowspan="4">氏名</th>
+				<th>日本語</th>
 				<td>${user.name}</td>
 			</tr>
-			<tr>
-				<td></td>
-				<td>カナ半角</td>
+			<tr>				
+				<th>カナ半角</th>
 				<td>${user.nameKana}</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td>英語</td>
+				<th>英語</th>
 				<td>${user.nameEnglish}</td>
 			</tr>
 			<tr>
-				<td></td>
-				<td>ニックネーム</td>
+				<th>ニックネーム</th>
 				<td>${user.nickname}</td>
 			</tr>
-			<tr class="blank_row"/>
+			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
-				<td>会社</td>
+				<th colspan="2">会社</th>
 				<td>${user.company}</td>
 			</tr>
 			<tr>
-				<td>所属</td>
-				<td>部</td>
+				<th rowspan="3">所属</th>
+				<th>部</th>
 				<td>${user.division.level1}</td>
 			</tr>
 			<tr>
-				<td>所属</td>
-				<td>課</td>
+				<th>課</th>
 				<td>${user.division.level2}</td>
 			</tr>
 			<tr>
-				<td>所属</td>
-				<td>グループ</td>
+				<th>グループ</th>
 				<td>${user.division.level3}</td>
 			</tr>
-			<tr class="blank_row"/>
+			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
-				<td>インターネットメールアドレス</td>
+				<th colspan="2">インターネットメールアドレス</th>
 				<td>${user.email}</td>
 			</tr>
 			<tr>
-				<td>サマリメール</td>
+				<th colspan="2">サマリメール</th>
 				<td>${user.sumaryMailFlag == true ? '必要' : '不要'}</td>
 			</tr>
 			<tr>
-				<td>文書回覧メール</td>
+				<th colspan="2">文書回覧メール</th>
 				<td>${user.articleMailFlag == true ? '必要' : '不要'}</td>
 			</tr>
 			
-			<tr class="blank_row"/>
+			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
-				<td>代理権者</td>
+				<th colspan="2">代理権者</th>
 				<td>${user.agent}</td>
 			</tr>
-			<tr class="blank_row"/>
+			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
-				<td>作成日<br>(YYYY-MM-DD HH:MM:SS)</td>
+				<th colspan="2">作成日<br>(YYYY-MM-DD HH:MM:SS)</th>
 				<td><fmt:formatDate value="${user.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
 			<tr>
-				<td>最終ログイン<br>(YYYY-MM-DD HH:MM:SS)</td>
+				<th colspan="2">最終ログイン<br>(YYYY-MM-DD HH:MM:SS)</th>
 				<td><fmt:formatDate value="${user.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
 			<tr>
-				<td>ユーザ情報最終更新日<br>(YYYY-MM-DD HH:MM:SS)</td>
+				<th colspan="2">ユーザ情報最終更新日<br>(YYYY-MM-DD HH:MM:SS)</th>
 				<td><fmt:formatDate value="${user.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
-			<tr class="blank_row"/>
+			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
-				<td>ステータス</td>
+				<th colspan="2">ステータス</th>
 				<td>${user.status == 0 ? 'Valid' : 'Invalid'}</td>
 			</tr>
 		</tbody>
 	</table>
+	
+	<div><button>編集</button> </div>
 </body>
+
 </html>

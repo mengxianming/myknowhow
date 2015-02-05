@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.study.autoprodtool.common.ListJsonResult;
 
 /**
  * Handles requests for the application home page.
@@ -25,6 +28,17 @@ public class UserController {
 		
 		
 		return "/user/detail";
+	}
+	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
+	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
+	@ResponseBody
+	public ListJsonResult list() {
+				
+		
+		return null;
 	}
 	
 }

@@ -7,19 +7,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>モジュール展開表</title>
-
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/common.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/lib/jquery/jquery.js"></script>
 </head>
 <body>
 	<div id="container">
-		<div id="layout-left" class="layout-content">
-			<tiles:insertAttribute name="left" />
+		<div id="layout-left" style="float:left; width:300px;">
+			<div id="left-container" style="border: 2px solid;">
+				<tiles:insertAttribute name="left" />
+			</div>
+
 		</div>
-		<div id="layout-main" class="layout-content">
-			<tiles:insertAttribute name="main" />
+		<div id="layout-main" style="padding-left: 320px;">
+			<div id="right-container" style="border: 2px solid; text-align: center;padding: 10px 0 20px;">
+				<tiles:insertAttribute name="main" />
+			</div>
+
 		</div>
 	</div>
-
-
 </body>
+
 </html>
