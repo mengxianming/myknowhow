@@ -6,8 +6,10 @@ package com.study.autoprodtool.service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
-import com.study.autoprodtool.dao.RestrictionProvider;
+import com.study.autoprodtool.entity.Entity;
+import com.study.autoprodtool.form.ListCriteria;
 
 /**
  * Descriptions
@@ -17,12 +19,13 @@ import com.study.autoprodtool.dao.RestrictionProvider;
  * @since JDK1.6
  *
  */
-public interface CrudService<T> {
+public interface CrudService<T extends Entity> {
 	T selectOne(Serializable key) throws Exception;;
-	List<T> selectList(RestrictionProvider restrictions) throws Exception;
-	List<Long> selectIdList(RestrictionProvider restrictions) throws Exception;
-	int selectListSize(RestrictionProvider restrictions) throws Exception;
+	List<T> selectList(ListCriteria<?> restrictions) throws Exception;
+	List<Long> selectIdList(ListCriteria<?> restrictions) throws Exception;
+	int selectListSize(ListCriteria<?> restrictions) throws Exception;
 	void insert(T entity) throws Exception;
 	void update(T entity) throws Exception;
 	void delete(T entity) throws Exception;
+	Map<Long, T> selectListByIds(Long[] idList) throws Exception;
 }

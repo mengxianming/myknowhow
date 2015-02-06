@@ -19,14 +19,7 @@
 				<th colspan="2">ユーザ識別</th>
 				<td>${user.role}</td>
 			</tr>
-			<tr>
-				<th colspan="2">ムービーユーザ識別</th>
-				<td>${user.movieFlag == true ? 'ムービー利用可' : 'ムービー利用不可'}</td>
-			</tr>
-			<tr>
-				<th colspan="2">Successユーザ識別</th>
-				<td>${user.successRole}</td>
-			</tr>
+			
 			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
 				<th rowspan="4">氏名</th>
