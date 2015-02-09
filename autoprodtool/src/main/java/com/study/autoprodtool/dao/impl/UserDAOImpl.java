@@ -23,8 +23,8 @@ public class UserDAOImpl extends CrudDAOImpl<User> implements UserDAO{
 	/**
 	 * @param entityClazz
 	 */
-	public UserDAOImpl(Class<User> entityClazz) {
-		super(entityClazz);		
+	public UserDAOImpl() {
+		super(User.class);		
 	}
 
 	

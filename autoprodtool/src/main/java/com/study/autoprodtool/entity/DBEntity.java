@@ -3,6 +3,7 @@ package com.study.autoprodtool.entity;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 /**
  * DBテーブルを表すエンティティ。
@@ -10,8 +11,8 @@ import javax.persistence.Id;
  * @author mengxm 2013-5-27 created
  *
  */
-@javax.persistence.Entity
-public abstract class Entity {
+@MappedSuperclass  
+public abstract class DBEntity {
 	@Id
 	protected Long id;
 	protected Date createTime;	
@@ -50,7 +51,7 @@ public abstract class Entity {
 	}
 		 
 	
-	public static <E extends Entity> E emptyEntity(Class<E> clazz, Long id){
+	public static <E extends DBEntity> E emptyEntity(Class<E> clazz, Long id){
 		E ent;
 		try {
 			ent = clazz.newInstance();

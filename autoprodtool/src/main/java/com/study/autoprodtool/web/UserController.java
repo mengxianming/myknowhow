@@ -20,6 +20,7 @@ import com.study.autoprodtool.common.ComUtils;
 import com.study.autoprodtool.common.JsonResult;
 import com.study.autoprodtool.common.ListJsonResult;
 import com.study.autoprodtool.common.Pager;
+import com.study.autoprodtool.common.Urls;
 import com.study.autoprodtool.entity.User;
 import com.study.autoprodtool.form.ListCriteria;
 import com.study.autoprodtool.form.UserForm;
@@ -38,19 +39,19 @@ public class UserController {
 	private Integer pageLimit;
 
 	
-	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
+	@RequestMapping(value = Urls.USER_LIST, method = RequestMethod.GET)
 	public String listPage() {
 		
 		return "/user/list";
 	}
 	
-	@RequestMapping(value = "/user/create", method = RequestMethod.GET)
+	@RequestMapping(value = Urls.USER_CREATE, method = RequestMethod.GET)
 	public String createPage() {
 		
 		return "/user/create";
 	}
 	
-	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
+	@RequestMapping(value = Urls.USER_UPDATE, method = RequestMethod.GET)
 	public String updatePage() {
 		
 		return "/user/update";
@@ -60,7 +61,7 @@ public class UserController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = Urls.USER_DETAIL + "/{id}", method = RequestMethod.GET)
 	public String detailPage(@PathVariable String id) {
 		log.info("show user detail fo id: "+ id);
 
@@ -73,7 +74,7 @@ public class UserController {
 	 * Simply selects the home view to render by returning its name.
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/user/list", method = RequestMethod.GET)
+	@RequestMapping(value = Urls.USER_LIST, method = RequestMethod.POST)
 	@ResponseBody
 	public ListJsonResult list(@ModelAttribute ListCriteria<UserForm> listCriteria) throws Exception {
 		List<User> list = userService.selectList(listCriteria);				
@@ -81,21 +82,21 @@ public class UserController {
 		return ListJsonResult.success(list, listCriteria.getPager());
 	}
 
-	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
+	@RequestMapping(value = Urls.USER_CREATE, method = RequestMethod.POST)
 	public JsonResult create(UserForm userForm) throws Exception{
 		User user = userForm.toEntity(User.class);
 		userService.insert(user);
 		return JsonResult.success(user.getId());
 	}
 	
-	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	@RequestMapping(value = Urls.USER_UPDATE, method = RequestMethod.POST)
 	public JsonResult update(UserForm userForm) throws Exception{
 		User user = userForm.toEntity(User.class);
 		userService.update(user);
 		return JsonResult.success(null);
 	}
 	
-	@RequestMapping(value = "/user/delete", method = RequestMethod.POST)
+	@RequestMapping(value = Urls.USER_DELETE, method = RequestMethod.POST)
 	public JsonResult delete(String ids) throws Exception{
 		if(CheckUtil.isNull(ids)){
 			throw new Exception("empty parameter: ids");

@@ -13,7 +13,7 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 
 import com.study.autoprodtool.common.CheckUtil;
-import com.study.autoprodtool.entity.Entity;
+import com.study.autoprodtool.entity.DBEntity;
 
 /**
  * Descriptions
@@ -23,7 +23,7 @@ import com.study.autoprodtool.entity.Entity;
  * @since JDK1.6
  *
  */
-public abstract class EntityForm<E extends Entity> {
+public abstract class EntityForm<E extends DBEntity> {
 	public void initFromEntity(E entity){	
 		if(entity == null){
 			return;

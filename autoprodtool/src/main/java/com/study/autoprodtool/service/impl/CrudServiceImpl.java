@@ -12,7 +12,7 @@ import java.util.Map;
 import com.study.autoprodtool.common.CheckUtil;
 import com.study.autoprodtool.dao.CrudDAO;
 import com.study.autoprodtool.dao.RestrictionProvider;
-import com.study.autoprodtool.entity.Entity;
+import com.study.autoprodtool.entity.DBEntity;
 import com.study.autoprodtool.form.ListCriteria;
 import com.study.autoprodtool.service.CrudService;
 
@@ -24,7 +24,7 @@ import com.study.autoprodtool.service.CrudService;
  * @since JDK1.6
  *
  */
-public abstract class CrudServiceImpl<T extends Entity> implements CrudService<T>{	
+public abstract class CrudServiceImpl<T extends DBEntity> implements CrudService<T>{	
 
 	public abstract CrudDAO<T> getCrudDAO();
 	

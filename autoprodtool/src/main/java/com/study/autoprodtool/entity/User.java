@@ -6,6 +6,7 @@ package com.study.autoprodtool.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
@@ -16,9 +17,11 @@ import javax.persistence.ManyToOne;
  * @since JDK1.6
  *
  */
-public class User extends Entity{
+@Entity
+public class User extends DBEntity{
 	private String loginName;
 	private String password;
+	@ManyToOne
 	private Role role;
 	private String name;
 	private String nameKana;

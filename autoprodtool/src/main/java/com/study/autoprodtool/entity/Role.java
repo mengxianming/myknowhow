@@ -4,6 +4,8 @@
  */
 package com.study.autoprodtool.entity;
 
+import javax.persistence.Entity;
+
 /**
  * Descriptions
  *
@@ -12,6 +14,20 @@ package com.study.autoprodtool.entity;
  * @since JDK1.6
  *
  */
-public class Role extends Entity {
+@Entity
+public class Role extends DBEntity {
+	private String name;
 
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 }

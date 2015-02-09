@@ -1,12 +1,10 @@
 /*
  * 企業選択JS処理 
  */
-$(function() {
-
-    var rowId = null;
+$(function() {    
     // テーブル定義
-    var jqGridWrapper = new JqGridWrapper("company-list", true, {
-	url : listUrl,
+    var jqGridWrapper = new JqGridWrapper("user-list", false, {
+	url : urls.list,
 	mtype : "POST",
 	dataType: "json",
 	jsonReader : {
@@ -18,6 +16,7 @@ $(function() {
 	    id : "id"
 	},
 	height : "auto",
+	width : 700,
 	autowidth : true,
 	shrinkToFit : false,
 	altRows : true,
@@ -88,33 +87,40 @@ $(function() {
 	    }
 	}],
 	beforeProcessing : function(data) {	   
-	    var gridParam = {};
-	    if (data.pageSize) {
-		gridParam.rowNum = data.pageSize;
-		gridParam.records = data.totalRecords;
-		gridParam.page = data.currentPage;
-	    }
-	    companyGrid.jqGrid('setGridParam', gridParam);
-
-	    if (data.pageSize) {
-		util.paginator($("#paginator"), gridParam.records, gridParam.rowNum,
-			gridParam.page, 9, function(newPage) {
-		    companyGrid.setGridParam({
-			page : newPage
-		    });
-		    reloadTable();
-		});
-	    }	    
+//	    var gridParam = {};
+//	    if (data.pageSize) {
+//		gridParam.rowNum = data.pageSize;
+//		gridParam.records = data.totalRecords;
+//		gridParam.page = data.currentPage;
+//	    }
+//	    companyGrid.jqGrid('setGridParam', gridParam);
+//
+//	    if (data.pageSize) {
+//		util.paginator($("#paginator"), gridParam.records, gridParam.rowNum,
+//			gridParam.page, 9, function(newPage) {
+//		    companyGrid.setGridParam({
+//			page : newPage
+//		    });
+//		    reloadTable();
+//		});
+//	    }	    
 	  
-	    
-	    rowId = null;
-	},
-	onCellSelect : function(rowid, index, contents, event) {
-	    // var data = $("#" + rowid + ">td"); // 行内のTDを取得する
-	    // rowId = data[0].innerHTML;
-	    rowId = rowid;
 	}
+	
     });
 
+    //register button handlers
+    $("#btn-new").click(function(){
+	window.location.href=urls.create;
+    });
+    $("#btn-edit").click(function(){
+	window.location.href=urls.update + "/" + jqGridWrapper.getSelectedRowData().id;
+    });
+    $("#btn-del").click(function(){
+	window.location.href=urls.del + "/" + jqGridWrapper.getSelectedRowData().id;
+    });
+    
+    //show data list
+    jqGridWrapper.reloadTable();
 
 });

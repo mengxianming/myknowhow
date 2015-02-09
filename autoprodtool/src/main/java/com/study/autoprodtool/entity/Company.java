@@ -4,6 +4,8 @@
  */
 package com.study.autoprodtool.entity;
 
+import javax.persistence.Entity;
+
 /**
  * Descriptions
  *
@@ -12,7 +14,8 @@ package com.study.autoprodtool.entity;
  * @since JDK1.6
  *
  */
-public class Company extends Entity {
+@Entity
+public class Company extends DBEntity {
 	private String name;
 	
 	/**

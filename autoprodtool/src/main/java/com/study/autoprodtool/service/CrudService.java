@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import com.study.autoprodtool.entity.Entity;
+import com.study.autoprodtool.entity.DBEntity;
 import com.study.autoprodtool.form.ListCriteria;
 
 /**
@@ -19,7 +19,7 @@ import com.study.autoprodtool.form.ListCriteria;
  * @since JDK1.6
  *
  */
-public interface CrudService<T extends Entity> {
+public interface CrudService<T extends DBEntity> {
 	T selectOne(Serializable key) throws Exception;;
 	List<T> selectList(ListCriteria<?> restrictions) throws Exception;
 	List<Long> selectIdList(ListCriteria<?> restrictions) throws Exception;
