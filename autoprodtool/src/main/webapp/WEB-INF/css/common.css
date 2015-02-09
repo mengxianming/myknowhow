@@ -1,0 +1,25 @@
+.table {
+	border: 1px solid #888;
+	border-collapse: collapse;
+	margin: 0 auto;
+	width: 500px;
+}
+
+.table th {
+	border: 1px solid #888;
+	background: gray;
+	color: white;
+}
+
+.table td {
+	border: 1px solid #888;
+	width: 50%;
+}
+
+.blank-row {
+	height: 20px;
+}
+
+button {
+	width: 80px;
+}
