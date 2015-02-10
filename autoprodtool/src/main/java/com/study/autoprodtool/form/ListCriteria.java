@@ -99,7 +99,9 @@ public abstract class ListCriteria<F>{
 			
 			@Override
 			public void addRestriction(Criteria criteria) {
-				criteria.addOrder(getOrder());
+				if(getOrder() != null){
+					criteria.addOrder(getOrder());
+				}
 				if(pager != null){
 					criteria.setFirstResult(pager.getPage() == null ? 0 : pager.getPage() * pager.getLimit());
 					if(pager.getLimit() != null){

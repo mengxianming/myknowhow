@@ -5,6 +5,7 @@
 package com.study.autoprodtool.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Descriptions
@@ -16,6 +17,8 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Role extends DBEntity {
+	@Id
+	private Long id;
 	private String name;
 
 	/**
@@ -30,4 +33,18 @@ public class Role extends DBEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
 }

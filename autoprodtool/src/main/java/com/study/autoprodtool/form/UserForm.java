@@ -12,7 +12,7 @@ import com.study.autoprodtool.entity.User;
  * @since JDK1.6
  *
  */
-public class UserForm extends EntityForm<User>{
+public class UserForm extends EntityForm<UserForm, User>{
 	private String id;
 	private String loginName;
 	private String password;

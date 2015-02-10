@@ -94,6 +94,7 @@ public abstract class CrudServiceImpl<T extends DBEntity> implements CrudService
 	 * @see my.study.dynaweb.dao.getCrudDAO()#insert(java.lang.Object)
 	 */
 	public void insert(T entity) throws Exception {
+		entity.removeTransientsBeforeSave();
 		getCrudDAO().insert(entity);
 	}
 

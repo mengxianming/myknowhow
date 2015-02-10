@@ -23,21 +23,23 @@ import com.study.autoprodtool.entity.DBEntity;
  * @since JDK1.6
  *
  */
-public abstract class EntityForm<E extends DBEntity> {
-	public void initFromEntity(E entity){	
+public abstract class EntityForm<F extends EntityForm<?, ?>, E extends DBEntity> {
+	@SuppressWarnings("unchecked")
+	public F initFromEntity(E entity){	
 		if(entity == null){
-			return;
+			return (F)this;
 		}
 		
 		try {
 			BeanWrapper formWrapper = PropertyAccessorFactory.forBeanPropertyAccess(this);
 			formWrapper.setAutoGrowNestedPaths(true);
 			BeanWrapper entityWrapper = PropertyAccessorFactory.forBeanPropertyAccess(entity);
+			entityWrapper.setAutoGrowNestedPaths(true);
 			
 			//set properties base on setter, and check annotated method
 			for(Method method : getClass().getMethods()){
 				PropertyDescriptor desciptor = BeanUtils.findPropertyForMethod(method);				
-				if(desciptor == null){
+				if(desciptor == null || desciptor.getWriteMethod() == null){
 					continue;
 				}
 				String propName = desciptor.getName();
@@ -71,6 +73,8 @@ public abstract class EntityForm<E extends DBEntity> {
 		catch (Exception e) {			
 			throw new FormEntityConversionException(e);
 		}		
+		
+		return (F)this;
 	}
 	
 	@SuppressWarnings("unchecked")

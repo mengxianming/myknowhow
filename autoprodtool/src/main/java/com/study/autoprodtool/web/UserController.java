@@ -1,5 +1,6 @@
 package com.study.autoprodtool.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -77,12 +78,17 @@ public class UserController {
 	@RequestMapping(value = Urls.USER_LIST, method = RequestMethod.POST)
 	@ResponseBody
 	public ListJsonResult list(@ModelAttribute ListCriteria<UserForm> listCriteria) throws Exception {
-		List<User> list = userService.selectList(listCriteria);				
+		List<User> list = userService.selectList(listCriteria);			
+		List<UserForm> ret = new ArrayList<UserForm>();
+		for(User user : list){
+			ret.add(new UserForm().initFromEntity(user));
+		}
 
-		return ListJsonResult.success(list, listCriteria.getPager());
+		return ListJsonResult.success(ret, listCriteria.getPager());
 	}
 
 	@RequestMapping(value = Urls.USER_CREATE, method = RequestMethod.POST)
+	@ResponseBody
 	public JsonResult create(UserForm userForm) throws Exception{
 		User user = userForm.toEntity(User.class);
 		userService.insert(user);
@@ -90,6 +96,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = Urls.USER_UPDATE, method = RequestMethod.POST)
+	@ResponseBody
 	public JsonResult update(UserForm userForm) throws Exception{
 		User user = userForm.toEntity(User.class);
 		userService.update(user);
@@ -97,6 +104,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = Urls.USER_DELETE, method = RequestMethod.POST)
+	@ResponseBody
 	public JsonResult delete(String ids) throws Exception{
 		if(CheckUtil.isNull(ids)){
 			throw new Exception("empty parameter: ids");

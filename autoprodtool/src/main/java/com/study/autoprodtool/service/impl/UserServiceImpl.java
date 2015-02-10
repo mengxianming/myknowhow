@@ -44,6 +44,5 @@ public class UserServiceImpl extends CrudServiceImpl<User> implements UserServic
 		
 	public List<User> selectAll(Integer start, Integer limit) throws Exception {		
 		return routeDAO.selectAll(start, limit);
-	}
-
+	}	
 }

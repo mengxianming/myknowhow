@@ -5,6 +5,10 @@
 package com.study.autoprodtool.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 /**
  * Descriptions
@@ -16,9 +20,27 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Division extends DBEntity {
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_division_id")
+	@SequenceGenerator(name="seq_division_id", sequenceName="seq_division_id", allocationSize=1)
+	private Long id;
 	private String name;
 	private String parent;
 	private String pparent;
+	
+	
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 	/**
 	 * @return the name
 	 */

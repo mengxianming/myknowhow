@@ -7,7 +7,11 @@ package com.study.autoprodtool.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 /**
  * Descriptions
@@ -19,6 +23,10 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class User extends DBEntity{
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_user_id")
+	@SequenceGenerator(name="seq_user_id", sequenceName="seq_user_id", allocationSize=1)
+	private Long id;
 	private String loginName;
 	private String password;
 	@ManyToOne
@@ -43,7 +51,23 @@ public class User extends DBEntity{
 	private Date lastLogin;
 	
 	private Short status;
-
+	
+	/* (non-Javadoc)
+	 * @see com.study.autoprodtool.entity.DBEntity#getId()
+	 */
+	@Override	
+	public Long getId() {		
+		return id;
+	}
+	/* (non-Javadoc)
+	 * @see com.study.autoprodtool.entity.DBEntity#setId(java.lang.Long)
+	 */
+	@Override
+	public void setId(Long id) {
+		this.id = id;		
+	}
+	
+	
 	public String getLoginName() {
 		return loginName;
 	}
@@ -162,8 +186,6 @@ public class User extends DBEntity{
 
 	public void setStatus(Short status) {
 		this.status = status;
-	}
-	
-	
+	}			
 
 }

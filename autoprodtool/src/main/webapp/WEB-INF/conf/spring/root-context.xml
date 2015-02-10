@@ -50,6 +50,10 @@
 				<value>${basePackagePath}/entity</value>
 			</list>
 		</property>
+		<property name="namingStrategy" >
+			<bean class="com.study.autoprodtool.common.MyNamingStrategy"></bean>
+		</property>
+		
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>

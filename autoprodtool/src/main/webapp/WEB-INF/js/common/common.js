@@ -10,57 +10,57 @@
      * @returns
      */
     JqGridWrapper = function (containerId, loadAtOnce, options){
-        var that = this;
-        this.selectedRowId = null;
-        this.grid = jQuery("#" + containerId);    
-        if(!loadAtOnce){
-    	options = jQuery.extend({}, options, {dataType: "local",	    
-    	    onCellSelect : function(rowid, index, contents, event) {		   
-    		that.selectedRowId = rowid;
-    	    },
-    	    beforeProcessing : function(data) {			    
-    		that.selectedRowId = null;
-    	    }
-
-    	});
-        }
-        this.grid.jqGrid(options);
+	var that = this;
+	this.selectedRowId = null;
+	this.grid = jQuery("#" + containerId);    
+	if(!loadAtOnce){
+	    options = jQuery.extend({}, options, {
+		datatype: "local"
+	    });
+	}
+	this.grid.bind("jqGridCellSelect", function(evt, rowid, index, content) {		   
+	    that.selectedRowId = rowid;
+	});
+	this.grid.bind("jqGridLoadComplete",function(event) {			    
+	    that.selectedRowId = null;
+	});
+	this.grid.jqGrid(options);
     };
 
     JqGridWrapper.prototype.resetUrl = function(newUrl){
-        var gridParam = {
-    	    url : newUrl
-        };
-        this.grid.jqGrid('setGridParam', gridParam);
+	var gridParam = {
+		url : newUrl
+	};
+	this.grid.jqGrid('setGridParam', gridParam);
     };
     JqGridWrapper.prototype.reloadTable = function(postData, resetPager){
-        var gridParam = {
-    	    datatype : "json"
-        };
-        if (postData) {
-    	gridParam.postData = postData;
-        }
-        if (resetPager) {
-    	gridParam.page = 1;
-        }
-        this.grid.jqGrid('setGridParam', gridParam);
-        this.grid.trigger("reloadGrid");
+	var gridParam = {
+		datatype : "json"
+	};
+	if (postData) {
+	    gridParam.postData = postData;
+	}
+	if (resetPager) {
+	    gridParam.page = 1;
+	}
+	this.grid.jqGrid('setGridParam', gridParam);
+	this.grid.trigger("reloadGrid");
 
     };
 
     JqGridWrapper.prototype.getWrapped = function(){
-        return this.grid;
+	return this.grid;
     };
 
     JqGridWrapper.prototype.getSelectedRowId = function(){
-        return this.selectedRowId;
+	return this.selectedRowId;
     };
 
     JqGridWrapper.prototype.getSelectedRowData = function(){
-        if(this.selectedRowId){
-    	return this.grid.jqGrid('getRowData', this.selectedRowId);
-        }
-        return null;
+	if(this.selectedRowId){
+	    return this.grid.jqGrid('getRowData', this.selectedRowId);
+	}
+	return null;
     };
 })();
 
@@ -70,34 +70,34 @@
  */
 $(function(){    
     util = {
-    	    
+
     };
 
     /**
      * Ajax呼び出す返却値を取得する
      */
     util.getAjaxData = function(url, postdata) {
-        var list = null;
-        postdata = postdata ? postdata : {};
-        
-        util.ajax({
-    	    	url : url,
-    	    	type : "POST",
-    	    	data : postdata,
-    	    	success : function(data, status) {
-    	    		if(data.data) {
-    	    			list = data.data;
-    	    		}
-    	    	}
-        });
-        
-        return list;
+	var list = null;
+	postdata = postdata ? postdata : {};
+
+	util.ajax({
+	    url : url,
+	    type : "POST",
+	    data : postdata,
+	    success : function(data, status) {
+		if(data.data) {
+		    list = data.data;
+		}
+	    }
+	});
+
+	return list;
     };
-    
-   util.fillOptionList = function (selector, dataList, keyProp, labelProp, selected){
+
+    util.fillOptionList = function (selector, dataList, keyProp, labelProp, selected){
 	$(selector).val("");
 	$(selector).empty();
-			
+
 	for(var index in dataList){			
 	    var dataEle = dataList[index];
 	    var key, label;
@@ -116,7 +116,7 @@ $(function(){
 	}
 
     };
-    
+
     /*
      * paginator control
      * 
@@ -134,24 +134,24 @@ $(function(){
      * 
      */
     util.paginator = function(container, totalRecords, recordsPerpage, currentPage, pageBtnCount, pageChangedCallBack) {
-        $(container).paginator({
-    	totalrecords : totalRecords,
-    	recordsperpage : recordsPerpage,
-    	pagebtncount : pageBtnCount,
-    	initval : currentPage,
-    	next : '次へ',
-    	prev : '前へ',
-    	first : '',
-    	last : '',
-    	theme : '',
-    	controlsalways : false,
-    	onchange : function(newPage) {
-    	    if (pageChangedCallBack)
-    		pageChangedCallBack(newPage);
-    	}
-        });
+	$(container).paginator({
+	    totalrecords : totalRecords,
+	    recordsperpage : recordsPerpage,
+	    pagebtncount : pageBtnCount,
+	    initval : currentPage,
+	    next : '次へ',
+	    prev : '前へ',
+	    first : '',
+	    last : '',
+	    theme : '',
+	    controlsalways : false,
+	    onchange : function(newPage) {
+		if (pageChangedCallBack)
+		    pageChangedCallBack(newPage);
+	    }
+	});
     };
-    
+
 });
 
 

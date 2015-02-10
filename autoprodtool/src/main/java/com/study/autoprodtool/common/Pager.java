@@ -75,10 +75,11 @@ public class Pager {
 		return null;
 	}
 
-	public Integer totalPages() {
+	public Integer getTotalPages() {
 		if (total != null && limit != null && limit > 0) {
 			return total / limit;
 		}
 		return null;
 	}
+	
 }

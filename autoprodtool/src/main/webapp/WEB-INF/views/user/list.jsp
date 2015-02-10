@@ -11,7 +11,7 @@
 <button id="btn-del">選択削除</button>
 </div>
 <div>
-	<div id="jqgrid-user-list">		
+	<div id="jqgrid-user-list" style="margin: 10px 20px;">		
 		<table id="user-list"></table>
 		<div id="pager"></div>
 	</div>
@@ -20,7 +20,9 @@
 	</div>
 </div>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/lib/jquery/jquery-ui/css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/lib/jquery/jqGrid/css/ui.jqgrid.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/lib/jquery/jquery-ui/jquery-ui.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/lib/jquery/jqGrid/jquery.jqGrid.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/common.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/user/list-app.js" ></script>

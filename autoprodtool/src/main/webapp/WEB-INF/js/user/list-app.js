@@ -3,21 +3,21 @@
  */
 $(function() {    
     // テーブル定義
-    var jqGridWrapper = new JqGridWrapper("user-list", false, {
+    jqGridWrapper = new JqGridWrapper("user-list", false, {
 	url : urls.list,
 	mtype : "POST",
-	dataType: "json",
+	datatype: "json",
 	jsonReader : {
 	    root : "data",
-	    page : "currentPage",
-	    total : "totalPages",
-	    records : "totalRecords",
+	    page : "pager.page",
+	    total : "pager.totalPages",
+	    records : "pager.total",
 	    cell : "",
 	    id : "id"
 	},
 	height : "auto",
-	width : 700,
-	autowidth : true,
+	width : $("#user-list").parent().width(),
+//	autowidth : true,
 	shrinkToFit : false,
 	altRows : true,
 	sortable : false,
@@ -33,18 +33,18 @@ $(function() {
 	    name : 'loginName'
 	}, {
 	    label : 'ユーザー識別',
-	    name : 'role'
+	    name : 'roleName'
 	}, {
 	    label : '氏名',
 	    name : 'name'
 	},  {
 	    label : '会社',
-	    name : 'company'
+	    name : 'companyName'
 	},  {
 	    label : '所属',
 	    name : 'division',
 	    jsonmap : function(obj) {
-		return divisionPParent + "-" + divisionParent + "-" + divisionName;
+		return obj.divisionPParent + "-" + obj.divisionParent + "-" + obj.divisionName;
 	    }
 	},  {
 	    label : 'インターネットメールアドレス',
@@ -87,7 +87,7 @@ $(function() {
 	    }
 	}],
 	beforeProcessing : function(data) {	   
-//	    var gridParam = {};
+	    var gridParam = {};
 //	    if (data.pageSize) {
 //		gridParam.rowNum = data.pageSize;
 //		gridParam.records = data.totalRecords;

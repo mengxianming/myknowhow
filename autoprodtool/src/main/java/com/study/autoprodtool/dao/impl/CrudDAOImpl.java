@@ -62,7 +62,7 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	 * @see my.study.hibernate.dao.CrudDAO#insert(java.lang.Object)
 	 */
 	public void insert(T entity) throws Exception {
-		getSession().save(entity);	
+		getSession().persist(entity);	
 		getSession().flush();
 	}
 
@@ -70,7 +70,7 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	 * @see my.study.hibernate.dao.CrudDAO#update(java.lang.Object)
 	 */
 	public void update(T entity) throws Exception {
-		getSession().update(entity);
+		getSession().merge(entity);
 		getSession().flush();
 	}
 
@@ -78,7 +78,7 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	 * @see my.study.hibernate.dao.CrudDAO#delete(java.lang.Object)
 	 */
 	public void delete(T entity) throws Exception {
-		getSession().update(entity);
+		getSession().delete(entity);
 		getSession().flush();
 	}
 

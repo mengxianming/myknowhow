@@ -133,7 +133,7 @@
 			</tbody>
 		</table>
 		<div>
-			<button id="submit">新規</button>
+			<input type="submit" value="新規"></input>
 		</div>
 	</form>
 
@@ -159,9 +159,10 @@ var urls = {
 
 	function onSuccess(newId){
 	    $("#ok-dialog").dialog({
+		autoOpen : true,
 		resizable : false,
 		minWidth : 350,
-		width : width,
+		width : 400,
 		modal : true,
 		buttons : [{
 		    text : "リストへ戻る" ,
@@ -177,6 +178,7 @@ var urls = {
 		    text : "戻る" ,
 		    click : function(){
 			$(this).dialog("close"); 
+			$("#form").resetForm();
 		    }
 		}]
 	});
@@ -194,7 +196,7 @@ var urls = {
 			dataType : 'json',
 			success : function(data){
 			    if(data && data.code == 'S00'){
-				onSuccess(data);
+				onSuccess(data.data);
 					
 			    }
 			}
