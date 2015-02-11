@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.study.autoprodtool.dao.CrudDAO;
 import com.study.autoprodtool.dao.RestrictionProvider;
+import com.study.autoprodtool.dao.RestrictionProviderSupport;
 
 /**
  * Descriptions
@@ -55,6 +56,8 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	public List<T> selectList(final RestrictionProvider restrictions) {
 		Criteria criteria = getSession().createCriteria(entityClazz);
 		restrictions.addRestriction(criteria);
+		restrictions.addPager(criteria);
+		restrictions.addOrder(criteria);
 		return criteria.list();
 	}
 
@@ -128,15 +131,17 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	 * @see net.suntec.dynabiz.service.masterdataservice.dao.CrudDAO#selectAll(java.lang.Integer, java.lang.Integer)
 	 */	
 	public List<T> selectAll(final Integer offset, final Integer limit) {	
-		return selectList(new RestrictionProvider(){
+		return selectList(new RestrictionProviderSupport(){
 
 			@Override
-			public void addRestriction(Criteria criteria) {
+			public void addPager(Criteria criteria) {
 				setPageLimit(criteria, offset, limit);				
 			}
 			
 		});
 	}
+	
+	
 
 
 
@@ -171,13 +176,18 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	 * @see net.suntec.dynabiz.service.masterdataservice.dao.CrudDAO#selectListByField(java.lang.String, java.lang.Object[], java.lang.Integer, java.lang.Integer)
 	 */	
 	public List<T> selectListByField(final String field, final Object[] values, final Integer start, final Integer limit) throws Exception {
-		return selectList(new RestrictionProvider(){
+		return selectList(new RestrictionProviderSupport(){
 
 			@Override
 			public void addRestriction(Criteria criteria) {
-				criteria.add(Restrictions.in(field, values));
+				criteria.add(Restrictions.in(field, values));				
+			}
+			/* (non-Javadoc)
+			 * @see com.study.autoprodtool.dao.RestrictionProviderSupport#addPager(org.hibernate.Criteria)
+			 */
+			@Override
+			public void addPager(Criteria criteria) {
 				setPageLimit(criteria, start, limit);
-				
 			}
 			
 		});
@@ -189,11 +199,17 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	 * @see net.suntec.dynabiz.service.masterdataservice.dao.CrudDAO#selectListByExample(net.suntec.dynabiz.service.masterdataservice.entity.Entity, java.lang.Integer, java.lang.Integer)
 	 */	
 	public List<T> selectListByExample(final T example, final Integer start, final Integer limit) throws Exception {
-		return selectList(new RestrictionProvider(){
+		return selectList(new RestrictionProviderSupport(){
 
 			@Override
 			public void addRestriction(Criteria criteria) {
-				criteria.add(Example.create(example));		
+				criteria.add(Example.create(example));				
+			}
+			/* (non-Javadoc)
+			 * @see com.study.autoprodtool.dao.RestrictionProviderSupport#addPager(org.hibernate.Criteria)
+			 */
+			@Override
+			public void addPager(Criteria criteria) {
 				setPageLimit(criteria, start, limit);
 			}
 			
@@ -206,14 +222,20 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	 * @see net.suntec.dynabiz.service.masterdataservice.dao.CrudDAO#selectListByKeyword(java.lang.String, java.lang.String[], java.lang.Integer, java.lang.Integer)
 	 */	
 	public List<T> selectListByKeyword(final String keyword, final String[] fields, final Integer start, final Integer limit) throws Exception {
-		return selectList(new RestrictionProvider(){
+		return selectList(new RestrictionProviderSupport(){
 			
 			public void addRestriction(Criteria criteria) {
 				Disjunction ors = Restrictions.disjunction();
 				for(String field : fields){
 					ors.add(Restrictions.like(field, keyword));
 				}
-				criteria.add(ors);			
+				criteria.add(ors);				
+			}
+			/* (non-Javadoc)
+			 * @see com.study.autoprodtool.dao.RestrictionProviderSupport#addPager(org.hibernate.Criteria)
+			 */
+			@Override
+			public void addPager(Criteria criteria) {
 				setPageLimit(criteria, start, limit);
 			}
 			
@@ -244,6 +266,8 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 		Criteria criteria = getSession().createCriteria(entityClazz);
 		criteria.setProjection(Projections.id());	
 		restrictions.addRestriction(criteria);
+		restrictions.addPager(criteria);
+		restrictions.addOrder(criteria);
 		return criteria.list();
 	}
 

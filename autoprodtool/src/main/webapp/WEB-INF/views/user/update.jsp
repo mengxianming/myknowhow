@@ -3,10 +3,10 @@
 
 
 <div>
-	<jsp:include page="newedit.jsp">
-	</jsp:include>
+<jsp:include page="newedit.jsp">
+</jsp:include>
 
-	<div id="ok-dialog" title="メッセージ">ユーザーを新規作成しました。</div>
+<div id="ok-dialog" title="メッセージ">ユーザーを編集しました。</div>
 </div>
 
 <script type="text/javascript">
@@ -24,20 +24,9 @@ var urls = {
 		width : 400,
 		modal : true,
 		buttons : [{
-		    text : "リストへ戻る" ,
-		    click : function(){
-			window.location.href = urls.list;
-		    }
-		},{
-		    text : "編集" ,
-		    click : function(){
-				window.location.href = urls.update + "/" + newId;
-		    }
-		},{
 		    text : "戻る" ,
 		    click : function(){
 			$(this).dialog("close"); 
-			$("#form").resetForm();
 		    }
 		}]
 	});

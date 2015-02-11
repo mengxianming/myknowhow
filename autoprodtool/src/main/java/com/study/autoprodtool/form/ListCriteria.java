@@ -98,18 +98,23 @@ public abstract class ListCriteria<F>{
 		return new RestrictionProvider() {
 			
 			@Override
-			public void addRestriction(Criteria criteria) {
+			public void addRestriction(Criteria criteria) {				
+				addCriterions(criteria);		
+			}
+
+			@Override
+			public void addOrder(Criteria criteria) {
 				if(getOrder() != null){
 					criteria.addOrder(getOrder());
-				}
-				if(pager != null){
-					criteria.setFirstResult(pager.getPage() == null ? 0 : pager.getPage() * pager.getLimit());
-					if(pager.getLimit() != null){
-						criteria.setFetchSize(pager.getLimit());
-					}
-				}
-				
-				
+				}				
+			}
+
+			@Override
+			public void addPager(Criteria criteria) {
+				if(pager != null && pager.getPage() != null && pager.getLimit() != null){
+					criteria.setFirstResult(pager.getOffset());
+					criteria.setFetchSize(pager.getLimit());
+				}					
 			}
 		};
 	}

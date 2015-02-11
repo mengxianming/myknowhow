@@ -47,9 +47,10 @@ public class UserForm extends EntityForm<UserForm, User>{
 	@FieldMapping("agent.name")
 	private String agentName;
 		
-	private Date lastLogin;
-	
+	private Date lastLogin;	
 	private Short status;
+	private Date createTime;
+	private Date updateTime;
 
 	/**
 	 * @return the id
@@ -240,5 +241,29 @@ public class UserForm extends EntityForm<UserForm, User>{
 		this.divisionPparent = divisionPparent;
 	}
 	
+	/**
+	 * @return the createTime
+	 */
+	public Date getCreateTime() {
+		return createTime;
+	}
+	/**
+	 * @param createTime the createTime to set
+	 */
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	/**
+	 * @return the updateTime
+	 */
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	/**
+	 * @param updateTime the updateTime to set
+	 */
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
 }

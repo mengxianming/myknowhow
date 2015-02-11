@@ -7,6 +7,10 @@ package com.study.autoprodtool.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.study.autoprodtool.form.ListCriteria;
+
 
 /**
  * Descriptions
@@ -37,4 +41,20 @@ public class ComUtils {
 		
 	}
 
+	/**
+	 * @param request
+	 * @param listCriteria
+	 */
+	public static void populateJqGridPagerSorterInfo(HttpServletRequest request, Integer pageLimit,
+			ListCriteria<?> listCriteria) {
+		Pager pager = new Pager().setLimit(pageLimit);
+		if(!CheckUtil.isNull(request.getParameter("page"))){
+			pager.setPage(Integer.valueOf(request.getParameter("page")));
+		}		
+		
+		listCriteria.setPager(pager);
+		listCriteria.setSortField(request.getParameter("sidx"));
+		listCriteria.setSortOrder(request.getParameter("sord"));
+		
+	}		
 }

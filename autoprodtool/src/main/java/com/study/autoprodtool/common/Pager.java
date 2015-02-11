@@ -46,7 +46,7 @@ public class Pager {
 	}
 
 	/**
-	 * page number start from 0.
+	 * page number start from 1.
 	 * 
 	 * @return
 	 */
@@ -70,14 +70,14 @@ public class Pager {
 
 	public Integer getOffset() {
 		if (page != null && limit != null) {
-			return page * limit;
+			return (page - 1)* limit;
 		}
 		return null;
 	}
 
 	public Integer getTotalPages() {
 		if (total != null && limit != null && limit > 0) {
-			return total / limit;
+			return total / limit + 1;
 		}
 		return null;
 	}

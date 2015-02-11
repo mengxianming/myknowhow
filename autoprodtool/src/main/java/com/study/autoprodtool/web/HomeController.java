@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.study.autoprodtool.common.Urls;
+
 /**
  * Handles requests for the application home page.
  */
@@ -34,6 +36,11 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	
+	@RequestMapping(value = Urls.MASTER_HOME, method = RequestMethod.GET)
+	public String masterPage(Locale locale, Model model) {
+		return "/master/list";
 	}
 	
 }

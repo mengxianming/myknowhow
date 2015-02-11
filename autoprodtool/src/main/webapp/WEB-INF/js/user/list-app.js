@@ -3,6 +3,7 @@
  */
 $(function() {    
     // テーブル定義
+    var jqGridWrapper = null;
     jqGridWrapper = new JqGridWrapper("user-list", false, {
 	url : urls.list,
 	mtype : "POST",
@@ -88,23 +89,21 @@ $(function() {
 	}],
 	beforeProcessing : function(data) {	   
 	    var gridParam = {};
-//	    if (data.pageSize) {
-//		gridParam.rowNum = data.pageSize;
-//		gridParam.records = data.totalRecords;
-//		gridParam.page = data.currentPage;
-//	    }
-//	    companyGrid.jqGrid('setGridParam', gridParam);
-//
-//	    if (data.pageSize) {
-//		util.paginator($("#paginator"), gridParam.records, gridParam.rowNum,
-//			gridParam.page, 9, function(newPage) {
-//		    companyGrid.setGridParam({
-//			page : newPage
-//		    });
-//		    reloadTable();
-//		});
-//	    }	    
-	  
+	    if (data.pager) {
+		gridParam.rowNum = data.pager.limit;
+		gridParam.records = data.pager.total;
+		gridParam.page = data.pager.page;
+	    }
+	    jqGridWrapper.setGridParams(gridParam);
+
+	    if (data.pager) {
+		util.paginator($("#paginator"), gridParam.records, gridParam.rowNum,
+			gridParam.page, 9, function(newPage) {
+		    jqGridWrapper.setGridParam('page', newPage);
+		    jqGridWrapper.reloadTable();
+		});
+	    }	    
+
 	}
 	
     });
@@ -113,11 +112,39 @@ $(function() {
     $("#btn-new").click(function(){
 	window.location.href=urls.create;
     });
-    $("#btn-edit").click(function(){
-	window.location.href=urls.update + "/" + jqGridWrapper.getSelectedRowData().id;
+    $("#btn-detail").click(function(){
+	if(!jqGridWrapper.getSelectedRowData()){
+	    util.alertDialog("メッセージ", "ユーザーを選択してください。");
+	    return;
+	}
+	window.location.href=urls.detail + "/" + jqGridWrapper.getSelectedRowData().id;
     });
     $("#btn-del").click(function(){
-	window.location.href=urls.del + "/" + jqGridWrapper.getSelectedRowData().id;
+	if(!jqGridWrapper.getSelectedRowData()){
+	    util.alertDialog("メッセージ", "ユーザーを選択してください。");
+	    return;
+	}
+	
+	util.confirmDialog('削除確認', "ユーザーを削除してよろしいですか？", function(){
+	    $.ajax({
+		url : urls.del,
+		type : 'POST',
+		dataType : 'json',
+		data : {ids : jqGridWrapper.getSelectedRowData().id},
+		success : function(data){
+		    if(data && data.code == 'S00'){
+			util.alertDialog("メッセージ", "ユーザーを削除しました。");
+			jqGridWrapper.reloadTable();
+			return ;
+		    }
+		    util.alertDialog("メッセージ", "ユーザー削除が失敗しました。");
+		},
+		error : function(status){
+		    util.alertDialog("メッセージ", "ユーザー削除が失敗しました。");
+		}
+	    });
+	});
+	
     });
     
     //show data list

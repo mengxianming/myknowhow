@@ -1,3 +1,4 @@
+<%@page import="com.study.autoprodtool.common.Urls"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -6,18 +7,18 @@
 <body>
     <div style="float:right; padding: 10px 20px;">
     <button>ヘルプ</button><br><br>
-    <button>戻る</button>
+    <button id="btn-ret">戻る</button>
     </div>
-	<h1>ユーザー情報</h1>
+	<h1>ユーザー情報</h1>	
 	<table class="table">
-		<tbody>
+		<tbody>			
 			<tr>
 				<th colspan="2">ユーザID</th>
 				<td>${user.loginName}</td>
 			</tr>
 			<tr>
 				<th colspan="2">ユーザ識別</th>
-				<td>${user.role}</td>
+				<td>${user.roleName}</td>
 			</tr>
 			
 			<tr class="blank-row"><td colspan="3"></td></tr>
@@ -41,20 +42,20 @@
 			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
 				<th colspan="2">会社</th>
-				<td>${user.company}</td>
+				<td>${user.companyName}</td>
 			</tr>
 			<tr>
 				<th rowspan="3">所属</th>
 				<th>部</th>
-				<td>${user.division.level1}</td>
+				<td>${user.divisionPparent}</td>
 			</tr>
 			<tr>
 				<th>課</th>
-				<td>${user.division.level2}</td>
+				<td>${user.divisionParent}</td>
 			</tr>
 			<tr>
 				<th>グループ</th>
-				<td>${user.division.level3}</td>
+				<td>${user.divisionName}</td>
 			</tr>
 			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
@@ -63,30 +64,30 @@
 			</tr>
 			<tr>
 				<th colspan="2">サマリメール</th>
-				<td>${user.sumaryMailFlag == true ? '必要' : '不要'}</td>
+				<td>${user.sumaryMailFlag == 0 ? '必要' : '不要'}</td>
 			</tr>
 			<tr>
 				<th colspan="2">文書回覧メール</th>
-				<td>${user.articleMailFlag == true ? '必要' : '不要'}</td>
+				<td>${user.articleMailFlag == 0 ? '必要' : '不要'}</td>
 			</tr>
 			
 			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
 				<th colspan="2">代理権者</th>
-				<td>${user.agent}</td>
+				<td>${user.agentName}</td>
 			</tr>
 			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
 				<th colspan="2">作成日<br>(YYYY-MM-DD HH:MM:SS)</th>
-				<td><fmt:formatDate value="${user.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td><fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
 			<tr>
 				<th colspan="2">最終ログイン<br>(YYYY-MM-DD HH:MM:SS)</th>
-				<td><fmt:formatDate value="${user.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td><fmt:formatDate value="${user.lastLogin}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
 			<tr>
 				<th colspan="2">ユーザ情報最終更新日<br>(YYYY-MM-DD HH:MM:SS)</th>
-				<td><fmt:formatDate value="${user.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td><fmt:formatDate value="${user.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
 			<tr class="blank-row"><td colspan="3"></td></tr>
 			<tr>
@@ -96,7 +97,16 @@
 		</tbody>
 	</table>
 	
-	<div><button>編集</button> </div>
+	<div><button id="btn-edit">編集</button> </div>
 </body>
 
+<script type="text/javascript"> 
+$("#btn-ret").click(function(){
+    window.location.href = '<c:url value="<%=Urls.USER_LIST %>"></c:url>';
+});
+
+$("#btn-edit").click(function(){
+    window.location.href = '<c:url value="<%=Urls.USER_UPDATE %>"></c:url>' + '/' + '${user.id}';
+});
+</script>
 </html>

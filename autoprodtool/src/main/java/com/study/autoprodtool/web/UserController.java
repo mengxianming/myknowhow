@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +23,6 @@ import com.study.autoprodtool.common.CheckUtil;
 import com.study.autoprodtool.common.ComUtils;
 import com.study.autoprodtool.common.JsonResult;
 import com.study.autoprodtool.common.ListJsonResult;
-import com.study.autoprodtool.common.Pager;
 import com.study.autoprodtool.common.Urls;
 import com.study.autoprodtool.entity.User;
 import com.study.autoprodtool.form.ListCriteria;
@@ -38,7 +40,6 @@ public class UserController {
 	private UserService userService;
 	@Value("${pageLimit}")
 	private Integer pageLimit;
-
 	
 	@RequestMapping(value = Urls.USER_LIST, method = RequestMethod.GET)
 	public String listPage() {
@@ -52,8 +53,10 @@ public class UserController {
 		return "/user/create";
 	}
 	
-	@RequestMapping(value = Urls.USER_UPDATE, method = RequestMethod.GET)
-	public String updatePage() {
+	@RequestMapping(value = Urls.USER_UPDATE + "/{id}", method = RequestMethod.GET)
+	public String updatePage(@PathVariable Long id, Model model) throws Exception {
+		User user = userService.selectOne(id);
+		model.addAttribute("user", new UserForm().initFromEntity(user));
 		
 		return "/user/update";
 	}
@@ -61,10 +64,12 @@ public class UserController {
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = Urls.USER_DETAIL + "/{id}", method = RequestMethod.GET)
-	public String detailPage(@PathVariable String id) {
-		log.info("show user detail fo id: "+ id);
+	public String detailPage(@PathVariable Long id, Model model) throws Exception {
+		User user = userService.selectOne(id);
+		model.addAttribute("user", new UserForm().initFromEntity(user));
 
 		return "/user/detail";
 	}
@@ -77,7 +82,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = Urls.USER_LIST, method = RequestMethod.POST)
 	@ResponseBody
-	public ListJsonResult list(@ModelAttribute ListCriteria<UserForm> listCriteria) throws Exception {
+	public ListJsonResult list(@ModelAttribute("listCriteria") ListCriteria<UserForm> listCriteria) throws Exception {
 		List<User> list = userService.selectList(listCriteria);			
 		List<UserForm> ret = new ArrayList<UserForm>();
 		for(User user : list){
@@ -128,8 +133,8 @@ public class UserController {
 		return JsonResult.success(null);
 	}
 
-	@ModelAttribute
-	public ListCriteria<UserForm> initListCriteria(){
+	@ModelAttribute("listCriteria")
+	public ListCriteria<UserForm> initListCriteria(HttpServletRequest request){
 		ListCriteria<UserForm> listCriteria = new ListCriteria<UserForm>(){
 
 			@Override
@@ -139,7 +144,7 @@ public class UserController {
 			}
 
 		};
-		listCriteria.setPager(new Pager().setLimit(pageLimit));
+		ComUtils.populateJqGridPagerSorterInfo(request, pageLimit, listCriteria);
 		return listCriteria;
 	}
 
