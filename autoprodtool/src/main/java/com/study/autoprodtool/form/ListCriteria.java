@@ -89,7 +89,7 @@ public abstract class ListCriteria<F>{
 	public Order getOrder(){
 		if(sortField != null){
 			return "desc".equalsIgnoreCase(sortOrder) ? Order.desc(sortField) 
-					: Order.desc(sortField);
+					: Order.asc(sortField);
 		}
 		return null;
 	}

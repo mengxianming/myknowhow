@@ -30,5 +30,9 @@ public interface Urls {
 	String COMPANY_UPDATE = "/company/update";
 	String COMPANY_DELETE = "/company/delete";
 
+	String ROLE_LIST = "/role/list";
+	String ROLE_CREATE = "/role/create";
+	String ROLE_UPDATE = "/role/update";
+	String ROLE_DELETE = "/role/delete";
 
 }

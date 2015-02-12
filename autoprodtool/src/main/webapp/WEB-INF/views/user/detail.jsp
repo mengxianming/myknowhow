@@ -106,7 +106,7 @@ $("#btn-ret").click(function(){
 });
 
 $("#btn-edit").click(function(){
-    window.location.href = '<c:url value="<%=Urls.USER_UPDATE %>"></c:url>' + '/' + '${user.id}';
+    window.location.href = '<c:url value="<%=Urls.USER_UPDATE %>"></c:url>' + '?id=' + '${user.id}';
 });
 </script>
 </html>

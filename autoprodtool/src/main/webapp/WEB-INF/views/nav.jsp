@@ -43,7 +43,9 @@
 			</li>
 
 			<li class="nav-header">システム管理</li>
-			<li class="" style=""><a href="<%=Urls.USER_LIST%>">ユーザ管理</a>
+			
+			<li class="" style=""><a href="<c:url value='<%=Urls.USER_LIST%>' />" >ユーザ管理</a>
+			
 			</li>
 
 		</ul>

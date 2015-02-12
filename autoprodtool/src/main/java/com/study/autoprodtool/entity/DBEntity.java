@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
@@ -22,7 +23,11 @@ import com.study.autoprodtool.common.PropertyAccessException;
  */
 @MappedSuperclass  
 public abstract class DBEntity {
+	@Column(insertable=false, updatable=false,
+			columnDefinition="timestamp DEFAULT now() ")	
 	protected Date createTime;	
+	@Column(insertable=false, updatable=false,
+			columnDefinition="timestamp DEFAULT now() ")
 	protected Date updateTime;
 		
 	abstract public Long getId();

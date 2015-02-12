@@ -1,37 +1,50 @@
-/*
- * 企業選択JS処理 
+/**
+ * define division table
  */
-$(function() {    
+$(function() {  
+//    var companyList = util.getAjaxData(urls.company.list, {testData : 'hello,world'});
+//    var companyOptions = util.getJqGridOptionsString(companyList, "id", "name");
     // テーブル定義
     var divisionGrid = null;
     divisionGrid = new JqGridWrapper("division-list", false, {
+	caption : '所属管理',
 	url : urls.division.list,
 	mtype : "POST",
-	datatype: "json",
-	jsonReader : {
-	    root : "data",
-	    page : "pager.page",
-	    total : "pager.totalPages",
-	    records : "pager.total",
-	    cell : "",
-	    id : "id"
-	},
-	height : 400,
-	width : 300,
+	datatype: "json",	
+	height : 300,
+	width : 280,
 //	autowidth : true,
-	shrinkToFit : false,
+//	shrinkToFit : true,
 	altRows : true,
 	sortable : false,
 	sortname : "id",
-	pager : "#division-pager",
-	editurl : urls.division.update,
-	viewrecords: true,
+	pager : "#division-pager",	
+	viewrecords: false,
+	pagerpos : 'right',
 	colModel : [ {
 	    label : 'ID',
-	    name : 'id',
-	    sorttype : 'int',
-	    hidden : true
+	    name : 'id'
 	}, {
+	    label : '企業',
+	    name : 'companyId',
+	    editable : true,
+	    edittype : 'custom',
+	    editoptions : {		
+		custom_element : function(value, options){
+		    var companyList = util.getAjaxData(urls.company.list);
+		    var selector = $("<select/>");
+		    util.fillOptionList(selector, companyList, "id", "name", value);
+		    return selector.get(0);
+		},
+		custom_value : function(elem, operation, value){
+		    if(operation === 'get') {
+			return $(elem).val();
+		    } else if(operation === 'set') {
+			$(elem).val(value);
+		    }
+		}
+	    }
+	},{
 	    label : '部',
 	    name : 'pparent',
 	    editable:true
@@ -43,81 +56,85 @@ $(function() {
 	    label : 'グループ',
 	    name : 'name',
 	    editable:true
-	}],
-	beforeProcessing : function(data) {	   
-	    var gridParam = {};
-	    if (data.pager) {
-		gridParam.rowNum = data.pager.limit;
-		gridParam.records = data.pager.total;
-		gridParam.page = data.pager.page;
-	    }
-	    divisionGrid.setGridParams(gridParam);   
-
-	}
+	}]
 	
     });
-    divisionGrid.grid
-    .navGrid('#division-pager',{edit:false,add:false,del:false,search:false})
-    .inlineNav('#division-pager');
-//    .navButtonAdd('#division-pager',{
-//       caption:"新規", 
-//       buttonicon:"ui-icon-add", 
-//       onClickButton: function(){ 
-//	   divisionGrid.grid.addRow("new-row", {
-//	       position : 'last'
-//	   });
-//       }, 
-//       position:"last"
-//    })
-//    .navButtonAdd('#pager',{
-//       caption:"Del", 
-//       buttonicon:"ui-icon-del", 
-//       onClickButton: function(){ 
-//          alert("Deleting Row");
-//       }, 
-//       position:"last"
-//    });
-
-    //register button handlers
-//    $("#btn-new").click(function(){
-//	window.location.href=urls.create;
-//    });
-//    $("#btn-detail").click(function(){
-//	if(!jqGridWrapper.getSelectedRowData()){
-//	    util.alertDialog("メッセージ", "ユーザーを選択してください。");
-//	    return;
-//	}
-//	window.location.href=urls.detail + "/" + jqGridWrapper.getSelectedRowData().id;
-//    });
-//    $("#btn-del").click(function(){
-//	if(!jqGridWrapper.getSelectedRowData()){
-//	    util.alertDialog("メッセージ", "ユーザーを選択してください。");
-//	    return;
-//	}
-//	
-//	util.confirmDialog('削除確認', "ユーザーを削除してよろしいですか？", function(){
-//	    $.ajax({
-//		url : urls.del,
-//		type : 'POST',
-//		dataType : 'json',
-//		data : {ids : jqGridWrapper.getSelectedRowData().id},
-//		success : function(data){
-//		    if(data && data.code == 'S00'){
-//			util.alertDialog("メッセージ", "ユーザーを削除しました。");
-//			jqGridWrapper.reloadTable();
-//			return ;
-//		    }
-//		    util.alertDialog("メッセージ", "ユーザー削除が失敗しました。");
-//		},
-//		error : function(status){
-//		    util.alertDialog("メッセージ", "ユーザー削除が失敗しました。");
-//		}
-//	    });
-//	});
-//	
-//    });
-    
+    //add default pager and in-line edit buttons
+    divisionGrid.enableInlineEdit(urls.division.create, urls.division.update, urls.division.del);    
     //show data list
     divisionGrid.reloadTable();
+});
 
+/**
+ * define company table
+ */
+$(function() {    
+    // テーブル定義
+    var companyGrid = null;
+    companyGrid = new JqGridWrapper("company-list", false, {
+	caption : '企業管理',
+	url : urls.company.list,
+	mtype : "POST",
+	datatype: "json",	
+	height : 300,
+	width : 280,
+//	autowidth : true,
+//	shrinkToFit : true,
+	altRows : true,
+	sortable : false,
+	sortname : "id",
+	pager : "#company-pager",	
+	viewrecords: false,
+	pagerpos : 'right',
+	colModel : [ {
+	    label : 'ID',
+	    name : 'id'
+	}, {
+	    label : '名前',
+	    name : 'name',
+	    editable:true
+	}]
+	
+    });
+    //add default pager and in-line edit buttons
+    companyGrid.enableInlineEdit(urls.company.create, urls.company.update, urls.company.del);    
+    //show data list
+    companyGrid.reloadTable();
+});
+
+/**
+ * define role table
+ */
+$(function() {    
+    // テーブル定義
+    var roleGrid = null;
+    roleGrid = new JqGridWrapper("role-list", false, {
+	caption : '役割管理',
+	url : urls.role.list,
+	mtype : "POST",
+	datatype: "json",	
+	height : 300,
+	width : 280,
+//	autowidth : true,
+//	shrinkToFit : true,
+	altRows : true,
+	sortable : false,
+	sortname : "id",
+	pager : "#role-pager",	
+	viewrecords: false,
+	pagerpos : 'right',
+	colModel : [ {
+	    label : 'ID',
+	    name : 'id'
+	}, {
+	    label : '名前',
+	    name : 'name',
+	    editable:true
+	}]
+	
+    });
+    //add default pager and in-line edit buttons
+    roleGrid.enableInlineEdit(urls.role.create, urls.role.update, urls.role.del);    
+    //show data list
+    roleGrid.reloadTable();
 });

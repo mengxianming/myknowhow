@@ -20,11 +20,9 @@
 				</tr>
 				<tr>
 					<th colspan="2">ユーザ識別</th>
-					<td><select id="select-role" name="roleId">
-					    <c:forEach items="roles" var="item">					    	
-					    	<c:set var="selectedStr">${item.id == user.roleId ? 'selected="selected"' : ''}</c:set>
-					        <option value="${item.id}" ${selectedStr}>${item.name }</option>
-					    </c:forEach>
+					<td>
+					    <input type="hidden" id="roleId" value="${user.roleId }"/>
+					    <select id="select-role" name="roleId">					    
 					    </select>
 					</td>
 				</tr>
@@ -53,11 +51,9 @@
 				</tr>
 				<tr>
 					<th colspan="2">会社</th>
-					<td><select id="select-company" name="companyId">
-					<c:forEach items="companies" var="item">					    	
-					    	<c:set var="selectedStr">${item.id == user.companyId ? 'selected="selected"' : ''}</c:set>
-					        <option value="${item.id}" ${selectedStr}>${item.name }</option>
-					    </c:forEach>
+					<td>
+					<input type="hidden" id="companyId" value="${user.companyId }"/>
+					<select id="select-company" name="companyId">					
 					</select></td>
 				</tr>
 				<tr>
@@ -72,8 +68,8 @@
 				</tr>
 				<tr>
 					<th>グループ</th>
-					<td><input type="hidden" id="divisonId" value="${user.divisonId }" />
-					 <select id="select-division" name="divisonId"></select></td>
+					<td><input type="hidden" id="divisionId" value="${user.divisionId }" />
+					 <select id="select-division" name="divisionId"></select></td>
 				</tr>
 				<tr class="blank-row">
 					<td colspan="3"></td>
@@ -86,7 +82,8 @@
 				<tr>
 					<th colspan="2">サマリメール</th>
 					<td>
-						<div id="sumaryMailFlag" value="${user.sumaryMailFlag }">						    
+						<div id="sumaryMailFlag">
+						<input type="hidden" id="sumaryMailFlag" value="${user.sumaryMailFlag }" />						    
 							<input type="radio" name="sumaryMailFlag" id="sumaryMailFlagOn" value="0"> <label for="sumaryMailFlagOn">必要</label>
 							<input type="radio" name="sumaryMailFlag" id="sumaryMailFlagOff" value="1" checked="checked"> <label
 								for="sumaryMailFlagOff">不要</label>
@@ -97,7 +94,8 @@
 				<tr>
 					<th colspan="2">文書回覧メール</th>
 					<td>
-						<div id="articleMailFlag" value="${user.articleMailFlag }">
+						<div id="articleMailFlag">
+						<input type="hidden" id="articleMailFlag" value="${user.articleMailFlag }" />		
 							<input type="radio" name="articleMailFlag" id="articleMailFlagOn" value="0"> <label
 								for="articleMailFlagOn">必要</label> <input type="radio" name="articleMailFlag" id="articleMailFlagOff" value="1">
 							<label for="articleMailFlagOff">不要</label>
@@ -136,7 +134,8 @@
 				<tr>
 					<th colspan="2">ステータス</th>
 					<td>
-						<div id="status" value="${user.status }">
+						<div id="status">
+						<input type="hidden" id="status" value="${user.status }" />	
 							<input type="radio" name="status" id="statusValid" value="0"> <label for="statusValid">Valid</label> <input
 								type="radio" name="status" id="statusInvalidValid" value="1"> <label for="statusInvalidValid">Invalid</label>
 						</div>
@@ -156,28 +155,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/lib/jquery/jquery-ui/jquery-ui.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/lib/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/common.js"></script>
-<script type="text/javascript">	
-    var divisonUrl = '<c:url value="<%=Urls.DIVISION_LIST  %>"></c:url>',
-	$(function(){
-	    //get divison info
-	    divisions = util.getAjaxData()
-	    $("#form").on("submit", function(evt){
-		    evt.preventDefault();
-		    $("#form").ajaxSubmit({
-			url : urls.create,
-			type : 'POST',
-			dataType : 'json',
-			success : function(data){
-			    if(data && data.code == 'S00'){
-				onSuccess(data.data);
-					
-			    }
-			}
-	    });
-		});
-	    
-	    $("#btn-ret").click(function(){
-		window.location.href = urls.list;
-	    });
-	});    
+<script type="text/javascript">
+$(function(){
+    var roleList = util.getAjaxData('<c:url value="<%=Urls.ROLE_LIST%>"/>');
+    util.fillOptionList("#select-role", roleList, "id", "name", $('#roleId').val());
+    
+    var companyList = util.getAjaxData('<c:url value="<%=Urls.COMPANY_LIST%>"/>');
+    util.fillOptionList("#select-company", companyList, "id", "name", $('#companyId').val());
+    
+    var divisionList = util.getAjaxData('<c:url value="<%=Urls.DIVISION_LIST%>"/>');
+    util.fillOptionList("#select-division", divisionList, "id", "name", $('#divisionId').val());
+});
 </script>
+

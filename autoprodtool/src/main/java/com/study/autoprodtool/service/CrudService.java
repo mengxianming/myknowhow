@@ -28,4 +28,5 @@ public interface CrudService<T extends DBEntity> {
 	void update(T entity) throws Exception;
 	void delete(T entity) throws Exception;
 	Map<Long, T> selectListByIds(Long[] idList) throws Exception;
+	public List<T> selectAll(Integer start, Integer limit) throws Exception;
 }

@@ -4,6 +4,8 @@
  */
 package com.study.autoprodtool.common;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,4 +59,15 @@ public class ComUtils {
 		listCriteria.setSortOrder(request.getParameter("sord"));
 		
 	}		
+	
+	public static Class<?>[] getGenericTypes(Class<?> subClass) {
+		Type sType = subClass.getGenericSuperclass();
+		Type[] generics = ((ParameterizedType) sType).getActualTypeArguments();
+		
+		Class<?>[] genericTypes = new Class<?>[generics.length];
+		for(int i =0; i < generics.length; i++){
+			genericTypes[i] = (Class<?>) (generics[i]);
+		}		
+		return genericTypes;
+	}
 }

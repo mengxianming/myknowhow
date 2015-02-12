@@ -1,7 +1,11 @@
 package com.study.autoprodtool.dao.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
+
+import javax.persistence.GeneratedValue;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,9 +19,11 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.study.autoprodtool.common.ComUtils;
 import com.study.autoprodtool.dao.CrudDAO;
 import com.study.autoprodtool.dao.RestrictionProvider;
 import com.study.autoprodtool.dao.RestrictionProviderSupport;
+import com.study.autoprodtool.entity.DBEntity;
 
 /**
  * Descriptions
@@ -27,14 +33,15 @@ import com.study.autoprodtool.dao.RestrictionProviderSupport;
  * @since JDK1.6
  *
  */
-public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
+public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	private static Log log = LogFactory.getLog(CrudDAOImpl.class);
 	
 	private Class<T> entityClazz;
 	private SessionFactory sessionFactory;
 	
-	public CrudDAOImpl(Class<T> entityClazz){
-		this.entityClazz = entityClazz;
+	@SuppressWarnings("unchecked")
+	public CrudDAOImpl(){
+		this.entityClazz = (Class<T>)ComUtils.getGenericTypes(getClass())[0];
 	}		
 	
 	
@@ -65,8 +72,33 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T>{
 	 * @see my.study.hibernate.dao.CrudDAO#insert(java.lang.Object)
 	 */
 	public void insert(T entity) throws Exception {
+		setIdToUnSaved(entity);
 		getSession().persist(entity);	
 		getSession().flush();
+	}
+
+
+
+	private void setIdToUnSaved(T entity){
+		try {
+			Method idGetter = entity.getClass().getDeclaredMethod("getId");
+			Method idSetter = entity.getClass().getDeclaredMethod("setId", Long.class);
+			if(idGetter.isAnnotationPresent(GeneratedValue.class)){
+				//set it to null
+				idSetter.invoke(entity, new Object[]{null});
+			}
+			
+			Field idField = entity.getClass().getDeclaredField("id");
+			if(idField.isAnnotationPresent(GeneratedValue.class)){
+				//set it to null
+				idField.setAccessible(true);
+				idField.set(entity, null);
+			}
+		}
+		catch (Exception e) {
+			log.warn("can't set id to unsaved value before persist, ignore it:" + entity);
+		}
+		
 	}
 
 	/* (non-Javadoc)

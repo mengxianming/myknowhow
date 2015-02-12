@@ -13,49 +13,49 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.study.autoprodtool.common.JsonResult;
 import com.study.autoprodtool.common.ListJsonResult;
 import com.study.autoprodtool.common.Urls;
-import com.study.autoprodtool.entity.Division;
-import com.study.autoprodtool.form.DivisionForm;
+import com.study.autoprodtool.entity.Company;
+import com.study.autoprodtool.form.CompanyForm;
 import com.study.autoprodtool.form.ListCriteria;
 import com.study.autoprodtool.service.CrudService;
-import com.study.autoprodtool.service.DivisionService;
+import com.study.autoprodtool.service.CompanyService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class DivisionController extends AbstractEntityController<DivisionForm, Division>{	
-//	private static final Logger log = LoggerFactory.getLogger(DivisionController.class);
+public class CompanyController extends AbstractEntityController<CompanyForm, Company>{	
+//	private static final Logger log = LoggerFactory.getLogger(CompanyController.class);
 
 	@Autowired
-	private DivisionService divisionService;		
+	private CompanyService companyService;		
 	
-	@RequestMapping(value = Urls.DIVISION_LIST, method = RequestMethod.POST)
+	@RequestMapping(value = Urls.COMPANY_LIST, method = RequestMethod.POST)
 	@ResponseBody
-	public ListJsonResult list(@ModelAttribute ListCriteria<DivisionForm> listCriteria, HttpServletRequest request) throws Exception {		
+	public ListJsonResult list(@ModelAttribute ListCriteria<CompanyForm> listCriteria, HttpServletRequest request) throws Exception {		
 		return super.list(listCriteria, request);
 	}
 
-	@RequestMapping(value = Urls.DIVISION_CREATE, method = RequestMethod.POST)
+	@RequestMapping(value = Urls.COMPANY_CREATE, method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult create(DivisionForm form) throws Exception{
+	public JsonResult create(CompanyForm form) throws Exception{
 		return super.create(form);
 	}
 	
-	@RequestMapping(value = Urls.DIVISION_UPDATE, method = RequestMethod.POST)
+	@RequestMapping(value = Urls.COMPANY_UPDATE, method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult update(DivisionForm form) throws Exception{
+	public JsonResult update(CompanyForm form) throws Exception{
 		return super.update(form);
 	}
 	
-	@RequestMapping(value = Urls.DIVISION_DELETE, method = RequestMethod.POST)
+	@RequestMapping(value = Urls.COMPANY_DELETE, method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult delete(String ids) throws Exception{
 		return super.delete(ids);
 	}
 
 	@ModelAttribute
-	public ListCriteria<DivisionForm> initListCriteria(HttpServletRequest request){
-		ListCriteria<DivisionForm> listCriteria = new ListCriteria<DivisionForm>(){
+	public ListCriteria<CompanyForm> initListCriteria(HttpServletRequest request){
+		ListCriteria<CompanyForm> listCriteria = new ListCriteria<CompanyForm>(){
 
 			@Override
 			protected void addCriterions(Criteria criteria) {
@@ -71,8 +71,8 @@ public class DivisionController extends AbstractEntityController<DivisionForm, D
 	 * @see com.study.autoprodtool.web.AbstractEntityController#getCrudService()
 	 */
 	@Override
-	CrudService<Division> getCrudService() {		
-		return divisionService;
+	CrudService<Company> getCrudService() {		
+		return companyService;
 	}
 
 }

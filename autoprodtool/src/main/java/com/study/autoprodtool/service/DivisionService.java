@@ -4,8 +4,6 @@
  */
 package com.study.autoprodtool.service;
 
-import java.util.List;
-
 import com.study.autoprodtool.entity.Division;
 
 /**
@@ -17,6 +15,5 @@ import com.study.autoprodtool.entity.Division;
  *
  */
 public interface DivisionService extends CrudService<Division>{
-	List<Division> selectAll(Integer start, Integer limit) throws Exception;
-
+	
 }

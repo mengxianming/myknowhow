@@ -133,6 +133,12 @@ public abstract class CrudServiceImpl<T extends DBEntity> implements CrudService
 		return ret;
 	}
 
-	
-
+	/* (non-Javadoc)
+	 * @see com.study.autoprodtool.service.CrudService#selectAll(java.lang.Integer, java.lang.Integer)
+	 */
+	@Override
+	public List<T> selectAll(Integer start, Integer limit) throws Exception {		
+		return getCrudDAO().selectAll(start, limit);
+	}
+		
 }

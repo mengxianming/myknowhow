@@ -13,49 +13,49 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.study.autoprodtool.common.JsonResult;
 import com.study.autoprodtool.common.ListJsonResult;
 import com.study.autoprodtool.common.Urls;
-import com.study.autoprodtool.entity.Division;
-import com.study.autoprodtool.form.DivisionForm;
+import com.study.autoprodtool.entity.Role;
+import com.study.autoprodtool.form.RoleForm;
 import com.study.autoprodtool.form.ListCriteria;
 import com.study.autoprodtool.service.CrudService;
-import com.study.autoprodtool.service.DivisionService;
+import com.study.autoprodtool.service.RoleService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class DivisionController extends AbstractEntityController<DivisionForm, Division>{	
-//	private static final Logger log = LoggerFactory.getLogger(DivisionController.class);
+public class RoleController extends AbstractEntityController<RoleForm, Role>{	
+//	private static final Logger log = LoggerFactory.getLogger(RoleController.class);
 
 	@Autowired
-	private DivisionService divisionService;		
+	private RoleService roleService;		
 	
-	@RequestMapping(value = Urls.DIVISION_LIST, method = RequestMethod.POST)
+	@RequestMapping(value = Urls.ROLE_LIST, method = RequestMethod.POST)
 	@ResponseBody
-	public ListJsonResult list(@ModelAttribute ListCriteria<DivisionForm> listCriteria, HttpServletRequest request) throws Exception {		
+	public ListJsonResult list(@ModelAttribute ListCriteria<RoleForm> listCriteria, HttpServletRequest request) throws Exception {		
 		return super.list(listCriteria, request);
 	}
 
-	@RequestMapping(value = Urls.DIVISION_CREATE, method = RequestMethod.POST)
+	@RequestMapping(value = Urls.ROLE_CREATE, method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult create(DivisionForm form) throws Exception{
+	public JsonResult create(RoleForm form) throws Exception{
 		return super.create(form);
 	}
 	
-	@RequestMapping(value = Urls.DIVISION_UPDATE, method = RequestMethod.POST)
+	@RequestMapping(value = Urls.ROLE_UPDATE, method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult update(DivisionForm form) throws Exception{
+	public JsonResult update(RoleForm form) throws Exception{
 		return super.update(form);
 	}
 	
-	@RequestMapping(value = Urls.DIVISION_DELETE, method = RequestMethod.POST)
+	@RequestMapping(value = Urls.ROLE_DELETE, method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult delete(String ids) throws Exception{
 		return super.delete(ids);
 	}
 
 	@ModelAttribute
-	public ListCriteria<DivisionForm> initListCriteria(HttpServletRequest request){
-		ListCriteria<DivisionForm> listCriteria = new ListCriteria<DivisionForm>(){
+	public ListCriteria<RoleForm> initListCriteria(HttpServletRequest request){
+		ListCriteria<RoleForm> listCriteria = new ListCriteria<RoleForm>(){
 
 			@Override
 			protected void addCriterions(Criteria criteria) {
@@ -71,8 +71,7 @@ public class DivisionController extends AbstractEntityController<DivisionForm, D
 	 * @see com.study.autoprodtool.web.AbstractEntityController#getCrudService()
 	 */
 	@Override
-	CrudService<Division> getCrudService() {		
-		return divisionService;
-	}
-
+	CrudService<Role> getCrudService() {		
+		return roleService;
+	}	
 }

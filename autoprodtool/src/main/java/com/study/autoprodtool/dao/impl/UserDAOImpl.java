@@ -20,13 +20,5 @@ import com.study.autoprodtool.entity.User;
 @Repository
 public class UserDAOImpl extends CrudDAOImpl<User> implements UserDAO{
 
-	/**
-	 * @param entityClazz
-	 */
-	public UserDAOImpl() {
-		super(User.class);		
-	}
-
-	
 
 }

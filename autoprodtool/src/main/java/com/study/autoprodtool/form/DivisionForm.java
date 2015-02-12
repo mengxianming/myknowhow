@@ -19,6 +19,10 @@ public class DivisionForm extends EntityForm<DivisionForm, Division>{
 	private String pparent;
 	private String parent;
 	private String name;
+	@FieldMapping("company.id")
+	private Long companyId;
+	@FieldMapping("company.name")
+	private String companyName;
 	
 	/**
 	 * @return the id
@@ -68,6 +72,30 @@ public class DivisionForm extends EntityForm<DivisionForm, Division>{
 	 */
 	public void setPparent(String pparent) {
 		this.pparent = pparent;
+	}
+	/**
+	 * @param companyId the companyId to set
+	 */
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+	/**
+	 * @return the companyId
+	 */
+	public Long getCompanyId() {
+		return companyId;
+	}
+	/**
+	 * @param companyName the companyName to set
+	 */
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	/**
+	 * @return the companyName
+	 */
+	public String getCompanyName() {
+		return companyName;
 	}
 
 }

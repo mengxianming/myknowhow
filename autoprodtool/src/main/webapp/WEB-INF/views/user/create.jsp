@@ -1,10 +1,9 @@
 <%@page import="com.study.autoprodtool.common.Urls"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div>
-	<jsp:include page="newedit.jsp">
-	</jsp:include>
+	<jsp:include page="newedit.jsp"/>
 
 	<div id="ok-dialog" title="メッセージ">ユーザーを新規作成しました。</div>
 </div>
@@ -31,7 +30,7 @@ var urls = {
 		},{
 		    text : "編集" ,
 		    click : function(){
-				window.location.href = urls.update + "/" + newId;
+				window.location.href = urls.update + "?id=" + newId;
 		    }
 		},{
 		    text : "戻る" ,

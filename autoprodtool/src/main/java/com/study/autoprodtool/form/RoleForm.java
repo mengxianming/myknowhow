@@ -2,13 +2,9 @@
  *  Copyright(C) 2013 Suntec Software(Shanghai) Co., Ltd.
  *  All Right Reserved.
  */
-package com.study.autoprodtool.entity;
+package com.study.autoprodtool.form;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import com.study.autoprodtool.entity.Role;
 
 /**
  * Descriptions
@@ -18,11 +14,7 @@ import javax.persistence.SequenceGenerator;
  * @since JDK1.6
  *
  */
-@Entity
-public class Role extends DBEntity {
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_role_id")
-	@SequenceGenerator(name="seq_role_id", sequenceName="seq_role_id", allocationSize=1)	
+public class RoleForm extends EntityForm<RoleForm, Role> {	
 	private Long id;
 	private String name;
 

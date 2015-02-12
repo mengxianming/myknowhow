@@ -2,9 +2,9 @@
  *  Copyright(C) 2013 Suntec Software(Shanghai) Co., Ltd.
  *  All Right Reserved.
  */
-package com.study.autoprodtool.service;
+package com.study.autoprodtool.dao;
 
-import com.study.autoprodtool.entity.User;
+import com.study.autoprodtool.entity.Company;
 
 /**
  * Descriptions
@@ -14,6 +14,6 @@ import com.study.autoprodtool.entity.User;
  * @since JDK1.6
  *
  */
-public interface UserService extends CrudService<User>{
+public interface CompanyDAO extends CrudDAO<Company>{
 
 }

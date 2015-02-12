@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.study.autoprodtool.dao.CrudDAO;
-import com.study.autoprodtool.dao.DivisionDAO;
-import com.study.autoprodtool.entity.Division;
-import com.study.autoprodtool.service.DivisionService;
+import com.study.autoprodtool.dao.RoleDAO;
+import com.study.autoprodtool.entity.Role;
+import com.study.autoprodtool.service.RoleService;
 
 /**
  * Descriptions
@@ -21,16 +21,16 @@ import com.study.autoprodtool.service.DivisionService;
  *
  */
 @Service
-public class DivisionServiceImpl extends CrudServiceImpl<Division> implements DivisionService{
+public class RoleServiceImpl extends CrudServiceImpl<Role> implements RoleService{
 	@Autowired
-	private DivisionDAO divisionDAO;
+	private RoleDAO roleDAO;
 
 	/* (non-Javadoc)
 	 * @see my.study.dynaweb.service.impl.CrudServiceImpl#getCrudDAO()
 	 */
 	@Override
-	public CrudDAO<Division> getCrudDAO() {		
-		return this.divisionDAO;
+	public CrudDAO<Role> getCrudDAO() {		
+		return this.roleDAO;
 	}
 	
 }

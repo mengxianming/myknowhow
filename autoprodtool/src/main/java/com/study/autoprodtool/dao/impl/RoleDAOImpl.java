@@ -6,8 +6,8 @@ package com.study.autoprodtool.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import com.study.autoprodtool.dao.DivisionDAO;
-import com.study.autoprodtool.entity.Division;
+import com.study.autoprodtool.dao.RoleDAO;
+import com.study.autoprodtool.entity.Role;
 
 /**
  * Descriptions
@@ -18,6 +18,7 @@ import com.study.autoprodtool.entity.Division;
  *
  */
 @Repository
-public class DivisionDAOImpl extends CrudDAOImpl<Division> implements DivisionDAO{
+public class RoleDAOImpl extends CrudDAOImpl<Role> implements RoleDAO{
+	
 
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -27,6 +28,8 @@ public class Division extends DBEntity {
 	private String name;
 	private String parent;
 	private String pparent;
+	@ManyToOne
+	private Company company;
 	
 	
 	/**
@@ -76,6 +79,18 @@ public class Division extends DBEntity {
 	 */
 	public void setPparent(String pparent) {
 		this.pparent = pparent;
+	}
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	/**
+	 * @return the company
+	 */
+	public Company getCompany() {
+		return company;
 	}
 	
 	

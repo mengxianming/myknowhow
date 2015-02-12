@@ -117,7 +117,7 @@ $(function() {
 	    util.alertDialog("メッセージ", "ユーザーを選択してください。");
 	    return;
 	}
-	window.location.href=urls.detail + "/" + jqGridWrapper.getSelectedRowData().id;
+	window.location.href=urls.detail + "?id=" + jqGridWrapper.getSelectedRowData().id;
     });
     $("#btn-del").click(function(){
 	if(!jqGridWrapper.getSelectedRowData()){

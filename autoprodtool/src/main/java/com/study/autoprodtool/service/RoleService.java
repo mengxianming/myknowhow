@@ -4,7 +4,7 @@
  */
 package com.study.autoprodtool.service;
 
-import com.study.autoprodtool.entity.User;
+import com.study.autoprodtool.entity.Role;
 
 /**
  * Descriptions
@@ -14,6 +14,6 @@ import com.study.autoprodtool.entity.User;
  * @since JDK1.6
  *
  */
-public interface UserService extends CrudService<User>{
+public interface RoleService extends CrudService<Role>{	
 
 }
