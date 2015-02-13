@@ -4,12 +4,17 @@
  */
 package com.study.autoprodtool.common;
 
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.beanutils.PropertyUtils;
 
 import com.study.autoprodtool.form.ListCriteria;
 
@@ -69,5 +74,34 @@ public class ComUtils {
 			genericTypes[i] = (Class<?>) (generics[i]);
 		}		
 		return genericTypes;
+	}
+	
+	public static <E> void iterate(Collection<E> collection, ForEach<E> forEach){
+		if(collection != null){
+			Iterator<E> it = collection.iterator();
+			while(it.hasNext()){
+				forEach.perform(it.next());
+			}
+		}
+	}
+	
+	public static void iterate(Object bean, ForEach<PropertyValue> forEach){
+		PropertyDescriptor[] props = PropertyUtils.getPropertyDescriptors(bean);
+		for(PropertyDescriptor prop : props){		
+			if(prop.getReadMethod() == null){
+				continue;
+			}
+			try {
+				PropertyValue pv = new PropertyValue();
+				pv.setName(prop.getName());
+				pv.setValue(PropertyUtils.getProperty(bean, pv.getName()));
+				pv.setPropertyDescriptor(prop);
+				forEach.perform(pv);
+			}
+			catch (Exception e) {
+				continue;
+			}
+			
+		}
 	}
 }

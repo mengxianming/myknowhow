@@ -1,7 +1,10 @@
 package com.study.autoprodtool.common;
 
+import java.beans.PropertyDescriptor;
 import java.util.Collection;
 import java.util.Map;
+
+import org.apache.commons.beanutils.PropertyUtils;
 /**
  * チェックのツールクラス
  * 
@@ -38,6 +41,33 @@ public class CheckUtil {
 		}
 
 		return false;
+	}
+	
+	/**
+	 * 指定Bean設定可能なすべての属性がヌルであるかをチェックする
+	 * @param bean 
+	 * @return
+	 */
+	public static boolean isAllFieldsNull(Object bean) {
+		boolean isAllNull = true;
+		PropertyDescriptor[] props = PropertyUtils.getPropertyDescriptors(bean);
+		for(PropertyDescriptor prop : props){
+			if(prop.getWriteMethod() == null){
+				continue;
+			}
+			Object val;
+			try {
+				val = PropertyUtils.getProperty(bean, prop.getName());
+			}
+			catch (Exception e) {
+				throw new RuntimeException("error occured when get property from a bean", e);
+			}
+			if(val != null){
+				isAllNull = false;
+				break;
+			}
+		}
+		return isAllNull;
 	}
 
 }

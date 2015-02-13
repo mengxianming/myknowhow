@@ -29,7 +29,6 @@ public abstract class AbstractEntityController<F extends EntityForm<F, E>, E ext
 	@Value("${pageLimit}")
 	protected Integer pageLimit;
 	private Class<F> entityFormClass;
-	private Class<E> entityClass;
 	
 	abstract CrudService<E> getCrudService();
 	
@@ -41,7 +40,6 @@ public abstract class AbstractEntityController<F extends EntityForm<F, E>, E ext
 	public AbstractEntityController() {
 		Class<?>[] types = ComUtils.getGenericTypes(getClass());
 		entityFormClass = (Class<F>)types[0];
-		entityClass = (Class<E>)types[1];
 	}
 	
 		
@@ -58,13 +56,13 @@ public abstract class AbstractEntityController<F extends EntityForm<F, E>, E ext
 		
 	
 	protected JsonResult create(F form) throws Exception{
-		E ent = form.toEntity(entityClass);
+		E ent = form.toEntity();
 		getCrudService().insert(ent);
 		return JsonResult.success(ent.getId());
 	}
 	
 	protected JsonResult update(F form) throws Exception{
-		E ent = form.toEntity(entityClass);
+		E ent = form.toEntity();
 		getCrudService().update(ent);
 		return JsonResult.success(null);
 	}

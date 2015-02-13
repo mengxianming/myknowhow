@@ -19,7 +19,7 @@ public class UserForm extends EntityForm<UserForm, User>{
 	@FieldMapping("role.id")
 	private Long roleId;
 	@FieldMapping("role.name")
-	private Long roleName;
+	private String roleName;
 	private String name;
 	private String nameKana;
 	private String nameEnglish;
@@ -32,11 +32,11 @@ public class UserForm extends EntityForm<UserForm, User>{
 	@FieldMapping("division.id")
 	private Long divisionId;
 	@FieldMapping("division.name")
-	private Long divisionName;
+	private String divisionName;
 	@FieldMapping("division.parent")
-	private Long divisionParent;
+	private String divisionParent;
 	@FieldMapping("division.pparent")
-	private Long divisionPparent;
+	private String divisionPparent;
 	
 	private String email;
 	private Short sumaryMailFlag;
@@ -185,11 +185,11 @@ public class UserForm extends EntityForm<UserForm, User>{
 		this.roleId = roleId;
 	}
 
-	public Long getRoleName() {
+	public String getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(Long roleName) {
+	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
 
@@ -217,27 +217,27 @@ public class UserForm extends EntityForm<UserForm, User>{
 		this.divisionId = divisionId;
 	}
 
-	public Long getDivisionName() {
+	public String getDivisionName() {
 		return divisionName;
 	}
 
-	public void setDivisionName(Long divisionName) {
+	public void setDivisionName(String divisionName) {
 		this.divisionName = divisionName;
 	}
 
-	public Long getDivisionParent() {
+	public String getDivisionParent() {
 		return divisionParent;
 	}
 
-	public void setDivisionParent(Long divisionParent) {
+	public void setDivisionParent(String divisionParent) {
 		this.divisionParent = divisionParent;
 	}
 
-	public Long getDivisionPparent() {
+	public String getDivisionPparent() {
 		return divisionPparent;
 	}
 
-	public void setDivisionPparent(Long divisionPparent) {
+	public void setDivisionPparent(String divisionPparent) {
 		this.divisionPparent = divisionPparent;
 	}
 	

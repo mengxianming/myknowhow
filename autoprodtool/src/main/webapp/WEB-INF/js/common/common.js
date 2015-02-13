@@ -1,4 +1,3 @@
-
 /**
  *  Constructor for JqGridWrapper
  * @param containerId string - html container id. used for jquery selector.
@@ -6,15 +5,15 @@
  * @param options object - jqgrid options
  * @returns
  */
-function JqGridWrapper(containerId, loadAtOnce, options){
+function JqGridWrapper(containerId, loadAtOnce, options) {
     var that = this;
     this.selectedRowId = null;
     this.datatype = options.datatype;
-    this.grid = jQuery("#" + containerId);    
-    if(!loadAtOnce){
+    this.grid = jQuery("#" + containerId);
+    if (!loadAtOnce) {
 	options.datatype = "local";
     }
-    if(!options.jsonReader){
+    if (!options.jsonReader) {
 	options.jsonReader = {
 	    root : "data",
 	    page : "pager.page",
@@ -24,10 +23,10 @@ function JqGridWrapper(containerId, loadAtOnce, options){
 	    id : "id"
 	};
     }
-    this.grid.bind("jqGridCellSelect", function(evt, rowid, index, content) {		   
+    this.grid.bind("jqGridCellSelect", function(evt, rowid, index, content) {
 	that.selectedRowId = rowid;
     });
-    this.grid.bind("jqGridLoadComplete",function(event, data) {			    
+    this.grid.bind("jqGridLoadComplete", function(event, data) {
 	that.selectedRowId = null;
 
 	var gridParam = {};
@@ -36,16 +35,15 @@ function JqGridWrapper(containerId, loadAtOnce, options){
 	    gridParam.records = data.pager.total;
 	    gridParam.page = data.pager.page;
 	}
-	that.setGridParams(gridParam);   
+	that.setGridParams(gridParam);
     });
-    
-    
+
     this.grid.jqGrid(options);
 };
 
-JqGridWrapper.prototype.reloadTable = function(postData, resetPager){
+JqGridWrapper.prototype.reloadTable = function(postData, resetPager) {
     var gridParam = {
-	    datatype : this.datatype
+	datatype : this.datatype
     };
     if (postData) {
 	gridParam.postData = postData;
@@ -58,55 +56,57 @@ JqGridWrapper.prototype.reloadTable = function(postData, resetPager){
 
 };
 
-JqGridWrapper.prototype.getGridParam = function(key){
+JqGridWrapper.prototype.getGridParam = function(key) {
     return this.grid.jqGrid('getGridParam', key);
 };
-JqGridWrapper.prototype.setGridParam = function(key, value){
-    var params = { };
-    if(key){
+JqGridWrapper.prototype.setGridParam = function(key, value) {
+    var params = {};
+    if (key) {
 	params[key] = value;
     }
     this.grid.jqGrid('setGridParam', params);
 };
 
-JqGridWrapper.prototype.getGridParams = function(){
+JqGridWrapper.prototype.getGridParams = function() {
     return this.grid.jqGrid('getGridParam');
 };
 
-JqGridWrapper.prototype.setGridParams = function(params){
-    params = params && typeof(params) == "object" ? params : {}; 
+JqGridWrapper.prototype.setGridParams = function(params) {
+    params = params && typeof (params) === "object" ? params : {};
     this.grid.jqGrid('setGridParam', params);
 };
 
-
-
-JqGridWrapper.prototype.getWrapped = function(){
+JqGridWrapper.prototype.getWrapped = function() {
     return this.grid;
 };
 
-JqGridWrapper.prototype.getSelectedRowId = function(){
+JqGridWrapper.prototype.getSelectedRowId = function() {
     return this.selectedRowId;
 };
 
-JqGridWrapper.prototype.getSelectedRowData = function(){
-    if(this.selectedRowId){
+JqGridWrapper.prototype.getSelectedRowData = function() {
+    if (this.selectedRowId) {
 	return this.grid.jqGrid('getRowData', this.selectedRowId);
     }
     return null;
 };
 
-JqGridWrapper.prototype.enableInlineEdit = function(addUrl, editUrl, delUrl, addSuccessfunc, editSuccessfunc, delSuccessfunc){
+JqGridWrapper.prototype.enableInlineEdit = function(addUrl, editUrl, delUrl, addSuccessfunc, editSuccessfunc,
+	delSuccessfunc) {
     var that = this;
     var pager = this.getGridParam("pager");
-    this.grid
-    .navGrid(pager,{edit:false,add:false,del:false,search:false})
-    .inlineNav(pager, {
+    this.grid.navGrid(pager, {
+	edit : false,
+	add : false,
+	del : false,
+	search : false
+    }).inlineNav(pager, {
 	addParams : {
 	    rowID : "0",
 	    addRowParams : {
 		url : addUrl,
-		successfunc : function(){
-		    if(addSuccessfunc){
+		successfunc : function() {
+		    if (addSuccessfunc) {
 			addSuccessfunc();
 		    }
 		    that.reloadTable();
@@ -115,50 +115,51 @@ JqGridWrapper.prototype.enableInlineEdit = function(addUrl, editUrl, delUrl, add
 	},
 	editParams : {
 	    url : editUrl,
-	    successfunc : function(){
-		if(editSuccessfunc){
+	    successfunc : function() {
+		if (editSuccessfunc) {
 		    editSuccessfunc();
 		}
 		that.reloadTable();
 	    }
 	}
     });
-    
-  //add delete button
-    this.grid.navButtonAdd(pager,{
-       caption:"", 
-       buttonicon:"ui-icon-close", 
-       onClickButton: function(){ 
-	   if(!that.getSelectedRowData()){
-	       util.alertDialog("メッセージ", "一行のデータを選択してください。");
-	       return;
-	   }
 
-	   util.confirmDialog('削除確認', "データを削除してよろしいですか？", function(){
-	       $.ajax({
-		   url : delUrl,
-		   type : 'POST',
-		   dataType : 'json',
-		   data : {ids : that.getSelectedRowData().id},
-		   success : function(data){
-		       if(data && data.code == 'S00'){
-			   util.alertDialog("メッセージ", "選択したデータを削除しました。");
-			   that.reloadTable();
-			   return ;
-		       }
-		       util.alertDialog("メッセージ", "選択したデータの削除が失敗しました。");
-		   },
-		   error : function(status){
-		       util.alertDialog("メッセージ", "選択したデータの削除が失敗しました。");
-		   }
-	       });
-	   }); 
-	  
-       },
-       position:"last"
+    //add delete button
+    this.grid.navButtonAdd(pager, {
+	caption : "",
+	buttonicon : "ui-icon-close",
+	onClickButton : function() {
+	    if (!that.getSelectedRowData()) {
+		util.alertDialog("メッセージ", "一行のデータを選択してください。");
+		return;
+	    }
+
+	    util.confirmDialog('削除確認', "データを削除してよろしいですか？", function() {
+		$.ajax({
+		    url : delUrl,
+		    type : 'POST',
+		    dataType : 'json',
+		    data : {
+			ids : that.getSelectedRowData().id
+		    },
+		    success : function(data) {
+			if (data && data.code === 'S00') {
+			    util.alertDialog("メッセージ", "選択したデータを削除しました。");
+			    that.reloadTable();
+			    return;
+			}
+			util.alertDialog("メッセージ", "選択したデータの削除が失敗しました。");
+		    },
+		    error : function(status) {
+			util.alertDialog("メッセージ", "選択したデータの削除が失敗しました。");
+		    }
+		});
+	    });
+
+	},
+	position : "last"
     });
 };
-
 
 /**
  * define utility functions in name space 'util'
@@ -169,11 +170,50 @@ var util = {
 };
 
 /**
+ * filter the list by testing every element meeting filter function condition.
+ * filter function will be passed parameter like : filterFunc(element, index), and it will
+ * return true or false to indicate the test result.
+ */
+util.filterList = function(list, filterFunc) {
+    return $.grep(list, filterFunc);
+};
+
+/**
+ * filter the list by testing every element meeting filter function condition.
+ * filter function will be passed parameter like : filterFunc(element, index), and it will
+ * return true or false to indicate the test result.
+ * if the result list has only one element, return that element instead of the array.
+ * if no result, return null
+ */
+util.filterListUnique = function(list, filterFunc) {
+    var ret = $.grep(list, filterFunc);
+    return ret.length > 0 ? ret[0] : null;
+};
+
+/**
+ * select the assigned property value from the list and return the result list.
+ * if distinct flag is set to true, duplicated elements will be removed before returning.
+ * 
+ */
+util.projectList = function(list, prop, distinct) {
+    var ret = [];
+    for ( var i = 0; i < list.length; i++) {
+	ret.push(list[i][prop]);
+    }
+    if (distinct) {
+	ret = $.unique(ret);
+    }
+    return ret;
+};
+
+/**
  * Ajax呼び出す返却値を取得する
  */
 util.getAjaxData = function(url, postdata) {
     var list = null;
-    postdata = postdata ? postdata : {ts : new Date().getTime()};
+    postdata = postdata ? postdata : {
+	ts : new Date().getTime()
+    };
 
     $.ajax({
 	url : url,
@@ -182,7 +222,7 @@ util.getAjaxData = function(url, postdata) {
 	dataType : 'json',
 	async : false,
 	success : function(data, status) {
-	    if(data.data) {
+	    if (data.data) {
 		list = data.data;
 	    }
 	}
@@ -191,22 +231,24 @@ util.getAjaxData = function(url, postdata) {
     return list;
 };
 
-util.fillOptionList = function (selector, dataList, keyProp, labelProp, selected){
+util.fillOptionList = function(selector, dataList, keyProp, labelProp, selected) {
     $(selector).val("");
     $(selector).empty();
+    //add empty option
+    $(selector).append('<option value="">--未選択--</option>');
 
-    for(var index in dataList){			
+    for ( var index in dataList) {
 	var dataEle = dataList[index];
 	var key, label;
-	if(typeof(dataEle) == "string"){
+	if (typeof (dataEle) === "string") {
 	    key = dataEle;
 	    label = dataEle;
-	}else{
+	} else {
 	    key = dataEle[keyProp];
 	    label = dataEle[labelProp];
 	}
 	var option = $("<option/>").attr("value", key).text(label);
-	if(key == selected){
+	if (key == selected) {
 	    option.attr("selected", "selected");
 	}
 	$(selector).append(option);
@@ -214,37 +256,37 @@ util.fillOptionList = function (selector, dataList, keyProp, labelProp, selected
 
 };
 
-util.listToMap = function(list, keyProp, valueProp){
+util.listToMap = function(list, keyProp, valueProp) {
     var map = {};
-    for(var index = 0; index < list.length; index++){			
+    for ( var index = 0; index < list.length; index++) {
 	var dataEle = list[index];
 	var key, label;
-	if(typeof(dataEle) == "string"){
+	if (typeof (dataEle) === "string") {
 	    key = dataEle;
 	    label = dataEle;
-	}else{
+	} else {
 	    key = dataEle[keyProp];
 	    label = dataEle[valueProp];
-	}	
+	}
 	map[key] = label;
     }
     return map;
 };
 
-util.getJqGridOptionsString = function(list, keyProp, valueProp){
+util.getJqGridOptionsString = function(list, keyProp, valueProp) {
     var str = "";
-    for(var index = 0; index < list.length; index++){			
+    for ( var index = 0; index < list.length; index++) {
 	var dataEle = list[index];
 	var key, label;
-	if(typeof(dataEle) == "string"){
+	if (typeof (dataEle) === "string") {
 	    key = dataEle;
 	    label = dataEle;
-	}else{
+	} else {
 	    key = dataEle[keyProp];
 	    label = dataEle[valueProp];
-	}	
+	}
 	str += index > 0 ? ";" : '';
-	str += key + ":" + label;	
+	str += key + ":" + label;
     }
     return str;
 };
@@ -286,10 +328,9 @@ util.paginator = function(container, totalRecords, recordsPerpage, currentPage, 
 
 util.alertDialog = function(title, content, closeCallback) {
     title = title || "メッセージ";
-    var width = content.length>20 ? 'auto':350;
+    var width = content.length > 20 ? 'auto' : 350;
 
-    var html = [ '<div id="dialog-alert" title="' + title + '">', '<p>',
-                 content, '</p></div>' ].join(" ");
+    var html = [ '<div id="dialog-alert" title="' + title + '">', '<p>', content, '</p></div>' ].join(" ");
 
     var buttons = [ {
 	text : "OK",
@@ -314,10 +355,10 @@ util.alertDialog = function(title, content, closeCallback) {
 };
 
 util.confirmDialog = function(title, content, okCallback, closeCallback, cancelCallback, okCaption) {
-    title = title  || "確認";
+    title = title || "確認";
     okCaption = okCaption || "OK";
 
-    var width = content.length>20 ? 'auto':350;
+    var width = content.length > 20 ? 'auto' : 350;
 
     var buttons = [ {
 	text : okCaption,
@@ -338,8 +379,7 @@ util.confirmDialog = function(title, content, okCallback, closeCallback, cancelC
     } ];
 
     content = content ? content : "";
-    var html = [ '<div id="dialog-confirm" title="' + title + '">', '<p>',
-                 content, '</p></div>' ].join(" ");
+    var html = [ '<div id="dialog-confirm" title="' + title + '">', '<p>', content, '</p></div>' ].join(" ");
 
     $(html).dialog({
 	resizable : false,
@@ -347,15 +387,16 @@ util.confirmDialog = function(title, content, okCallback, closeCallback, cancelC
 	width : width,
 	modal : true,
 	buttons : buttons,
-	close : function(event,ui) {
+	close : function(event, ui) {
 	    if (closeCallback) {
-		closeCallback(event,ui);
+		closeCallback(event, ui);
 	    }
 	}
     });
 };
 
-
-
-
-
+util.bindRadioButtons = function(containerSelector, bindVal) {
+    $(containerSelector).find(":radio").each(function(index, elem) {
+	elem.checked = $(elem).val() == bindVal;
+    });
+};

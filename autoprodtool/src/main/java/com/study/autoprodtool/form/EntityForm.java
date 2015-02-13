@@ -13,6 +13,7 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 
 import com.study.autoprodtool.common.CheckUtil;
+import com.study.autoprodtool.common.ComUtils;
 import com.study.autoprodtool.entity.DBEntity;
 
 /**
@@ -24,6 +25,17 @@ import com.study.autoprodtool.entity.DBEntity;
  *
  */
 public abstract class EntityForm<F extends EntityForm<?, ?>, E extends DBEntity> {
+	private Class<E> dbentityClass;
+	
+	/**
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public EntityForm() {
+		Class<?>[] genericClasses = ComUtils.getGenericTypes(getClass());
+		dbentityClass = (Class<E>)genericClasses[1];
+	}
+	
 	@SuppressWarnings("unchecked")
 	public F initFromEntity(E entity){	
 		if(entity == null){
@@ -78,13 +90,10 @@ public abstract class EntityForm<F extends EntityForm<?, ?>, E extends DBEntity>
 	}
 	
 	@SuppressWarnings("unchecked")
-	public E toEntity(Class<E> entityType){	
-		if(entityType == null){
-			return null;
-		}
+	public E toEntity(){		
 		try {
 			BeanWrapper formWrapper = PropertyAccessorFactory.forBeanPropertyAccess(this);
-			BeanWrapper entityWrapper = PropertyAccessorFactory.forBeanPropertyAccess(entityType.newInstance());
+			BeanWrapper entityWrapper = PropertyAccessorFactory.forBeanPropertyAccess(dbentityClass.newInstance());
 			entityWrapper.setAutoGrowNestedPaths(true);
 			
 			//set properties base on setter, and check annotated method

@@ -9,9 +9,9 @@
 		<br> <br>
 		<button id="btn-ret">戻る</button>
 	</div>
-	<h1>ユーザー情報</h1>
+	<h1>ユーザー情報</h1>	
 	<form id="form">
-
+		<input type="hidden" name="id" value="${user.id }"/>
 		<table class="table">
 			<tbody>
 				<tr>
@@ -82,10 +82,10 @@
 				<tr>
 					<th colspan="2">サマリメール</th>
 					<td>
-						<div id="sumaryMailFlag">
+						<div id="sumaryMailFlag-radios">
 						<input type="hidden" id="sumaryMailFlag" value="${user.sumaryMailFlag }" />						    
 							<input type="radio" name="sumaryMailFlag" id="sumaryMailFlagOn" value="0"> <label for="sumaryMailFlagOn">必要</label>
-							<input type="radio" name="sumaryMailFlag" id="sumaryMailFlagOff" value="1" checked="checked"> <label
+							<input type="radio" name="sumaryMailFlag" id="sumaryMailFlagOff" value="1" > <label
 								for="sumaryMailFlagOff">不要</label>
 						</div>
 					</td>
@@ -94,7 +94,7 @@
 				<tr>
 					<th colspan="2">文書回覧メール</th>
 					<td>
-						<div id="articleMailFlag">
+						<div id="articleMailFlag-radios">
 						<input type="hidden" id="articleMailFlag" value="${user.articleMailFlag }" />		
 							<input type="radio" name="articleMailFlag" id="articleMailFlagOn" value="0"> <label
 								for="articleMailFlagOn">必要</label> <input type="radio" name="articleMailFlag" id="articleMailFlagOff" value="1">
@@ -134,7 +134,7 @@
 				<tr>
 					<th colspan="2">ステータス</th>
 					<td>
-						<div id="status">
+						<div id="status-radios">
 						<input type="hidden" id="status" value="${user.status }" />	
 							<input type="radio" name="status" id="statusValid" value="0"> <label for="statusValid">Valid</label> <input
 								type="radio" name="status" id="statusInvalidValid" value="1"> <label for="statusInvalidValid">Invalid</label>
@@ -156,15 +156,60 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/lib/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/common.js"></script>
 <script type="text/javascript">
+
 $(function(){
     var roleList = util.getAjaxData('<c:url value="<%=Urls.ROLE_LIST%>"/>');
     util.fillOptionList("#select-role", roleList, "id", "name", $('#roleId').val());
     
     var companyList = util.getAjaxData('<c:url value="<%=Urls.COMPANY_LIST%>"/>');
-    util.fillOptionList("#select-company", companyList, "id", "name", $('#companyId').val());
+    util.fillOptionList("#select-company", companyList, "id", "name");
     
-    var divisionList = util.getAjaxData('<c:url value="<%=Urls.DIVISION_LIST%>"/>');
-    util.fillOptionList("#select-division", divisionList, "id", "name", $('#divisionId').val());
+    var divisionList = null;
+    var userDivision = null;
+    $("#select-company").change(function(){
+	 	divisionList = $("#select-company").val() ?
+		    util.getAjaxData('<c:url value="<%=Urls.DIVISION_LIST%>"/>', {'filter.companyId' : $("#select-company").val()})
+		    : [];
+		
+		userDivision= util.filterListUnique(divisionList, function(elem){return elem.id == $("#divisionId").val();});
+	    
+		var pparentList = util.projectList(divisionList, 'pparent', true);
+	 	util.fillOptionList("#select-division3", pparentList, null, null); 	
+	 	//trigger event
+		$("#select-division3").change();
+    });
+    $("#select-division3").change(function(){		
+	   var filterdList = $("#select-division3").val() ? 
+		   					util.filterList(divisionList, function(elem){return elem.pparent == $("#select-division3").val();})
+		   					: [];
+	    var parentList = util.projectList(filterdList, 'parent', true);
+	 	util.fillOptionList("#select-division2", parentList, null, null);
+	 	//trigger event
+		$("#select-division2").change();
+	});
+    $("#select-division2").change(function(){
+	   var filterdList = $("#select-division2").val() ?
+		   util.filterList(divisionList, function(elem){
+	       return elem.pparent == $("#select-division3").val() 
+	 				&& elem.parent == $("#select-division2").val();
+	    }) : [];   
+	 	util.fillOptionList("#select-division", filterdList, "id", "name");
+	});
+    
+    //trigger events to reflect model value to ui
+    $("#select-company").val($('#companyId').val());
+    $("#select-company").change();
+    $("#select-division3").val(userDivision ? userDivision.pparent : '' );
+    //$("#select-division3").change();
+	$("#select-division2").val(userDivision ? userDivision.parent : '' );
+	//$("#select-division2").change();
+	$("#select-division").val(userDivision ? userDivision.id : '' );
+	
+	//bind radio group
+	util.bindRadioButtons("#sumaryMailFlag-radios", $("#sumaryMailFlag").val());
+	util.bindRadioButtons("#articleMailFlag-radios", $("#articleMailFlag").val());
+	util.bindRadioButtons("#status-radios", $("#status").val());
+   
 });
 </script>
 

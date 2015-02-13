@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.GeneratedValue;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
@@ -20,6 +21,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.study.autoprodtool.common.ComUtils;
+import com.study.autoprodtool.common.ForEach;
+import com.study.autoprodtool.common.PropertyAccessException;
+import com.study.autoprodtool.common.PropertyValue;
 import com.study.autoprodtool.dao.CrudDAO;
 import com.study.autoprodtool.dao.RestrictionProvider;
 import com.study.autoprodtool.dao.RestrictionProviderSupport;
@@ -105,9 +109,40 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	 * @see my.study.hibernate.dao.CrudDAO#update(java.lang.Object)
 	 */
 	public void update(T entity) throws Exception {
+		validateFKField(entity);
 		getSession().merge(entity);
 		getSession().flush();
 	}
+
+	/**
+	 * @param entity
+	 */
+	private void validateFKField(final T entity) {
+		ComUtils.iterate(entity, new ForEach<PropertyValue>() {
+
+			@Override
+			public void perform(PropertyValue pv){
+				if(pv.getValue() instanceof DBEntity){
+					//this property is fk field. validate it
+					DBEntity fkfield = (DBEntity)pv.getValue();
+					if(fkfield.getId() == null){
+						//set it to null
+						try {
+							PropertyUtils.setProperty(entity, pv.getName(), null);
+						}
+						catch (Exception e) {
+							throw new PropertyAccessException(e);
+						}
+					}
+				}
+				
+			}			
+			
+		});
+		
+	}
+
+
 
 	/* (non-Javadoc)
 	 * @see my.study.hibernate.dao.CrudDAO#delete(java.lang.Object)

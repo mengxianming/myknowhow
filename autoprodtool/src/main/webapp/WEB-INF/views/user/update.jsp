@@ -38,7 +38,7 @@ var urls = {
 	    $("#form").on("submit", function(evt){
 		    evt.preventDefault();
 		    $("#form").ajaxSubmit({
-			url : urls.create,
+			url : urls.update,
 			type : 'POST',
 			dataType : 'json',
 			success : function(data){

@@ -34,5 +34,20 @@ public interface Urls {
 	String ROLE_CREATE = "/role/create";
 	String ROLE_UPDATE = "/role/update";
 	String ROLE_DELETE = "/role/delete";
+	
+	String CATEGORYBIG_LIST = "/categorybig/list";
+	String CATEGORYBIG_CREATE = "/categorybig/create";
+	String CATEGORYBIG_UPDATE = "/categorybig/update";
+	String CATEGORYBIG_DELETE = "/categorybig/delete";	
+	
+	String CATEGORYMID_LIST = "/categorymid/list";
+	String CATEGORYMID_CREATE = "/categorymid/create";
+	String CATEGORYMID_UPDATE = "/categorymid/update";
+	String CATEGORYMID_DELETE = "/categorymid/delete";
+	
+	String CATEGORYSMALL_LIST = "/categorysmall/list";
+	String CATEGORYSMALL_CREATE = "/categorysmall/create";
+	String CATEGORYSMALL_UPDATE = "/categorysmall/update";
+	String CATEGORYSMALL_DELETE = "/categorysmall/delete";
 
 }
