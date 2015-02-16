@@ -18,6 +18,7 @@ import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.study.autoprodtool.common.ComUtils;
@@ -247,8 +248,14 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 
 			@Override
 			public void addRestriction(Criteria criteria) {
-				criteria.add(Restrictions.in(field, values));				
+//				parseForSubCriteria(field, criteria)
+//				.add(Restrictions.in(getSimleFieldName(field), values));
+				
+				parseForSubCriteria(field, criteria)
+				.add(Restrictions.in(field, values));
 			}
+			
+			
 			/* (non-Javadoc)
 			 * @see com.study.autoprodtool.dao.RestrictionProviderSupport#addPager(org.hibernate.Criteria)
 			 */
@@ -259,7 +266,24 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 			
 		});
 	}
-
+	
+	private String getSimleFieldName(String field) {
+		int lastDot = field.lastIndexOf(".");
+		if(lastDot > 0){
+			return field.substring(lastDot + 1);								
+		}	
+		return field;
+	}
+	
+	private Criteria parseForSubCriteria(String field, Criteria criteria) {
+		int lastDot = field.lastIndexOf(".");
+		if(lastDot > 0){
+			String path = field.substring(0, lastDot);					
+//			return criteria.createCriteria(path, JoinType.LEFT_OUTER_JOIN);		
+			criteria.createAlias(path, path, JoinType.LEFT_OUTER_JOIN);
+		}	
+		return criteria;
+	}
 
 
 	/* (non-Javadoc)
@@ -347,7 +371,9 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	@Override
 	public <V> List<V> selectFiledList(String field, RestrictionProvider restrictions) throws Exception {
 		Criteria criteria = getSession().createCriteria(entityClazz);
-		criteria.setProjection(Projections.property(field));	
+//		criteria.setProjection(Projections.property(field));	
+		parseForSubCriteria(field, criteria)
+		.setProjection(Projections.property(field));
 		restrictions.addRestriction(criteria);
 		restrictions.addPager(criteria);
 		restrictions.addOrder(criteria);
