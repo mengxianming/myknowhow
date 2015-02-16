@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.study.autoprodtool.entity.DBEntity;
+import com.study.autoprodtool.form.FilterListCriteria;
 import com.study.autoprodtool.form.ListCriteria;
 
 /**
@@ -29,4 +30,6 @@ public interface CrudService<T extends DBEntity> {
 	void delete(T entity) throws Exception;
 	Map<Long, T> selectListByIds(Long[] idList) throws Exception;
 	public List<T> selectAll(Integer start, Integer limit) throws Exception;
+	<V> List<V> selectFiledList(String field, ListCriteria<?> restrictions) throws Exception;
+	Map<String, List<Object>> selectFilterOptions(FilterListCriteria<?> fiterListCriteria, boolean distinct) throws Exception;
 }

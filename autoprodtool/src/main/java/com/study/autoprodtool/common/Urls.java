@@ -19,6 +19,13 @@ public interface Urls {
 	String USER_DELETE = "/user/delete";
 	String USER_DETAIL = "/user/detail";
 	
+	String FUNCTION_LIST = "/function/list";
+	String FUNCTION_CREATE = "/function/create";
+	String FUNCTION_UPDATE = "/function/update";
+	String FUNCTION_DELETE = "/function/delete";
+	String FUNCTION_DETAIL = "/function/detail";
+	String FUNCTION_FILTER_LIST = "/function/filter/list";
+	
 	String MASTER_HOME = "/master";
 	String DIVISION_LIST = "/division/list";
 	String DIVISION_CREATE = "/division/create";

@@ -2,9 +2,6 @@ package com.study.autoprodtool.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Example;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.study.autoprodtool.common.CheckUtil;
 import com.study.autoprodtool.common.JsonResult;
 import com.study.autoprodtool.common.ListJsonResult;
 import com.study.autoprodtool.common.Urls;
@@ -57,24 +53,8 @@ public class DivisionController extends AbstractEntityController<DivisionForm, D
 	}
 
 	@ModelAttribute
-	public ListCriteria<DivisionForm> initListCriteria(HttpServletRequest request){
-		ListCriteria<DivisionForm> listCriteria = new ListCriteria<DivisionForm>(){
-
-			@Override
-			protected void addCriterions(Criteria criteria) {
-				if(getFilter() != null && !CheckUtil.isAllFieldsNull(getFilter())){
-					Division example = getFilter().toEntity();
-					//criteria.add(Example.create(example));
-					if(example.getCompany() != null){
-						criteria.add(Restrictions.eq("company", example.getCompany()));
-					}
-				}
-
-
-			}
-
-		};		
-		return listCriteria;
+	public ListCriteria<DivisionForm> initListCriteria(){		
+		return getDefaultListCriteria();
 	}
 
 	/* (non-Javadoc)

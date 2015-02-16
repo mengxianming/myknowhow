@@ -14,6 +14,7 @@ import com.study.autoprodtool.common.JsonResult;
 import com.study.autoprodtool.common.ListJsonResult;
 import com.study.autoprodtool.entity.DBEntity;
 import com.study.autoprodtool.form.EntityForm;
+import com.study.autoprodtool.form.ExampleListCriteria;
 import com.study.autoprodtool.form.ListCriteria;
 import com.study.autoprodtool.service.CrudService;
 
@@ -89,8 +90,17 @@ public abstract class AbstractEntityController<F extends EntityForm<F, E>, E ext
 		
 		return JsonResult.success(null);
 	}
-
 	
-	abstract ListCriteria<F> initListCriteria(HttpServletRequest request);
+	abstract ListCriteria<F> initListCriteria();
+	
+	public ListCriteria<F> getDefaultListCriteria(){
+		return new ExampleListCriteria<F>(entityFormClass);
+	}
 
+	/**
+	 * @return the entityFormClass
+	 */
+	public Class<F> getEntityFormClass() {
+		return entityFormClass;
+	}
 }

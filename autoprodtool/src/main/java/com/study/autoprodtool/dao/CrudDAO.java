@@ -23,6 +23,7 @@ public interface CrudDAO<T> {
 	void insert(T entity) throws Exception;
 	void update(T entity) throws Exception;
 	void delete(T entity) throws Exception;
+	<V> List<V> selectFiledList(String field, RestrictionProvider restrictions) throws Exception;
 	
 	/**
 	 * エンティティのフィールドの値範囲により、エンティティを検索する

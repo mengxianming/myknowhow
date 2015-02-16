@@ -2,7 +2,6 @@ package com.study.autoprodtool.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,8 +13,8 @@ import com.study.autoprodtool.common.JsonResult;
 import com.study.autoprodtool.common.ListJsonResult;
 import com.study.autoprodtool.common.Urls;
 import com.study.autoprodtool.entity.Role;
-import com.study.autoprodtool.form.RoleForm;
 import com.study.autoprodtool.form.ListCriteria;
+import com.study.autoprodtool.form.RoleForm;
 import com.study.autoprodtool.service.CrudService;
 import com.study.autoprodtool.service.RoleService;
 
@@ -54,17 +53,8 @@ public class RoleController extends AbstractEntityController<RoleForm, Role>{
 	}
 
 	@ModelAttribute
-	public ListCriteria<RoleForm> initListCriteria(HttpServletRequest request){
-		ListCriteria<RoleForm> listCriteria = new ListCriteria<RoleForm>(){
-
-			@Override
-			protected void addCriterions(Criteria criteria) {
-
-
-			}
-
-		};		
-		return listCriteria;
+	public ListCriteria<RoleForm> initListCriteria(){		
+		return getDefaultListCriteria();
 	}
 
 	/* (non-Javadoc)

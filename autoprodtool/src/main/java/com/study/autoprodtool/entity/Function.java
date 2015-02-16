@@ -28,6 +28,7 @@ public class Function extends DBEntity {
 	private Long id;
 	@Column(unique=true)
 	private String name;
+	@Column(name="\"order\"")
 	private Integer order;
 	@ManyToOne
 	private CategoryBig categoryBig;
@@ -35,6 +36,7 @@ public class Function extends DBEntity {
 	private CategoryMid categoryMid;
 	@ManyToOne
 	private CategorySmall categorySmall;
+	private String description;
 	
 
 	/**
@@ -108,6 +110,18 @@ public class Function extends DBEntity {
 	 */
 	public void setCategorySmall(CategorySmall categorySmall) {
 		this.categorySmall = categorySmall;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
 	}
 	
 	

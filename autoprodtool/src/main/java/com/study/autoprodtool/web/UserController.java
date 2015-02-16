@@ -2,7 +2,6 @@ package com.study.autoprodtool.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,19 +94,9 @@ public class UserController extends AbstractEntityController<UserForm, User>{
 		return super.delete(ids);
 	}
 
-	@ModelAttribute("listCriteria")
-	public ListCriteria<UserForm> initListCriteria(HttpServletRequest request){
-		ListCriteria<UserForm> listCriteria = new ListCriteria<UserForm>(){
-
-			@Override
-			protected void addCriterions(Criteria criteria) {
-
-
-			}
-
-		};
-		
-		return listCriteria;
+	@ModelAttribute
+	public ListCriteria<UserForm> initListCriteria(){		
+		return getDefaultListCriteria();
 	}
 
 	/* (non-Javadoc)

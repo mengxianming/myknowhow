@@ -338,4 +338,20 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 		return criteria.list();
 	}
 
+
+
+	/* (non-Javadoc)
+	 * @see com.study.autoprodtool.dao.CrudDAO#selectFiledList(com.study.autoprodtool.dao.RestrictionProvider, java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <V> List<V> selectFiledList(String field, RestrictionProvider restrictions) throws Exception {
+		Criteria criteria = getSession().createCriteria(entityClazz);
+		criteria.setProjection(Projections.property(field));	
+		restrictions.addRestriction(criteria);
+		restrictions.addPager(criteria);
+		restrictions.addOrder(criteria);
+		return criteria.list();
+	}
+
 }

@@ -2,7 +2,6 @@ package com.study.autoprodtool.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,8 +15,8 @@ import com.study.autoprodtool.common.Urls;
 import com.study.autoprodtool.entity.Company;
 import com.study.autoprodtool.form.CompanyForm;
 import com.study.autoprodtool.form.ListCriteria;
-import com.study.autoprodtool.service.CrudService;
 import com.study.autoprodtool.service.CompanyService;
+import com.study.autoprodtool.service.CrudService;
 
 /**
  * Handles requests for the application home page.
@@ -54,19 +53,10 @@ public class CompanyController extends AbstractEntityController<CompanyForm, Com
 	}
 
 	@ModelAttribute
-	public ListCriteria<CompanyForm> initListCriteria(HttpServletRequest request){
-		ListCriteria<CompanyForm> listCriteria = new ListCriteria<CompanyForm>(){
-
-			@Override
-			protected void addCriterions(Criteria criteria) {
-
-
-			}
-
-		};		
-		return listCriteria;
+	public ListCriteria<CompanyForm> initListCriteria(){		
+		return getDefaultListCriteria();
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see com.study.autoprodtool.web.AbstractEntityController#getCrudService()
 	 */

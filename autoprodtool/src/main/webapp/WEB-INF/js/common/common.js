@@ -400,3 +400,42 @@ util.bindRadioButtons = function(containerSelector, bindVal) {
 	elem.checked = $(elem).val() == bindVal;
     });
 };
+
+
+/**
+ * return name:value object
+ * maybe not safe for one name and multi values case
+ */
+util.getFormData = function(obj) {
+    var result = {};
+
+    var arrData = $(obj).serializeArray();
+
+    // convert to name:value format
+    for ( var i in arrData) {
+	if (typeof (result[arrData[i].name]) == 'undefined')
+	    result[arrData[i].name] = arrData[i].value;
+	else
+	    result[arrData[i].name] += "," + arrData[i].value;
+    }
+    return result;
+};
+
+util.createCustomSelectEditoptions = function(dataUrl, keyProp, valProp){
+    var opt = {};
+    opt.custom_element = function(value, options) {
+	    var list = util.getAjaxData(dataUrl);
+	    var selector = $("<select/>");
+	    util.fillOptionList(selector, list, keyProp, valProp, value);
+	    return selector.get(0);
+	};
+	opt.custom_value = function(elem, operation, value) {
+	    if (operation === 'get') {
+		return $(elem).val();
+	    } else if (operation === 'set') {
+		$(elem).val(value);
+	    }
+	};
+	
+	return opt;
+};

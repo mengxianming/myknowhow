@@ -5,6 +5,8 @@
 package com.study.autoprodtool.common;
 
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -15,7 +17,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.springframework.beans.BeanUtils;
 
+import com.study.autoprodtool.form.EntityForm;
+import com.study.autoprodtool.form.FieldMapping;
 import com.study.autoprodtool.form.ListCriteria;
 
 
@@ -86,6 +91,9 @@ public class ComUtils {
 	}
 	
 	public static void iterate(Object bean, ForEach<PropertyValue> forEach){
+		if(bean == null){
+			return;
+		}
 		PropertyDescriptor[] props = PropertyUtils.getPropertyDescriptors(bean);
 		for(PropertyDescriptor prop : props){		
 			if(prop.getReadMethod() == null){
@@ -103,5 +111,31 @@ public class ComUtils {
 			}
 			
 		}
+	}
+	
+	public static <F extends EntityForm<F, ?>> String getMappedEntityFieldName(Class<F> entityFormClass, String entityFormFieldName){		
+		String ret = entityFormFieldName;		
+		FieldMapping annotation = null;
+		try {
+			PropertyDescriptor desciptor = BeanUtils.getPropertyDescriptor(entityFormClass, entityFormFieldName);
+			if(desciptor != null){
+				Method setter = desciptor.getReadMethod();
+				annotation = setter.getAnnotation(FieldMapping.class);			
+			}
+			//override the annotation from setter method if field is annotated.
+			Field field = entityFormClass.getDeclaredField(entityFormFieldName);
+			if(field != null && field.isAnnotationPresent(FieldMapping.class)){
+				annotation = field.getAnnotation(FieldMapping.class);
+			}
+		}
+		catch (Exception e) {
+			throw new PropertyAccessException(e);
+		}
+		
+		if(annotation != null && !CheckUtil.isNull(annotation.value())){
+			ret = annotation.value();					
+		}
+		
+		return ret;
 	}
 }

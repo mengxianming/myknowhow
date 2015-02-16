@@ -2,7 +2,6 @@ package com.study.autoprodtool.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.hibernate.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,8 +15,8 @@ import com.study.autoprodtool.common.Urls;
 import com.study.autoprodtool.entity.CategorySmall;
 import com.study.autoprodtool.form.CategorySmallForm;
 import com.study.autoprodtool.form.ListCriteria;
-import com.study.autoprodtool.service.CrudService;
 import com.study.autoprodtool.service.CategorySmallService;
+import com.study.autoprodtool.service.CrudService;
 
 /**
  * Handles requests for the application home page.
@@ -54,17 +53,8 @@ public class CategorySmallController extends AbstractEntityController<CategorySm
 	}
 
 	@ModelAttribute
-	public ListCriteria<CategorySmallForm> initListCriteria(HttpServletRequest request){
-		ListCriteria<CategorySmallForm> listCriteria = new ListCriteria<CategorySmallForm>(){
-
-			@Override
-			protected void addCriterions(Criteria criteria) {
-
-
-			}
-
-		};		
-		return listCriteria;
+	public ListCriteria<CategorySmallForm> initListCriteria(){		
+		return getDefaultListCriteria();
 	}
 
 	/* (non-Javadoc)

@@ -133,6 +133,6 @@ public abstract class EntityForm<F extends EntityForm<?, ?>, E extends DBEntity>
 		catch (Exception e) {			
 			throw new FormEntityConversionException(e);
 		}		
-	}
+	}	
 
 }
