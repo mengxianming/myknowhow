@@ -53,7 +53,7 @@ public class DivisionController extends AbstractEntityController<DivisionForm, D
 	}
 
 	@ModelAttribute
-	public ListCriteria<DivisionForm> initListCriteria(){		
+	public ListCriteria<DivisionForm> initListCriteria() throws Exception{
 		return getDefaultListCriteria();
 	}
 

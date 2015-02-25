@@ -86,7 +86,7 @@ public class FunctionController extends AbstractEntityController<FunctionForm, F
 		Map<String, List<Object>> resultOptions = getCrudService().selectFilterOptions(listCriteria, true);		
 		result.put("selections", listCriteria.getSelections());
 		result.put("resultOptions", resultOptions);
-		return JsonResult.success(resultOptions);
+		return JsonResult.success(result);
 	}
 
 	/**
@@ -117,15 +117,15 @@ public class FunctionController extends AbstractEntityController<FunctionForm, F
 		return super.delete(ids);
 	}
 
-	@ModelAttribute
-	public ListCriteria<FunctionForm> initListCriteria(){		
+	@ModelAttribute("listCriteria")
+	public ListCriteria<FunctionForm> initListCriteria() throws Exception{	
 		return getDefaultListCriteria();
 	}
 	
 	@ModelAttribute("filterListCriteria")
 	public ListCriteria<FunctionForm> initFilterListCriteria(HttpServletRequest request){
 		ListCriteria<FunctionForm> listCriteria = new FilterListCriteria<FunctionForm>(getEntityFormClass());
-		
+		listCriteria.setFilter(new FunctionForm());
 		return listCriteria;
 	}
 

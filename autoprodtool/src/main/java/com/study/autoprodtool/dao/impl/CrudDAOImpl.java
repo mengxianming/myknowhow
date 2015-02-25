@@ -25,6 +25,7 @@ import com.study.autoprodtool.common.ComUtils;
 import com.study.autoprodtool.common.ForEach;
 import com.study.autoprodtool.common.PropertyAccessException;
 import com.study.autoprodtool.common.PropertyValue;
+import com.study.autoprodtool.dao.CriteriaWrap;
 import com.study.autoprodtool.dao.CrudDAO;
 import com.study.autoprodtool.dao.RestrictionProvider;
 import com.study.autoprodtool.dao.RestrictionProviderSupport;
@@ -56,7 +57,7 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	 */
 	@SuppressWarnings("unchecked")
 	public T selectOne(final Serializable key) {
-		Criteria criteria = getSession().createCriteria(entityClazz);
+		CriteriaWrap criteria = createCriteria();
 		criteria.add(Restrictions.eq("id", key));
 		return (T)criteria.uniqueResult();
 	}
@@ -66,12 +67,21 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<T> selectList(final RestrictionProvider restrictions) {
-		Criteria criteria = getSession().createCriteria(entityClazz);
+		CriteriaWrap criteria = createCriteria();
 		restrictions.addRestriction(criteria);
 		restrictions.addPager(criteria);
 		restrictions.addOrder(criteria);
 		return criteria.list();
 	}
+
+	/**
+	 * @return
+	 */
+	private CriteriaWrap createCriteria() {
+		return new CriteriaWrap(getSession().createCriteria(entityClazz));
+	}
+
+
 
 	/* (non-Javadoc)
 	 * @see my.study.hibernate.dao.CrudDAO#insert(java.lang.Object)
@@ -186,7 +196,7 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	 * @see net.suntec.dynabiz.service.masterdataservice.dao.CrudDAO#selectListSize(net.suntec.dynabiz.service.masterdataservice.dao.RestrictionProvider)
 	 */
 	public int selectListSize(RestrictionProvider restrictions) throws Exception {
-		Criteria criteria = getSession().createCriteria(entityClazz);
+		CriteriaWrap criteria = createCriteria();
 		restrictions.addRestriction(criteria);
 		criteria.setProjection(Projections.rowCount());		
 		Object ret = criteria.uniqueResult();
@@ -202,7 +212,7 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 		return selectList(new RestrictionProviderSupport(){
 
 			@Override
-			public void addPager(Criteria criteria) {
+			public void addPager(CriteriaWrap criteria) {
 				setPageLimit(criteria, offset, limit);				
 			}
 			
@@ -247,11 +257,11 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 		return selectList(new RestrictionProviderSupport(){
 
 			@Override
-			public void addRestriction(Criteria criteria) {
+			public void addRestriction(CriteriaWrap criteria) {
 //				parseForSubCriteria(field, criteria)
 //				.add(Restrictions.in(getSimleFieldName(field), values));
 				
-				parseForSubCriteria(field, criteria)
+				createAlias(field, criteria)
 				.add(Restrictions.in(field, values));
 			}
 			
@@ -260,26 +270,19 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 			 * @see com.study.autoprodtool.dao.RestrictionProviderSupport#addPager(org.hibernate.Criteria)
 			 */
 			@Override
-			public void addPager(Criteria criteria) {
+			public void addPager(CriteriaWrap criteria) {
 				setPageLimit(criteria, start, limit);
 			}
 			
 		});
 	}
 	
-	private String getSimleFieldName(String field) {
-		int lastDot = field.lastIndexOf(".");
-		if(lastDot > 0){
-			return field.substring(lastDot + 1);								
-		}	
-		return field;
-	}
 	
-	private Criteria parseForSubCriteria(String field, Criteria criteria) {
+	
+	private Criteria createAlias(String field, Criteria criteria) {
 		int lastDot = field.lastIndexOf(".");
 		if(lastDot > 0){
-			String path = field.substring(0, lastDot);					
-//			return criteria.createCriteria(path, JoinType.LEFT_OUTER_JOIN);		
+			String path = field.substring(0, lastDot);						
 			criteria.createAlias(path, path, JoinType.LEFT_OUTER_JOIN);
 		}	
 		return criteria;
@@ -293,14 +296,14 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 		return selectList(new RestrictionProviderSupport(){
 
 			@Override
-			public void addRestriction(Criteria criteria) {
+			public void addRestriction(CriteriaWrap criteria) {
 				criteria.add(Example.create(example));				
 			}
 			/* (non-Javadoc)
 			 * @see com.study.autoprodtool.dao.RestrictionProviderSupport#addPager(org.hibernate.Criteria)
 			 */
 			@Override
-			public void addPager(Criteria criteria) {
+			public void addPager(CriteriaWrap criteria) {
 				setPageLimit(criteria, start, limit);
 			}
 			
@@ -315,7 +318,7 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	public List<T> selectListByKeyword(final String keyword, final String[] fields, final Integer start, final Integer limit) throws Exception {
 		return selectList(new RestrictionProviderSupport(){
 			
-			public void addRestriction(Criteria criteria) {
+			public void addRestriction(CriteriaWrap criteria) {
 				Disjunction ors = Restrictions.disjunction();
 				for(String field : fields){
 					ors.add(Restrictions.like(field, keyword));
@@ -326,7 +329,7 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 			 * @see com.study.autoprodtool.dao.RestrictionProviderSupport#addPager(org.hibernate.Criteria)
 			 */
 			@Override
-			public void addPager(Criteria criteria) {
+			public void addPager(CriteriaWrap criteria) {
 				setPageLimit(criteria, start, limit);
 			}
 			
@@ -354,7 +357,7 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	 */
 	@SuppressWarnings("unchecked")	
 	public List<Long> selectIdList(RestrictionProvider restrictions) throws Exception {
-		Criteria criteria = getSession().createCriteria(entityClazz);
+		CriteriaWrap criteria = createCriteria();
 		criteria.setProjection(Projections.id());	
 		restrictions.addRestriction(criteria);
 		restrictions.addPager(criteria);
@@ -370,9 +373,8 @@ public abstract class CrudDAOImpl<T extends DBEntity> implements CrudDAO<T>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public <V> List<V> selectFiledList(String field, RestrictionProvider restrictions) throws Exception {
-		Criteria criteria = getSession().createCriteria(entityClazz);
-//		criteria.setProjection(Projections.property(field));	
-		parseForSubCriteria(field, criteria)
+		CriteriaWrap criteria = createCriteria();	
+		createAlias(field, criteria)
 		.setProjection(Projections.property(field));
 		restrictions.addRestriction(criteria);
 		restrictions.addPager(criteria);

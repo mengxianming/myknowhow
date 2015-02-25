@@ -53,7 +53,7 @@ public class CompanyController extends AbstractEntityController<CompanyForm, Com
 	}
 
 	@ModelAttribute
-	public ListCriteria<CompanyForm> initListCriteria(){		
+	public ListCriteria<CompanyForm> initListCriteria() throws Exception{	
 		return getDefaultListCriteria();
 	}
 	

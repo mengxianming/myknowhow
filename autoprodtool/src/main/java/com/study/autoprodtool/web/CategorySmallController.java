@@ -53,7 +53,7 @@ public class CategorySmallController extends AbstractEntityController<CategorySm
 	}
 
 	@ModelAttribute
-	public ListCriteria<CategorySmallForm> initListCriteria(){		
+	public ListCriteria<CategorySmallForm> initListCriteria() throws Exception{	
 		return getDefaultListCriteria();
 	}
 

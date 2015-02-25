@@ -91,10 +91,12 @@ public abstract class AbstractEntityController<F extends EntityForm<F, E>, E ext
 		return JsonResult.success(null);
 	}
 	
-	abstract ListCriteria<F> initListCriteria();
+	abstract ListCriteria<F> initListCriteria() throws Exception;
 	
-	public ListCriteria<F> getDefaultListCriteria(){
-		return new ExampleListCriteria<F>(entityFormClass);
+	public ListCriteria<F> getDefaultListCriteria() throws Exception{
+		ExampleListCriteria<F> crt = new ExampleListCriteria<F>(entityFormClass);
+		crt.setFilter(entityFormClass.newInstance());
+		return crt;
 	}
 
 	/**

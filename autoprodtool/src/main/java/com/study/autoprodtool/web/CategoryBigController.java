@@ -53,7 +53,7 @@ public class CategoryBigController extends AbstractEntityController<CategoryBigF
 	}
 
 	@ModelAttribute
-	public ListCriteria<CategoryBigForm> initListCriteria(){		
+	public ListCriteria<CategoryBigForm> initListCriteria() throws Exception{		
 		return getDefaultListCriteria();
 	}
 

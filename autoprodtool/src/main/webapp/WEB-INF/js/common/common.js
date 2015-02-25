@@ -240,12 +240,12 @@ util.fillOptionList = function(selector, dataList, keyProp, labelProp, selected)
     for ( var index in dataList) {
 	var dataEle = dataList[index];
 	var key, label;
-	if (typeof (dataEle) === "string") {
+	if (typeof (dataEle) === "object") {
+	    key = dataEle[keyProp];
+	    label = dataEle[labelProp];	    
+	} else {
 	    key = dataEle;
 	    label = dataEle;
-	} else {
-	    key = dataEle[keyProp];
-	    label = dataEle[labelProp];
 	}
 	var option = $("<option/>").attr("value", key).text(label);
 	if (key == selected) {

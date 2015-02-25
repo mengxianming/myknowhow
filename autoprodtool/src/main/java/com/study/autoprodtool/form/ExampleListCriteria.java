@@ -36,16 +36,12 @@ public class ExampleListCriteria<F extends EntityForm<F,?>> extends ListCriteria
 		List<PropertyValue> pvs = getFilterPropertyValues();
 		for(PropertyValue pv : pvs){
 			String mappedName = ComUtils.getMappedEntityFieldName(entityFormClass, pv.getName());
-			String propName = mappedName;
 			int lastDot = mappedName.lastIndexOf(".");
 			if(lastDot > 0){
 				String path = mappedName.substring(0, lastDot);
-				propName = mappedName.substring(lastDot + 1);
-				Criteria subCriteria = criteria.createCriteria(path, JoinType.LEFT_OUTER_JOIN);
-				subCriteria.add(Restrictions.eq(propName, pv.getValue()));
-			}else{
-				criteria.add(Restrictions.eq(propName, pv.getValue())); 
+				criteria.createAlias(path, path, JoinType.LEFT_OUTER_JOIN);
 			}
+			criteria.add(Restrictions.eq(mappedName, pv.getValue())); 		
 		}
 	}	
 
@@ -59,7 +55,7 @@ public class ExampleListCriteria<F extends EntityForm<F,?>> extends ListCriteria
 
 			@Override
 			public void perform(PropertyValue elem) {							
-				if(!CheckUtil.isNull(elem.getValue())){
+				if(elem.getPropertyDescriptor().getWriteMethod() != null && !CheckUtil.isNull(elem.getValue())){
 					pvs.add(elem);
 				}
 

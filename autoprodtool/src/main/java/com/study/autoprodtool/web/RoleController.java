@@ -53,7 +53,7 @@ public class RoleController extends AbstractEntityController<RoleForm, Role>{
 	}
 
 	@ModelAttribute
-	public ListCriteria<RoleForm> initListCriteria(){		
+	public ListCriteria<RoleForm> initListCriteria() throws Exception{
 		return getDefaultListCriteria();
 	}
 

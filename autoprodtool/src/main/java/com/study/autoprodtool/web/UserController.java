@@ -95,7 +95,7 @@ public class UserController extends AbstractEntityController<UserForm, User>{
 	}
 
 	@ModelAttribute
-	public ListCriteria<UserForm> initListCriteria(){		
+	public ListCriteria<UserForm> initListCriteria() throws Exception{
 		return getDefaultListCriteria();
 	}
 

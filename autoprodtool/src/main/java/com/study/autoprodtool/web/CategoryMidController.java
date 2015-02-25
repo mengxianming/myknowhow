@@ -53,7 +53,7 @@ public class CategoryMidController extends AbstractEntityController<CategoryMidF
 	}
 
 	@ModelAttribute
-	public ListCriteria<CategoryMidForm> initListCriteria(){		
+	public ListCriteria<CategoryMidForm> initListCriteria() throws Exception{		
 		return getDefaultListCriteria();
 	}
 

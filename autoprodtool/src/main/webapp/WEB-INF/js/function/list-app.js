@@ -1,8 +1,15 @@
 
 $(function() {  
     //filter selections
+    $("#filter-form").find('select').change(function(){
+	$("#filter-form").trigger('submit');
+    });
     $("#filter-form").on("submit", function(evt){
 	evt.preventDefault();
+		
+	//reload table contents
+	jqGridWrapper.reloadTable(util.getFormData("#filter-form"));
+	
 	$("#filter-form").ajaxSubmit({
 	    url : urls.filterList,
 	    type : 'POST',
@@ -14,7 +21,7 @@ $(function() {
 		    var result = data.data || {};
 		    var selections = result.selections || {};
 		    var resultOptions = result.resultOptions || {};
-		    for(var key in selections){
+		    for(var key in resultOptions){
 			var selector = "#select-" + key;
 			util.fillOptionList(selector, resultOptions[key], null, null, selections[key]);
 		    }		    
@@ -22,10 +29,8 @@ $(function() {
 		}
 	    }
 	});
-	
-	//reload table contents
-	jqGridWrapper.reloadTable(util.getFormData("#filter-form"));
     });
+    
     
     
     // テーブル定義

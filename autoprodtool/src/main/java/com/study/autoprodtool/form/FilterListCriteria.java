@@ -59,13 +59,11 @@ public class FilterListCriteria<F extends EntityForm<F,?>> extends ExampleListCr
 		List<String> filterNameList = filterNames == null ? Collections.EMPTY_LIST : filterNames;
 		
 		for(String filterName : filterNameList){
-//			Criteria curCriteria = criteria;
 			String mappedName = ComUtils.getMappedEntityFieldName(getEntityFormClass(), filterName);			
 			int lastDot = mappedName.lastIndexOf(".");
 			if(lastDot > 0){
 				String path = mappedName.substring(0, lastDot);
-//				propName = mappedName.substring(lastDot + 1);
-//				curCriteria = criteria.createCriteria(path, JoinType.LEFT_OUTER_JOIN);
+//				criteria.
 				criteria.createAlias(path, path, JoinType.LEFT_OUTER_JOIN);
 			}
 			

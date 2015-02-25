@@ -1,34 +1,33 @@
 package com.study.autoprodtool.dao;
 
-import org.hibernate.Criteria;
 
-public class RestrictionProviderSupport implements RestrictionProvider{
+public class RestrictionProviderSupport implements RestrictionProvider {
 
-		/* (non-Javadoc)
-		 * @see com.study.autoprodtool.dao.RestrictionProvider#addRestriction(org.hibernate.Criteria)
-		 */
-		@Override
-		public void addRestriction(Criteria criteria) {
-			
-			
-		}
+	/*
+	 * (non-Javadoc)
+	 * @see com.study.autoprodtool.dao.RestrictionProvider#addRestriction(com.study.autoprodtool.dao.CriteriaWrap)
+	 */
+	@Override
+	public void addRestriction(CriteriaWrap criteria) {
 
-		/* (non-Javadoc)
-		 * @see com.study.autoprodtool.dao.RestrictionProvider#addOrder(org.hibernate.Criteria)
-		 */
-		@Override
-		public void addOrder(Criteria criteria) {
-			
-			
-		}
-
-		/* (non-Javadoc)
-		 * @see com.study.autoprodtool.dao.RestrictionProvider#addPager(org.hibernate.Criteria)
-		 */
-		@Override
-		public void addPager(Criteria criteria) {
-			
-			
-		}
-		
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.study.autoprodtool.dao.RestrictionProvider#addOrder(com.study.autoprodtool.dao.CriteriaWrap)
+	 */
+	@Override
+	public void addOrder(CriteriaWrap criteria) {
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.study.autoprodtool.dao.RestrictionProvider#addPager(com.study.autoprodtool.dao.CriteriaWrap)
+	 */
+	@Override
+	public void addPager(CriteriaWrap criteria) {
+
+	}
+
+}

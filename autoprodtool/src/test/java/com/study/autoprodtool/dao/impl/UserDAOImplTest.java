@@ -13,13 +13,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
-import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.study.autoprodtool.common.TxTestBase;
+import com.study.autoprodtool.dao.CriteriaWrap;
 import com.study.autoprodtool.dao.RestrictionProvider;
 import com.study.autoprodtool.dao.UserDAO;
 import com.study.autoprodtool.entity.User;
@@ -66,19 +66,19 @@ public class UserDAOImplTest extends TxTestBase{
 		List<User> list = userDAO.selectList(new RestrictionProvider() {
 			
 			@Override
-			public void addRestriction(Criteria criteria) {
+			public void addRestriction(CriteriaWrap criteria) {
 				criteria.add(Restrictions.in("id", new Object[]{id, id2}));
 				
 			}
 			
 			@Override
-			public void addPager(Criteria criteria) {
+			public void addPager(CriteriaWrap criteria) {
 				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
-			public void addOrder(Criteria criteria) {
+			public void addOrder(CriteriaWrap criteria) {
 				// TODO Auto-generated method stub
 				
 			}
@@ -183,19 +183,19 @@ public class UserDAOImplTest extends TxTestBase{
 		int size = userDAO.selectListSize(new RestrictionProvider() {
 			
 			@Override
-			public void addRestriction(Criteria criteria) {
+			public void addRestriction(CriteriaWrap criteria) {
 				criteria.add(Restrictions.in("id", new Object[]{id, id2}));
 				
 			}
 			
 			@Override
-			public void addPager(Criteria criteria) {
+			public void addPager(CriteriaWrap criteria) {
 				
 				
 			}
 			
 			@Override
-			public void addOrder(Criteria criteria) {
+			public void addOrder(CriteriaWrap criteria) {
 				
 				
 			}
@@ -376,20 +376,17 @@ public class UserDAOImplTest extends TxTestBase{
 		List<String> list = userDAO.selectFiledList("name", new RestrictionProvider() {
 
 			@Override
-			public void addRestriction(Criteria criteria) {
-
-
-			}
-
-			@Override
-			public void addPager(Criteria criteria) {
-				// TODO Auto-generated method stub
+			public void addRestriction(CriteriaWrap criteria) {
 
 			}
 
 			@Override
-			public void addOrder(Criteria criteria) {
-				// TODO Auto-generated method stub
+			public void addPager(CriteriaWrap criteria) {
+
+			}
+
+			@Override
+			public void addOrder(CriteriaWrap criteria) {
 
 			}
 		});
@@ -409,19 +406,17 @@ public class UserDAOImplTest extends TxTestBase{
 		List<String> list = userDAO.selectFiledList("company.name", new RestrictionProvider() {
 
 			@Override
-			public void addRestriction(Criteria criteria) {
+			public void addRestriction(CriteriaWrap criteria) {
 
 			}
 
 			@Override
-			public void addPager(Criteria criteria) {
-				// TODO Auto-generated method stub
+			public void addPager(CriteriaWrap criteria) {
 
 			}
 
 			@Override
-			public void addOrder(Criteria criteria) {
-				// TODO Auto-generated method stub
+			public void addOrder(CriteriaWrap criteria) {
 
 			}
 		});

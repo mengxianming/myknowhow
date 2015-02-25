@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 
 import com.study.autoprodtool.common.Pager;
+import com.study.autoprodtool.dao.CriteriaWrap;
 import com.study.autoprodtool.dao.RestrictionProvider;
 
 /**
@@ -98,19 +99,19 @@ public abstract class ListCriteria<F>{
 		return new RestrictionProvider() {
 			
 			@Override
-			public void addRestriction(Criteria criteria) {				
+			public void addRestriction(CriteriaWrap criteria) {				
 				addCriterions(criteria);		
 			}
 
 			@Override
-			public void addOrder(Criteria criteria) {
+			public void addOrder(CriteriaWrap criteria) {
 				if(getOrder() != null){
 					criteria.addOrder(getOrder());
 				}				
 			}
 
 			@Override
-			public void addPager(Criteria criteria) {
+			public void addPager(CriteriaWrap criteria) {
 				if(pager != null && pager.getPage() != null && pager.getLimit() != null){
 					criteria.setFirstResult(pager.getOffset());
 					criteria.setFetchSize(pager.getLimit());
