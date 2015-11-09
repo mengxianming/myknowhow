@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mogoroom.service.acct.dao.AccountRefundAlipayMapper" >
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AccountRefundAlipay" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="biz_orderid" property="biz_orderid" jdbcType="VARCHAR" />
+    <result column="biz_type" property="biz_type" jdbcType="VARCHAR" />
+    <result column="notify_time" property="notify_time" jdbcType="TIMESTAMP" />
+    <result column="notify_type" property="notify_type" jdbcType="VARCHAR" />
+    <result column="notify_id" property="notify_id" jdbcType="VARCHAR" />
+    <result column="sign_type" property="sign_type" jdbcType="VARCHAR" />
+    <result column="sign" property="sign" jdbcType="VARCHAR" />
+    <result column="out_trade_no" property="out_trade_no" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="payment_type" property="payment_type" jdbcType="VARCHAR" />
+    <result column="trade_no" property="trade_no" jdbcType="VARCHAR" />
+    <result column="trade_status" property="trade_status" jdbcType="VARCHAR" />
+    <result column="seller_id" property="seller_id" jdbcType="VARCHAR" />
+    <result column="seller_email" property="seller_email" jdbcType="VARCHAR" />
+    <result column="buyer_id" property="buyer_id" jdbcType="VARCHAR" />
+    <result column="buyer_email" property="buyer_email" jdbcType="VARCHAR" />
+    <result column="total_fee" property="total_fee" jdbcType="DOUBLE" />
+    <result column="quantity" property="quantity" jdbcType="DOUBLE" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="body" property="body" jdbcType="VARCHAR" />
+    <result column="gmt_create" property="gmt_create" jdbcType="TIMESTAMP" />
+    <result column="gmt_payment" property="gmt_payment" jdbcType="TIMESTAMP" />
+    <result column="is_total_fee_adjust" property="is_total_fee_adjust" jdbcType="VARCHAR" />
+    <result column="use_coupon" property="use_coupon" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="VARCHAR" />
+    <result column="refund_status" property="refund_status" jdbcType="VARCHAR" />
+    <result column="gmt_refund" property="gmt_refund" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, biz_orderid, biz_type, notify_time, notify_type, notify_id, sign_type, sign, 
+    out_trade_no, subject, payment_type, trade_no, trade_status, seller_id, seller_email, 
+    buyer_id, buyer_email, total_fee, quantity, price, body, gmt_create, gmt_payment, 
+    is_total_fee_adjust, use_coupon, discount, refund_status, gmt_refund
+  </sql>
+  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+    select 
+    <include refid="Base_Column_List" />
+    from acct_refund_alipay
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete parameterType="java.lang.Integer" id="delete" >
+    delete from acct_refund_alipay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert parameterType="com.mogoroom.service.acct.domain.AccountRefundAlipay" useGeneratedKeys="true" keyProperty="id" id="insert" >
+    insert into acct_refund_alipay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="biz_orderid != null" >
+        biz_orderid,
+      </if>
+      <if test="biz_type != null" >
+        biz_type,
+      </if>
+      <if test="notify_time != null" >
+        notify_time,
+      </if>
+      <if test="notify_type != null" >
+        notify_type,
+      </if>
+      <if test="notify_id != null" >
+        notify_id,
+      </if>
+      <if test="sign_type != null" >
+        sign_type,
+      </if>
+      <if test="sign != null" >
+        sign,
+      </if>
+      <if test="out_trade_no != null" >
+        out_trade_no,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="payment_type != null" >
+        payment_type,
+      </if>
+      <if test="trade_no != null" >
+        trade_no,
+      </if>
+      <if test="trade_status != null" >
+        trade_status,
+      </if>
+      <if test="seller_id != null" >
+        seller_id,
+      </if>
+      <if test="seller_email != null" >
+        seller_email,
+      </if>
+      <if test="buyer_id != null" >
+        buyer_id,
+      </if>
+      <if test="buyer_email != null" >
+        buyer_email,
+      </if>
+      <if test="total_fee != null" >
+        total_fee,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="gmt_create != null" >
+        gmt_create,
+      </if>
+      <if test="gmt_payment != null" >
+        gmt_payment,
+      </if>
+      <if test="is_total_fee_adjust != null" >
+        is_total_fee_adjust,
+      </if>
+      <if test="use_coupon != null" >
+        use_coupon,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="refund_status != null" >
+        refund_status,
+      </if>
+      <if test="gmt_refund != null" >
+        gmt_refund,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="biz_orderid != null" >
+        #{biz_orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="biz_type != null" >
+        #{biz_type,jdbcType=VARCHAR},
+      </if>
+      <if test="notify_time != null" >
+        #{notify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notify_type != null" >
+        #{notify_type,jdbcType=VARCHAR},
+      </if>
+      <if test="notify_id != null" >
+        #{notify_id,jdbcType=VARCHAR},
+      </if>
+      <if test="sign_type != null" >
+        #{sign_type,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="out_trade_no != null" >
+        #{out_trade_no,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="payment_type != null" >
+        #{payment_type,jdbcType=VARCHAR},
+      </if>
+      <if test="trade_no != null" >
+        #{trade_no,jdbcType=VARCHAR},
+      </if>
+      <if test="trade_status != null" >
+        #{trade_status,jdbcType=VARCHAR},
+      </if>
+      <if test="seller_id != null" >
+        #{seller_id,jdbcType=VARCHAR},
+      </if>
+      <if test="seller_email != null" >
+        #{seller_email,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer_id != null" >
+        #{buyer_id,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer_email != null" >
+        #{buyer_email,jdbcType=VARCHAR},
+      </if>
+      <if test="total_fee != null" >
+        #{total_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="gmt_create != null" >
+        #{gmt_create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmt_payment != null" >
+        #{gmt_payment,jdbcType=TIMESTAMP},
+      </if>
+      <if test="is_total_fee_adjust != null" >
+        #{is_total_fee_adjust,jdbcType=VARCHAR},
+      </if>
+      <if test="use_coupon != null" >
+        #{use_coupon,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_status != null" >
+        #{refund_status,jdbcType=VARCHAR},
+      </if>
+      <if test="gmt_refund != null" >
+        #{gmt_refund,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update parameterType="com.mogoroom.service.acct.domain.AccountRefundAlipay" id="update" >
+    update acct_refund_alipay
+    <set >
+      <if test="biz_orderid != null" >
+        biz_orderid = #{biz_orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="biz_type != null" >
+        biz_type = #{biz_type,jdbcType=VARCHAR},
+      </if>
+      <if test="notify_time != null" >
+        notify_time = #{notify_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="notify_type != null" >
+        notify_type = #{notify_type,jdbcType=VARCHAR},
+      </if>
+      <if test="notify_id != null" >
+        notify_id = #{notify_id,jdbcType=VARCHAR},
+      </if>
+      <if test="sign_type != null" >
+        sign_type = #{sign_type,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null" >
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="out_trade_no != null" >
+        out_trade_no = #{out_trade_no,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="payment_type != null" >
+        payment_type = #{payment_type,jdbcType=VARCHAR},
+      </if>
+      <if test="trade_no != null" >
+        trade_no = #{trade_no,jdbcType=VARCHAR},
+      </if>
+      <if test="trade_status != null" >
+        trade_status = #{trade_status,jdbcType=VARCHAR},
+      </if>
+      <if test="seller_id != null" >
+        seller_id = #{seller_id,jdbcType=VARCHAR},
+      </if>
+      <if test="seller_email != null" >
+        seller_email = #{seller_email,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer_id != null" >
+        buyer_id = #{buyer_id,jdbcType=VARCHAR},
+      </if>
+      <if test="buyer_email != null" >
+        buyer_email = #{buyer_email,jdbcType=VARCHAR},
+      </if>
+      <if test="total_fee != null" >
+        total_fee = #{total_fee,jdbcType=DOUBLE},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="gmt_create != null" >
+        gmt_create = #{gmt_create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmt_payment != null" >
+        gmt_payment = #{gmt_payment,jdbcType=TIMESTAMP},
+      </if>
+      <if test="is_total_fee_adjust != null" >
+        is_total_fee_adjust = #{is_total_fee_adjust,jdbcType=VARCHAR},
+      </if>
+      <if test="use_coupon != null" >
+        use_coupon = #{use_coupon,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_status != null" >
+        refund_status = #{refund_status,jdbcType=VARCHAR},
+      </if>
+      <if test="gmt_refund != null" >
+        gmt_refund = #{gmt_refund,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_refund_alipay
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_refund_alipay
+	where 1=1
+	    <if test="po.id != null" >
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.biz_orderid != null" >
+          and biz_orderid = #{po.biz_orderid,jdbcType=VARCHAR}
+    </if>
+    <if test="po.biz_type != null" >
+          and biz_type = #{po.biz_type,jdbcType=VARCHAR}
+    </if>
+    <if test="po.notify_time != null" >
+          and notify_time = #{po.notify_time,jdbcType=TIMESTAMP}
+    </if>
+    <if test="po.notify_type != null" >
+          and notify_type = #{po.notify_type,jdbcType=VARCHAR}
+    </if>
+    <if test="po.notify_id != null" >
+          and notify_id = #{po.notify_id,jdbcType=VARCHAR}
+    </if>
+    <if test="po.sign_type != null" >
+          and sign_type = #{po.sign_type,jdbcType=VARCHAR}
+    </if>
+    <if test="po.sign != null" >
+          and sign = #{po.sign,jdbcType=VARCHAR}
+    </if>
+    <if test="po.out_trade_no != null" >
+          and out_trade_no = #{po.out_trade_no,jdbcType=VARCHAR}
+    </if>
+    <if test="po.subject != null" >
+          and subject = #{po.subject,jdbcType=VARCHAR}
+    </if>
+    <if test="po.payment_type != null" >
+          and payment_type = #{po.payment_type,jdbcType=VARCHAR}
+    </if>
+    <if test="po.trade_no != null" >
+          and trade_no = #{po.trade_no,jdbcType=VARCHAR}
+    </if>
+    <if test="po.trade_status != null" >
+          and trade_status = #{po.trade_status,jdbcType=VARCHAR}
+    </if>
+    <if test="po.seller_id != null" >
+          and seller_id = #{po.seller_id,jdbcType=VARCHAR}
+    </if>
+    <if test="po.seller_email != null" >
+          and seller_email = #{po.seller_email,jdbcType=VARCHAR}
+    </if>
+    <if test="po.buyer_id != null" >
+          and buyer_id = #{po.buyer_id,jdbcType=VARCHAR}
+    </if>
+    <if test="po.buyer_email != null" >
+          and buyer_email = #{po.buyer_email,jdbcType=VARCHAR}
+    </if>
+    <if test="po.total_fee != null" >
+          and total_fee = #{po.total_fee,jdbcType=DOUBLE}
+    </if>
+    <if test="po.quantity != null" >
+          and quantity = #{po.quantity,jdbcType=DOUBLE}
+    </if>
+    <if test="po.price != null" >
+          and price = #{po.price,jdbcType=DOUBLE}
+    </if>
+    <if test="po.body != null" >
+          and body = #{po.body,jdbcType=VARCHAR}
+    </if>
+    <if test="po.gmt_create != null" >
+          and gmt_create = #{po.gmt_create,jdbcType=TIMESTAMP}
+    </if>
+    <if test="po.gmt_payment != null" >
+          and gmt_payment = #{po.gmt_payment,jdbcType=TIMESTAMP}
+    </if>
+    <if test="po.is_total_fee_adjust != null" >
+          and is_total_fee_adjust = #{po.is_total_fee_adjust,jdbcType=VARCHAR}
+    </if>
+    <if test="po.use_coupon != null" >
+          and use_coupon = #{po.use_coupon,jdbcType=VARCHAR}
+    </if>
+    <if test="po.discount != null" >
+          and discount = #{po.discount,jdbcType=VARCHAR}
+    </if>
+    <if test="po.refund_status != null" >
+          and refund_status = #{po.refund_status,jdbcType=VARCHAR}
+    </if>
+    <if test="po.gmt_refund != null" >
+          and gmt_refund = #{po.gmt_refund,jdbcType=TIMESTAMP}
+    </if>
+
+  </select>
+
+</mapper>

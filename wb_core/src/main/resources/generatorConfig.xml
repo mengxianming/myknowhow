@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+		location="C:/Users/mengxianming/.m2/repository/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar" />
+
+	<context id="MysqlTables" targetRuntime="MyBatis3">
+<!-- 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
+<!-- 			connectionURL="jdbc:mysql://atsp.mysql.rdstest.tbsite.net:3306/atsp_wb" -->
+<!-- 			userId="atsp" password="atsp_autonavi" /> -->
+			<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/atsp_wb"
+			userId="root" password="123456" />
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.autonavi.tsp.workbackend.model"
+			targetProject="../wb_interface/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="false" />
+			<property name="rootClass" value="com.autonavi.tsp.workbackend.model.AbstractEntity" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.autonavi.tsp.workbackend.dao" targetProject="MAVEN">
+			<property name="enableSubPackages" value="true" />
+			
+		</javaClientGenerator>
+
+		<!-- <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" 
+			> -->
+		<!-- <property name="useActualColumnNames" value="true"/> -->
+		<!-- <generatedKey column="ID" sqlStatement="DB2" identity="true" /> -->
+		<!-- <columnOverride column="DATE_FIELD" property="startDate" /> -->
+		<!-- <ignoreColumn column="FRED" /> -->
+		<!-- <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
+		<!-- </table> -->
+
+<!-- 		<table tableName="navi_apkversion"  domainObjectName="NaviApkVersion"> -->
+<!-- 		<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+		<table tableName="navi_base_res_info">
+			<generatedKey column="id" sqlStatement="JDBC"/>
+		</table>
+<!-- 		<table tableName="navi_citylist" domainObjectName="NaviCityList" > -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+		<table tableName="navi_map_city_info">
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+<!-- 		<table tableName="navi_resource_publish"> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+		<table tableName="navi_resource_version">
+		</table>
+<!-- 		<table tableName="navi_screen_dpi"> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="navi_sys" domainObjectName="NaviSystem"> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="navi_white_list"> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table>		 -->
+<!-- 		<table tableName="navi_city_version_compat"> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+		
+	</context>
+</generatorConfiguration>

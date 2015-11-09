@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.autonavi.tsp.workbackend.dao.define.CustomSqlMapper" >
+
+	<resultMap id="NaviResourceVersionExtrasResultMap" type="com.autonavi.tsp.workbackend.model.NaviResourceVersion"
+		extends="com.autonavi.tsp.workbackend.dao.NaviResourceVersionMapper.BaseResultMap">
+		<result property="extras.navi_base_res_info_count" column="navi_base_res_info_count" />
+		<result property="extras.navi_map_city_info_count" column="navi_map_city_info_count" />
+	</resultMap>
+ 
+    <select id="selectNaviResourceVersionList" parameterType="Map" resultMap="NaviResourceVersionExtrasResultMap">
+        SELECT
+		  v.ID
+		  , v.res_type
+		  , v.res_version
+		  , v.not_matchl
+		  , v.memo
+		  , v.update_name
+		  , v.update_time
+		  , d.bcount AS navi_base_res_info_count
+		  , ci.ccount AS navi_map_city_info_count
+		FROM
+		  navi_resource_version v 
+		  LEFT JOIN ( 
+		    SELECT
+		      COUNT(1) AS bcount
+		      , bi.`resource_version_id` AS resource_version_id 
+		    FROM
+		      navi_base_res_info bi 
+		    WHERE
+		      bi.`status` = '0'
+			GROUP BY resource_version_id
+		  ) d 
+		    ON v.`ID` = d.resource_version_id 
+		  LEFT JOIN ( 
+		    SELECT
+		      COUNT(1) AS ccount
+		      , ci.`resource_version_id` AS resource_version_id 
+		    FROM
+		      navi_map_city_info ci 
+		    WHERE
+		      ci.`status` = '0'
+			GROUP BY resource_version_id
+		  ) ci 
+		    ON v.`ID` = ci.resource_version_id 
+		ORDER BY
+		  v.update_time DESC
+    </select>
+    
+    <select id="selectResourcePublishCountPerVersion" parameterType="java.util.List" resultType="map">
+		SELECT
+		v.id AS versionId
+		, count(p.ID) AS publishCount
+		FROM
+		navi_resource_version v
+		LEFT JOIN navi_resource_publish p
+		ON v.id = p.resource_version_id AND p.status IN ('1', '2')
+		WHERE
+		v.id IN
+		<foreach collection="list" item="id" open="(" separator="," close=")">
+		  #{id}
+		</foreach>
+		GROUP BY
+		v.id
+	</select>
+	
+	<resultMap id="NaviResourcePublishExtrasResultMap" type="com.autonavi.tsp.workbackend.model.NaviResourcePublish"
+		extends="com.autonavi.tsp.workbackend.dao.NaviResourcePublishMapper.BaseResultMap">
+		<result property="extras.navi_resource_version_res_type" column="navi_resource_version_res_type" />
+		<result property="extras.navi_resource_version_res_version" column="navi_resource_version_res_version" />
+	</resultMap>
+	<select id="selectNaviResourcePublishList" parameterType="Map" resultMap="NaviResourcePublishExtrasResultMap">
+		SELECT
+		p.ID
+		, p.resource_version_id
+		, p.syscode
+		, p.apk_version
+		, p.upgrade_type
+		, p.download_type
+		, p.status
+		, p.update_name
+		, p.update_time
+		, v.res_type as navi_resource_version_res_type
+		, v.res_version as navi_resource_version_res_version
+		FROM
+		navi_resource_publish p
+		INNER JOIN navi_resource_version v
+		ON p.`resource_version_id` = v.`ID`
+		ORDER BY
+		p.update_time DESC
+	</select>
+		
+    
+    <select id="getAllBaseResPublishByApkv" parameterType="Map" resultMap="NaviResourcePublishExtrasResultMap">
+        SELECT DISTINCT
+		  p.ID
+		  , p.resource_version_id
+		  , p.syscode
+		  , p.apk_version
+		  , p.upgrade_type
+		  , p.download_type
+		  , p.status
+		  , p.update_name
+		  , p.update_time
+		  , v.`res_version` as navi_resource_version_res_version
+		  , v.`memo` as navi_resource_version_memo
+		FROM
+		  `navi_resource_publish` p
+		  , `navi_resource_version` v
+		  , `navi_base_res_info` b 
+		WHERE
+		  p.`status` = '1' 
+		  AND p.`resource_version_id` = v.`ID` 
+		  AND v.`ID` = b.resource_version_id 
+		  AND p.`syscode` = #{ syscode, jdbcType = VARCHAR }
+		  AND p.`apk_version` = #{ apkVersion, jdbcType = VARCHAR }
+		  AND v.`res_type` = #{ resType, jdbcType = VARCHAR }
+		  AND b.`dpi_name` = #{ dpiName, jdbcType = VARCHAR }
+		  
+		  <if test="pid != null and pid.length() > 0">
+			  AND b.`pid` =  #{ pid, jdbcType = VARCHAR }
+			  <if test='pid == "2" and osver != null and osver.length() > 0'>
+			  	AND b.`osver` =  #{ osver, jdbcType = VARCHAR }
+			  </if>
+		  </if>
+		ORDER BY
+  			v.`res_version` DESC
+    </select>
+    
+<!-- 	<select id="getAllBaseResPublishByApkv" parameterType="Map" resultMap="NaviApkResResultMap"> -->
+<!--         SELECT -->
+<!-- 		  v.`res_version` as navi_resource_version_res_version -->
+<!-- 		  , p.`syscode` -->
+<!-- 		  , p.`apk_version` -->
+<!-- 		  , p.`upgrade_type` -->
+<!-- 		  , v.`memo` as navi_resource_version_memo -->
+<!-- 		  , p.`download_type` -->
+<!-- 		  , b.dpi_name -->
+<!-- 		  , b.`size` -->
+<!-- 		  , b.`zip_size` -->
+<!-- 		  , b.`md5` -->
+<!-- 		  , b.`oss_name`  -->
+<!-- 		  , b.`update_type` AS data_type -->
+<!-- 		FROM -->
+<!-- 		  `navi_resource_publish` p -->
+<!-- 		  , `navi_resource_version` v -->
+<!-- 		  , `navi_base_res_info` b  -->
+<!-- 		WHERE -->
+<!-- 		  p.`status` = '1'  -->
+<!-- 		  AND p.`resource_version_id` = v.`ID`  -->
+<!-- 		  AND v.`ID` = b.resource_version_id  -->
+<!-- 		  AND p.`syscode` = #{ syscode, jdbcType = VARCHAR } -->
+<!-- 		  AND p.`apk_version` = #{ apkVersion, jdbcType = VARCHAR } -->
+<!-- 		  AND v.`res_type` = #{ resType, jdbcType = VARCHAR } -->
+<!-- 		  AND ( -->
+<!-- 		     b.`update_type` = '0' AND b.`dpi_name` = #{ dpiName, jdbcType = VARCHAR } -->
+<!-- 		     OR b.`update_type` != '0' -->
+<!-- 		  ) -->
+		  
+<!-- 		  <if test="pid != null and pid.length() > 0"> -->
+<!-- 			  AND b.`pid` =  #{ pid, jdbcType = VARCHAR } -->
+<!-- 			  <if test='pid == "2" and osver != null and osver.length() > 0'> -->
+<!-- 			  	AND b.`osver` =  #{ osver, jdbcType = VARCHAR } -->
+<!-- 			  </if> -->
+<!-- 		  </if> -->
+<!-- 		ORDER BY -->
+<!--   			v.`res_version` DESC -->
+<!--     </select> -->
+    
+     <select id="getAllCityResPublishByApkv" parameterType="Map" resultMap="NaviResourcePublishExtrasResultMap">
+       SELECT
+		  p.ID
+		  , p.resource_version_id
+		  , p.syscode
+		  , p.apk_version
+		  , p.upgrade_type
+		  , p.download_type
+		  , p.status
+		  , p.update_name
+		  , p.update_time
+		  , v.`res_version` as navi_resource_version_res_version
+		  , v.`memo` as navi_resource_version_memo
+		  , v.`not_matchl` as navi_resource_version_not_matchl
+		FROM
+		  `navi_resource_publish` p
+		  , `navi_resource_version` v 
+		WHERE
+		  p.`status` = '1' 
+		  AND p.`resource_version_id` = v.`ID` 
+		  AND v.`res_type` = #{ resType, jdbcType = VARCHAR } 
+		  AND p.`syscode` = #{ syscode, jdbcType = VARCHAR } 
+		  AND p.`apk_version` = #{ apkVersion, jdbcType = VARCHAR } 
+		ORDER BY
+ 		 v.`res_version` DESC       
+    </select>	
+    
+    <resultMap id="NaviMapCityInfoExtrasResultMap" type="com.autonavi.tsp.workbackend.model.NaviMapCityInfo"
+		extends="com.autonavi.tsp.workbackend.dao.NaviMapCityInfoMapper.BaseResultMap">
+		<result property="extras.navi_resource_version_res_version" column="navi_resource_version_res_version" />
+	</resultMap>
+    <select id="selectMaxVersionFullData" parameterType="Map" resultMap="NaviMapCityInfoExtrasResultMap">
+       select
+		  * 
+		from
+		  ( 
+		    select
+		      mci.*
+		      , rv.res_version as navi_resource_version_res_version
+		    from
+		      navi_map_city_info mci 
+		      inner join navi_resource_version rv 
+		        on mci.resource_version_id = rv.id 
+		      inner join navi_citylist c 
+		        on c.adcode = mci.adcode 
+		        and c.res_version = #{ maxResVersion, jdbcType = VARCHAR }     <!-- 必须是最新版本的城市列表 -->
+		    where
+		      mci.update_type = '0'                      <!--  必须是全量数据 -->
+		      and rv.id in                  <!-- 满足用户终端条件的资源版本id列表 -->
+		      <foreach collection="availableResVersionIds" open="(" separator="," close=")" item="rvid">
+		      	#{rvid, jdbcType = VARCHAR }
+		      </foreach>
+		    order by
+		      rv.res_version desc                         <!-- 按版本从大到小排序，以便分组后取最前面的一条记录即为最大版本记录 -->
+		  ) t
+		group by
+  			adcode
+       
+    </select>	
+    
+ 
+    
+</mapper>

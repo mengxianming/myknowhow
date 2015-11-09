@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mogoroom.service.acct.dao.AccountBusiFeeDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AccountBusiFeeDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="doneCode" property="doneCode" jdbcType="INTEGER" />
+    <result column="acctId" property="acctId" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="fundChannel" property="fundChannel" jdbcType="INTEGER" />
+    <result column="bankCode" property="bankCode" jdbcType="VARCHAR" />
+    <result column="bankCard" property="bankCard" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, doneCode, acctId, amount, fundChannel, bankCode, bankCard, remark
+  </sql>
+  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+    select 
+    <include refid="Base_Column_List" />
+    from acct_busifeedtl
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete parameterType="java.lang.Integer" id="delete" >
+    delete from acct_busifeedtl
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert parameterType="com.mogoroom.service.acct.domain.AccountBusiFeeDetail" useGeneratedKeys="true" keyProperty="id" id="insert" >
+    insert into acct_busifeedtl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="doneCode != null" >
+        doneCode,
+      </if>
+      <if test="acctId != null" >
+        acctId,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="fundChannel != null" >
+        fundChannel,
+      </if>
+      <if test="bankCode != null" >
+        bankCode,
+      </if>
+      <if test="bankCard != null" >
+        bankCard,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="doneCode != null" >
+        #{doneCode,jdbcType=INTEGER},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fundChannel != null" >
+        #{fundChannel,jdbcType=INTEGER},
+      </if>
+      <if test="bankCode != null" >
+        #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update parameterType="com.mogoroom.service.acct.domain.AccountBusiFeeDetail" id="update" >
+    update acct_busifeedtl
+    <set >
+      <if test="doneCode != null" >
+        doneCode = #{doneCode,jdbcType=INTEGER},
+      </if>
+      <if test="acctId != null" >
+        acctId = #{acctId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fundChannel != null" >
+        fundChannel = #{fundChannel,jdbcType=INTEGER},
+      </if>
+      <if test="bankCode != null" >
+        bankCode = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null" >
+        bankCard = #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_busifeedtl
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_busifeedtl
+	where 1=1
+	    <if test="po.id != null" >
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.doneCode != null" >
+          and doneCode = #{po.doneCode,jdbcType=INTEGER}
+    </if>
+    <if test="po.acctId != null" >
+          and acctId = #{po.acctId,jdbcType=INTEGER}
+    </if>
+    <if test="po.amount != null" >
+          and amount = #{po.amount,jdbcType=DECIMAL}
+    </if>
+    <if test="po.fundChannel != null" >
+          and fundChannel = #{po.fundChannel,jdbcType=INTEGER}
+    </if>
+    <if test="po.bankCode != null" >
+          and bankCode = #{po.bankCode,jdbcType=VARCHAR}
+    </if>
+    <if test="po.bankCard != null" >
+          and bankCard = #{po.bankCard,jdbcType=VARCHAR}
+    </if>
+    <if test="po.remark != null" >
+          and remark = #{po.remark,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+
+</mapper>
