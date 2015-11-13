@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.AccountRefundAlipay;
+import com.mogoroom.service.acct.domain.AccountRefundAlipay;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AccountRefundAlipayMapper extends BaseAcctMapper<AccountRefundAlipay> {
+public interface AccountRefundAlipayMapper extends BaseMapper<AccountRefundAlipay> {
     int delete(Integer id);
 
     int insert(AccountRefundAlipay record);

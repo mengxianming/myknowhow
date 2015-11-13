@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.AccountFundType;
+import com.mogoroom.service.acct.domain.AccountFundType;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AccountFundTypeMapper extends BaseAcctMapper<AccountFundType> {
+public interface AccountFundTypeMapper extends BaseMapper<AccountFundType> {
     int delete(Integer id);
 
     int insert(AccountFundType record);

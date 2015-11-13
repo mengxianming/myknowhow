@@ -1,80 +1,80 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mogoroom.service.acct.dao.AccountBusiFundDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AccountBusiFundDetail" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="doneCode" property="doneCode" jdbcType="INTEGER" />
-    <result column="acctId" property="acctId" jdbcType="INTEGER" />
-    <result column="fundType" property="fundType" jdbcType="INTEGER" />
-    <result column="amount" property="amount" jdbcType="DECIMAL" />
-    <result column="beforeAmount" property="beforeAmount" jdbcType="DECIMAL" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogoroom.service.acct.dao.AccountBusiFundDetailMapper">
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AccountBusiFundDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="doneCode" jdbcType="INTEGER" property="doneCode" />
+    <result column="acctId" jdbcType="INTEGER" property="acctId" />
+    <result column="fundType" jdbcType="INTEGER" property="fundType" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="beforeAmount" jdbcType="DECIMAL" property="beforeAmount" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, doneCode, acctId, fundType, amount, beforeAmount
   </sql>
-  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from acct_busifunddtl
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete parameterType="java.lang.Integer" id="delete" >
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from acct_busifunddtl
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert parameterType="com.mogoroom.service.acct.domain.AccountBusiFundDetail" useGeneratedKeys="true" keyProperty="id" id="insert" >
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.AccountBusiFundDetail" useGeneratedKeys="true">
     insert into acct_busifunddtl
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="doneCode != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="doneCode != null">
         doneCode,
       </if>
-      <if test="acctId != null" >
+      <if test="acctId != null">
         acctId,
       </if>
-      <if test="fundType != null" >
+      <if test="fundType != null">
         fundType,
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount,
       </if>
-      <if test="beforeAmount != null" >
+      <if test="beforeAmount != null">
         beforeAmount,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="doneCode != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="doneCode != null">
         #{doneCode,jdbcType=INTEGER},
       </if>
-      <if test="acctId != null" >
+      <if test="acctId != null">
         #{acctId,jdbcType=INTEGER},
       </if>
-      <if test="fundType != null" >
+      <if test="fundType != null">
         #{fundType,jdbcType=INTEGER},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         #{amount,jdbcType=DECIMAL},
       </if>
-      <if test="beforeAmount != null" >
+      <if test="beforeAmount != null">
         #{beforeAmount,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
-  <update parameterType="com.mogoroom.service.acct.domain.AccountBusiFundDetail" id="update" >
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.AccountBusiFundDetail">
     update acct_busifunddtl
-    <set >
-      <if test="doneCode != null" >
+    <set>
+      <if test="doneCode != null">
         doneCode = #{doneCode,jdbcType=INTEGER},
       </if>
-      <if test="acctId != null" >
+      <if test="acctId != null">
         acctId = #{acctId,jdbcType=INTEGER},
       </if>
-      <if test="fundType != null" >
+      <if test="fundType != null">
         fundType = #{fundType,jdbcType=INTEGER},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
       </if>
-      <if test="beforeAmount != null" >
+      <if test="beforeAmount != null">
         beforeAmount = #{beforeAmount,jdbcType=DECIMAL},
       </if>
     </set>
@@ -91,22 +91,132 @@
     <include refid="Base_Column_List" />
     from acct_busifunddtl
 	where 1=1
-	    <if test="po.id != null" >
+	    <if test="po.id != null">
           and id = #{po.id,jdbcType=INTEGER}
     </if>
-    <if test="po.doneCode != null" >
+    <if test="po.doneCode != null">
           and doneCode = #{po.doneCode,jdbcType=INTEGER}
     </if>
-    <if test="po.acctId != null" >
+    <if test="po.acctId != null">
           and acctId = #{po.acctId,jdbcType=INTEGER}
     </if>
-    <if test="po.fundType != null" >
+    <if test="po.fundType != null">
           and fundType = #{po.fundType,jdbcType=INTEGER}
     </if>
-    <if test="po.amount != null" >
+    <if test="po.amount != null">
           and amount = #{po.amount,jdbcType=DECIMAL}
     </if>
-    <if test="po.beforeAmount != null" >
+    <if test="po.beforeAmount != null">
+          and beforeAmount = #{po.beforeAmount,jdbcType=DECIMAL}
+    </if>
+
+  </select>
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AccountBusiFundDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="doneCode" jdbcType="INTEGER" property="doneCode" />
+    <result column="acctId" jdbcType="INTEGER" property="acctId" />
+    <result column="fundType" jdbcType="INTEGER" property="fundType" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="beforeAmount" jdbcType="DECIMAL" property="beforeAmount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, doneCode, acctId, fundType, amount, beforeAmount
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from acct_busifunddtl
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from acct_busifunddtl
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.AccountBusiFundDetail" useGeneratedKeys="true">
+    insert into acct_busifunddtl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="doneCode != null">
+        doneCode,
+      </if>
+      <if test="acctId != null">
+        acctId,
+      </if>
+      <if test="fundType != null">
+        fundType,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="beforeAmount != null">
+        beforeAmount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="doneCode != null">
+        #{doneCode,jdbcType=INTEGER},
+      </if>
+      <if test="acctId != null">
+        #{acctId,jdbcType=INTEGER},
+      </if>
+      <if test="fundType != null">
+        #{fundType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="beforeAmount != null">
+        #{beforeAmount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.AccountBusiFundDetail">
+    update acct_busifunddtl
+    <set>
+      <if test="doneCode != null">
+        doneCode = #{doneCode,jdbcType=INTEGER},
+      </if>
+      <if test="acctId != null">
+        acctId = #{acctId,jdbcType=INTEGER},
+      </if>
+      <if test="fundType != null">
+        fundType = #{fundType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="beforeAmount != null">
+        beforeAmount = #{beforeAmount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_busifunddtl
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_busifunddtl
+	where 1=1
+	    <if test="po.id != null">
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.doneCode != null">
+          and doneCode = #{po.doneCode,jdbcType=INTEGER}
+    </if>
+    <if test="po.acctId != null">
+          and acctId = #{po.acctId,jdbcType=INTEGER}
+    </if>
+    <if test="po.fundType != null">
+          and fundType = #{po.fundType,jdbcType=INTEGER}
+    </if>
+    <if test="po.amount != null">
+          and amount = #{po.amount,jdbcType=DECIMAL}
+    </if>
+    <if test="po.beforeAmount != null">
           and beforeAmount = #{po.beforeAmount,jdbcType=DECIMAL}
     </if>
 

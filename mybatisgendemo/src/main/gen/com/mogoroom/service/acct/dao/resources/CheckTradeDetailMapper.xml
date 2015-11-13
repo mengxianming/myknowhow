@@ -1,141 +1,141 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mogoroom.service.acct.dao.CheckTradeDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.CheckTradeDetail" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="checkId" property="checkId" jdbcType="INTEGER" />
-    <result column="tradeNo" property="tradeNo" jdbcType="VARCHAR" />
-    <result column="oppoTradeNo" property="oppoTradeNo" jdbcType="VARCHAR" />
-    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="updateBy" property="updateBy" jdbcType="INTEGER" />
-    <result column="fixed" property="fixed" jdbcType="TINYINT" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="verified" property="verified" jdbcType="TINYINT" />
-    <result column="fundChannel" property="fundChannel" jdbcType="INTEGER" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogoroom.service.acct.dao.CheckTradeDetailMapper">
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.CheckTradeDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="checkId" jdbcType="INTEGER" property="checkId" />
+    <result column="tradeNo" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="oppoTradeNo" jdbcType="VARCHAR" property="oppoTradeNo" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updateBy" jdbcType="INTEGER" property="updateBy" />
+    <result column="fixed" jdbcType="TINYINT" property="fixed" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="verified" jdbcType="TINYINT" property="verified" />
+    <result column="fundChannel" jdbcType="INTEGER" property="fundChannel" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, checkId, tradeNo, oppoTradeNo, createTime, updateTime, updateBy, fixed, remark, 
     verified, fundChannel, content
   </sql>
-  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from acct_checktradedetail
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete parameterType="java.lang.Integer" id="delete" >
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from acct_checktradedetail
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert parameterType="com.mogoroom.service.acct.domain.CheckTradeDetail" useGeneratedKeys="true" keyProperty="id" id="insert" >
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.CheckTradeDetail" useGeneratedKeys="true">
     insert into acct_checktradedetail
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="checkId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="checkId != null">
         checkId,
       </if>
-      <if test="tradeNo != null" >
+      <if test="tradeNo != null">
         tradeNo,
       </if>
-      <if test="oppoTradeNo != null" >
+      <if test="oppoTradeNo != null">
         oppoTradeNo,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         createTime,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         updateTime,
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         updateBy,
       </if>
-      <if test="fixed != null" >
+      <if test="fixed != null">
         fixed,
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         remark,
       </if>
-      <if test="verified != null" >
+      <if test="verified != null">
         verified,
       </if>
-      <if test="fundChannel != null" >
+      <if test="fundChannel != null">
         fundChannel,
       </if>
-      <if test="content != null" >
+      <if test="content != null">
         content,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="checkId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="checkId != null">
         #{checkId,jdbcType=INTEGER},
       </if>
-      <if test="tradeNo != null" >
+      <if test="tradeNo != null">
         #{tradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="oppoTradeNo != null" >
+      <if test="oppoTradeNo != null">
         #{oppoTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         #{updateBy,jdbcType=INTEGER},
       </if>
-      <if test="fixed != null" >
+      <if test="fixed != null">
         #{fixed,jdbcType=TINYINT},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="verified != null" >
+      <if test="verified != null">
         #{verified,jdbcType=TINYINT},
       </if>
-      <if test="fundChannel != null" >
+      <if test="fundChannel != null">
         #{fundChannel,jdbcType=INTEGER},
       </if>
-      <if test="content != null" >
+      <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update parameterType="com.mogoroom.service.acct.domain.CheckTradeDetail" id="update" >
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.CheckTradeDetail">
     update acct_checktradedetail
-    <set >
-      <if test="checkId != null" >
+    <set>
+      <if test="checkId != null">
         checkId = #{checkId,jdbcType=INTEGER},
       </if>
-      <if test="tradeNo != null" >
+      <if test="tradeNo != null">
         tradeNo = #{tradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="oppoTradeNo != null" >
+      <if test="oppoTradeNo != null">
         oppoTradeNo = #{oppoTradeNo,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         createTime = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         updateTime = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateBy != null" >
+      <if test="updateBy != null">
         updateBy = #{updateBy,jdbcType=INTEGER},
       </if>
-      <if test="fixed != null" >
+      <if test="fixed != null">
         fixed = #{fixed,jdbcType=TINYINT},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="verified != null" >
+      <if test="verified != null">
         verified = #{verified,jdbcType=TINYINT},
       </if>
-      <if test="fundChannel != null" >
+      <if test="fundChannel != null">
         fundChannel = #{fundChannel,jdbcType=INTEGER},
       </if>
-      <if test="content != null" >
+      <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
     </set>
@@ -152,40 +152,229 @@
     <include refid="Base_Column_List" />
     from acct_checktradedetail
 	where 1=1
-	    <if test="po.id != null" >
+	    <if test="po.id != null">
           and id = #{po.id,jdbcType=INTEGER}
     </if>
-    <if test="po.checkId != null" >
+    <if test="po.checkId != null">
           and checkId = #{po.checkId,jdbcType=INTEGER}
     </if>
-    <if test="po.tradeNo != null" >
+    <if test="po.tradeNo != null">
           and tradeNo = #{po.tradeNo,jdbcType=VARCHAR}
     </if>
-    <if test="po.oppoTradeNo != null" >
+    <if test="po.oppoTradeNo != null">
           and oppoTradeNo = #{po.oppoTradeNo,jdbcType=VARCHAR}
     </if>
-    <if test="po.createTime != null" >
+    <if test="po.createTime != null">
           and createTime = #{po.createTime,jdbcType=TIMESTAMP}
     </if>
-    <if test="po.updateTime != null" >
+    <if test="po.updateTime != null">
           and updateTime = #{po.updateTime,jdbcType=TIMESTAMP}
     </if>
-    <if test="po.updateBy != null" >
+    <if test="po.updateBy != null">
           and updateBy = #{po.updateBy,jdbcType=INTEGER}
     </if>
-    <if test="po.fixed != null" >
+    <if test="po.fixed != null">
           and fixed = #{po.fixed,jdbcType=TINYINT}
     </if>
-    <if test="po.remark != null" >
+    <if test="po.remark != null">
           and remark = #{po.remark,jdbcType=VARCHAR}
     </if>
-    <if test="po.verified != null" >
+    <if test="po.verified != null">
           and verified = #{po.verified,jdbcType=TINYINT}
     </if>
-    <if test="po.fundChannel != null" >
+    <if test="po.fundChannel != null">
           and fundChannel = #{po.fundChannel,jdbcType=INTEGER}
     </if>
-    <if test="po.content != null" >
+    <if test="po.content != null">
+          and content = #{po.content,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.CheckTradeDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="checkId" jdbcType="INTEGER" property="checkId" />
+    <result column="tradeNo" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="oppoTradeNo" jdbcType="VARCHAR" property="oppoTradeNo" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="updateBy" jdbcType="INTEGER" property="updateBy" />
+    <result column="fixed" jdbcType="TINYINT" property="fixed" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="verified" jdbcType="TINYINT" property="verified" />
+    <result column="fundChannel" jdbcType="INTEGER" property="fundChannel" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, checkId, tradeNo, oppoTradeNo, createTime, updateTime, updateBy, fixed, remark, 
+    verified, fundChannel, content
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from acct_checktradedetail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from acct_checktradedetail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.CheckTradeDetail" useGeneratedKeys="true">
+    insert into acct_checktradedetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="checkId != null">
+        checkId,
+      </if>
+      <if test="tradeNo != null">
+        tradeNo,
+      </if>
+      <if test="oppoTradeNo != null">
+        oppoTradeNo,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="updateBy != null">
+        updateBy,
+      </if>
+      <if test="fixed != null">
+        fixed,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="verified != null">
+        verified,
+      </if>
+      <if test="fundChannel != null">
+        fundChannel,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="checkId != null">
+        #{checkId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oppoTradeNo != null">
+        #{oppoTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="fixed != null">
+        #{fixed,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="verified != null">
+        #{verified,jdbcType=TINYINT},
+      </if>
+      <if test="fundChannel != null">
+        #{fundChannel,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.CheckTradeDetail">
+    update acct_checktradedetail
+    <set>
+      <if test="checkId != null">
+        checkId = #{checkId,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNo != null">
+        tradeNo = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oppoTradeNo != null">
+        oppoTradeNo = #{oppoTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        updateBy = #{updateBy,jdbcType=INTEGER},
+      </if>
+      <if test="fixed != null">
+        fixed = #{fixed,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="verified != null">
+        verified = #{verified,jdbcType=TINYINT},
+      </if>
+      <if test="fundChannel != null">
+        fundChannel = #{fundChannel,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_checktradedetail
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_checktradedetail
+	where 1=1
+	    <if test="po.id != null">
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.checkId != null">
+          and checkId = #{po.checkId,jdbcType=INTEGER}
+    </if>
+    <if test="po.tradeNo != null">
+          and tradeNo = #{po.tradeNo,jdbcType=VARCHAR}
+    </if>
+    <if test="po.oppoTradeNo != null">
+          and oppoTradeNo = #{po.oppoTradeNo,jdbcType=VARCHAR}
+    </if>
+    <if test="po.createTime != null">
+          and createTime = #{po.createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="po.updateTime != null">
+          and updateTime = #{po.updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="po.updateBy != null">
+          and updateBy = #{po.updateBy,jdbcType=INTEGER}
+    </if>
+    <if test="po.fixed != null">
+          and fixed = #{po.fixed,jdbcType=TINYINT}
+    </if>
+    <if test="po.remark != null">
+          and remark = #{po.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="po.verified != null">
+          and verified = #{po.verified,jdbcType=TINYINT}
+    </if>
+    <if test="po.fundChannel != null">
+          and fundChannel = #{po.fundChannel,jdbcType=INTEGER}
+    </if>
+    <if test="po.content != null">
           and content = #{po.content,jdbcType=VARCHAR}
     </if>
 

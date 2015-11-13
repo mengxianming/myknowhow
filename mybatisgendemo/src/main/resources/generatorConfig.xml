@@ -9,7 +9,7 @@
 		<classPathEntry location="E:\maven-repository\my\demo\mybatisgendemo\0.0.1-SNAPSHOT\mybatisgendemo-0.0.1-SNAPSHOT.jar"/>
 
 	<context id="MysqlTables" targetRuntime="MyBatis3">
-		<plugin type="my.demo.mybatisgendemo.MyGenPluginForBaseMapper">
+		<plugin type="my.demo.mybatisgendemo.MyGenPlugin">
 		</plugin>
 		
 		<commentGenerator>

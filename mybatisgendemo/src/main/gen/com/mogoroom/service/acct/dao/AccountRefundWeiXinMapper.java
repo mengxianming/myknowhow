@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.AccountRefundWeiXin;
+import com.mogoroom.service.acct.domain.AccountRefundWeiXin;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AccountRefundWeiXinMapper extends BaseAcctMapper<AccountRefundWeiXin> {
+public interface AccountRefundWeiXinMapper extends BaseMapper<AccountRefundWeiXin> {
     int delete(Integer id);
 
     int insert(AccountRefundWeiXin record);

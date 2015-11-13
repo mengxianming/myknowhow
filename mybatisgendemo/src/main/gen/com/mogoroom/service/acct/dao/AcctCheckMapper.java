@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.AcctCheck;
+import com.mogoroom.service.acct.domain.AcctCheck;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AcctCheckMapper extends BaseAcctMapper<AcctCheck> {
+public interface AcctCheckMapper extends BaseMapper<AcctCheck> {
     int delete(Integer id);
 
     int insert(AcctCheck record);

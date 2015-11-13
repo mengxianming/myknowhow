@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mogoroom.service.newprice.dao.RoomPricePayTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.newprice.domain.RoomPricePayType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="rentPeriods" property="rentPeriods" jdbcType="TINYINT" />
+    <result column="depositPeriods" property="depositPeriods" jdbcType="TINYINT" />
+    <result column="finaProdType" property="finaProdType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, rentPeriods, depositPeriods, finaProdType
+  </sql>
+  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+    select 
+    <include refid="Base_Column_List" />
+    from room_price_paytype
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete parameterType="java.lang.Integer" id="delete" >
+    delete from room_price_paytype
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert parameterType="com.mogoroom.service.newprice.domain.RoomPricePayType" useGeneratedKeys="true" keyProperty="id" id="insert" >
+    insert into room_price_paytype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="rentPeriods != null" >
+        rentPeriods,
+      </if>
+      <if test="depositPeriods != null" >
+        depositPeriods,
+      </if>
+      <if test="finaProdType != null" >
+        finaProdType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="rentPeriods != null" >
+        #{rentPeriods,jdbcType=TINYINT},
+      </if>
+      <if test="depositPeriods != null" >
+        #{depositPeriods,jdbcType=TINYINT},
+      </if>
+      <if test="finaProdType != null" >
+        #{finaProdType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update parameterType="com.mogoroom.service.newprice.domain.RoomPricePayType" id="update" >
+    update room_price_paytype
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="rentPeriods != null" >
+        rentPeriods = #{rentPeriods,jdbcType=TINYINT},
+      </if>
+      <if test="depositPeriods != null" >
+        depositPeriods = #{depositPeriods,jdbcType=TINYINT},
+      </if>
+      <if test="finaProdType != null" >
+        finaProdType = #{finaProdType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_paytype
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_paytype
+	where 1=1
+	    <if test="po.id != null" >
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.name != null" >
+          and name = #{po.name,jdbcType=VARCHAR}
+    </if>
+    <if test="po.rentPeriods != null" >
+          and rentPeriods = #{po.rentPeriods,jdbcType=TINYINT}
+    </if>
+    <if test="po.depositPeriods != null" >
+          and depositPeriods = #{po.depositPeriods,jdbcType=TINYINT}
+    </if>
+    <if test="po.finaProdType != null" >
+          and finaProdType = #{po.finaProdType,jdbcType=TINYINT}
+    </if>
+
+  </select>
+
+  <delete id="deleteByFeature" parameterType="com.mogoroom.service.newprice.domain.RoomPricePayType" >
+    delete from room_price_paytype
+	<where> 
+	      <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="name != null" >
+          and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="rentPeriods != null" >
+          and rentPeriods = #{rentPeriods,jdbcType=TINYINT}
+    </if>
+    <if test="depositPeriods != null" >
+          and depositPeriods = #{depositPeriods,jdbcType=TINYINT}
+    </if>
+    <if test="finaProdType != null" >
+          and finaProdType = #{finaProdType,jdbcType=TINYINT}
+    </if>
+
+ </where>
+    </delete>
+
+  <select id="selectByFeature" parameterType="com.mogoroom.service.newprice.domain.RoomPricePayType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_paytype
+	where 1=1
+	    <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="name != null" >
+          and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="rentPeriods != null" >
+          and rentPeriods = #{rentPeriods,jdbcType=TINYINT}
+    </if>
+    <if test="depositPeriods != null" >
+          and depositPeriods = #{depositPeriods,jdbcType=TINYINT}
+    </if>
+    <if test="finaProdType != null" >
+          and finaProdType = #{finaProdType,jdbcType=TINYINT}
+    </if>
+
+  </select>
+
+  <select id="selectByFieldList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_paytype
+    where ${field} in
+    <foreach close=")" collection="values" item="val" open="(" separator=",">
+	        #{val}
+  </foreach>
+  </select>
+
+</mapper>

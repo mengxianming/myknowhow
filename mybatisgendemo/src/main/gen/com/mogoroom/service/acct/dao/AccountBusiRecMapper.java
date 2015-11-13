@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.AccountBusiRec;
+import com.mogoroom.service.acct.domain.AccountBusiRec;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AccountBusiRecMapper extends BaseAcctMapper<AccountBusiRec> {
+public interface AccountBusiRecMapper extends BaseMapper<AccountBusiRec> {
     int delete(Integer doneCode);
 
     int insert(AccountBusiRec record);

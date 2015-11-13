@@ -1,60 +1,60 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mogoroom.service.acct.dao.AcctBillDtlMapper" >
-  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AcctBillDtl" >
-    <id column="billDtlId" property="billDtlId" jdbcType="INTEGER" />
-    <result column="billId" property="billId" jdbcType="INTEGER" />
-    <result column="billDtlType" property="billDtlType" jdbcType="INTEGER" />
-    <result column="amount" property="amount" jdbcType="DECIMAL" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogoroom.service.acct.dao.AcctBillDtlMapper">
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AcctBillDtl">
+    <id column="billDtlId" jdbcType="INTEGER" property="billDtlId" />
+    <result column="billId" jdbcType="INTEGER" property="billId" />
+    <result column="billDtlType" jdbcType="INTEGER" property="billDtlType" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     billDtlId, billId, billDtlType, amount
   </sql>
-  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from acct_billdtl
     where billDtlId = #{billDtlId,jdbcType=INTEGER}
   </select>
-  <delete parameterType="java.lang.Integer" id="delete" >
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from acct_billdtl
     where billDtlId = #{billDtlId,jdbcType=INTEGER}
   </delete>
-  <insert parameterType="com.mogoroom.service.acct.domain.AcctBillDtl" useGeneratedKeys="true" keyProperty="billDtlId" id="insert" >
+  <insert id="insert" keyProperty="billDtlId" parameterType="com.mogoroom.service.acct.domain.AcctBillDtl" useGeneratedKeys="true">
     insert into acct_billdtl
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="billId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
         billId,
       </if>
-      <if test="billDtlType != null" >
+      <if test="billDtlType != null">
         billDtlType,
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="billId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
         #{billId,jdbcType=INTEGER},
       </if>
-      <if test="billDtlType != null" >
+      <if test="billDtlType != null">
         #{billDtlType,jdbcType=INTEGER},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         #{amount,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
-  <update parameterType="com.mogoroom.service.acct.domain.AcctBillDtl" id="update" >
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.AcctBillDtl">
     update acct_billdtl
-    <set >
-      <if test="billId != null" >
+    <set>
+      <if test="billId != null">
         billId = #{billId,jdbcType=INTEGER},
       </if>
-      <if test="billDtlType != null" >
+      <if test="billDtlType != null">
         billDtlType = #{billDtlType,jdbcType=INTEGER},
       </if>
-      <if test="amount != null" >
+      <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
       </if>
     </set>
@@ -71,16 +71,100 @@
     <include refid="Base_Column_List" />
     from acct_billdtl
 	where 1=1
-	    <if test="po.billDtlId != null" >
+	    <if test="po.billDtlId != null">
           and billDtlId = #{po.billDtlId,jdbcType=INTEGER}
     </if>
-    <if test="po.billId != null" >
+    <if test="po.billId != null">
           and billId = #{po.billId,jdbcType=INTEGER}
     </if>
-    <if test="po.billDtlType != null" >
+    <if test="po.billDtlType != null">
           and billDtlType = #{po.billDtlType,jdbcType=INTEGER}
     </if>
-    <if test="po.amount != null" >
+    <if test="po.amount != null">
+          and amount = #{po.amount,jdbcType=DECIMAL}
+    </if>
+
+  </select>
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AcctBillDtl">
+    <id column="billDtlId" jdbcType="INTEGER" property="billDtlId" />
+    <result column="billId" jdbcType="INTEGER" property="billId" />
+    <result column="billDtlType" jdbcType="INTEGER" property="billDtlType" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    billDtlId, billId, billDtlType, amount
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from acct_billdtl
+    where billDtlId = #{billDtlId,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from acct_billdtl
+    where billDtlId = #{billDtlId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="billDtlId" parameterType="com.mogoroom.service.acct.domain.AcctBillDtl" useGeneratedKeys="true">
+    insert into acct_billdtl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        billId,
+      </if>
+      <if test="billDtlType != null">
+        billDtlType,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billId != null">
+        #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="billDtlType != null">
+        #{billDtlType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.AcctBillDtl">
+    update acct_billdtl
+    <set>
+      <if test="billId != null">
+        billId = #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="billDtlType != null">
+        billDtlType = #{billDtlType,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where billDtlId = #{billDtlId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_billdtl
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_billdtl
+	where 1=1
+	    <if test="po.billDtlId != null">
+          and billDtlId = #{po.billDtlId,jdbcType=INTEGER}
+    </if>
+    <if test="po.billId != null">
+          and billId = #{po.billId,jdbcType=INTEGER}
+    </if>
+    <if test="po.billDtlType != null">
+          and billDtlType = #{po.billDtlType,jdbcType=INTEGER}
+    </if>
+    <if test="po.amount != null">
           and amount = #{po.amount,jdbcType=DECIMAL}
     </if>
 

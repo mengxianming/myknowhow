@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.CheckBillTradeDetail;
+import com.mogoroom.service.acct.domain.CheckBillTradeDetail;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface CheckBillTradeDetailMapper extends BaseAcctMapper<CheckBillTradeDetail> {
+public interface CheckBillTradeDetailMapper extends BaseMapper<CheckBillTradeDetail> {
     int delete(Integer id);
 
     int insert(CheckBillTradeDetail record);

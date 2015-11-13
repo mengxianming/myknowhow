@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.AccountBillTypeToFundType;
+import com.mogoroom.service.acct.domain.AccountBillTypeToFundType;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AccountBillTypeToFundTypeMapper extends BaseAcctMapper<AccountBillTypeToFundType> {
+public interface AccountBillTypeToFundTypeMapper extends BaseMapper<AccountBillTypeToFundType> {
     int delete(Integer billType);
 
     int insert(AccountBillTypeToFundType record);

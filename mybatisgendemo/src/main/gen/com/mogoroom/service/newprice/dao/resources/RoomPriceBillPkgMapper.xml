@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mogoroom.service.newprice.dao.RoomPriceBillPkgMapper" >
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.newprice.domain.RoomPriceBillPkg" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roomPriceId" property="roomPriceId" jdbcType="INTEGER" />
+    <result column="billType" property="billType" jdbcType="INTEGER" />
+    <result column="billDtlType" property="billDtlType" jdbcType="TINYINT" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="basePrice" property="basePrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roomPriceId, billType, billDtlType, amount, basePrice
+  </sql>
+  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+    select 
+    <include refid="Base_Column_List" />
+    from room_price_billpkg
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete parameterType="java.lang.Integer" id="delete" >
+    delete from room_price_billpkg
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert parameterType="com.mogoroom.service.newprice.domain.RoomPriceBillPkg" useGeneratedKeys="true" keyProperty="id" id="insert" >
+    insert into room_price_billpkg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roomPriceId != null" >
+        roomPriceId,
+      </if>
+      <if test="billType != null" >
+        billType,
+      </if>
+      <if test="billDtlType != null" >
+        billDtlType,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="basePrice != null" >
+        basePrice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roomPriceId != null" >
+        #{roomPriceId,jdbcType=INTEGER},
+      </if>
+      <if test="billType != null" >
+        #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="billDtlType != null" >
+        #{billDtlType,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="basePrice != null" >
+        #{basePrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update parameterType="com.mogoroom.service.newprice.domain.RoomPriceBillPkg" id="update" >
+    update room_price_billpkg
+    <set >
+      <if test="roomPriceId != null" >
+        roomPriceId = #{roomPriceId,jdbcType=INTEGER},
+      </if>
+      <if test="billType != null" >
+        billType = #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="billDtlType != null" >
+        billDtlType = #{billDtlType,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="basePrice != null" >
+        basePrice = #{basePrice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_billpkg
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_billpkg
+	where 1=1
+	    <if test="po.id != null" >
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.roomPriceId != null" >
+          and roomPriceId = #{po.roomPriceId,jdbcType=INTEGER}
+    </if>
+    <if test="po.billType != null" >
+          and billType = #{po.billType,jdbcType=INTEGER}
+    </if>
+    <if test="po.billDtlType != null" >
+          and billDtlType = #{po.billDtlType,jdbcType=TINYINT}
+    </if>
+    <if test="po.amount != null" >
+          and amount = #{po.amount,jdbcType=DECIMAL}
+    </if>
+    <if test="po.basePrice != null" >
+          and basePrice = #{po.basePrice,jdbcType=DECIMAL}
+    </if>
+
+  </select>
+
+  <delete id="deleteByFeature" parameterType="com.mogoroom.service.newprice.domain.RoomPriceBillPkg" >
+    delete from room_price_billpkg
+	<where> 
+	      <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="roomPriceId != null" >
+          and roomPriceId = #{roomPriceId,jdbcType=INTEGER}
+    </if>
+    <if test="billType != null" >
+          and billType = #{billType,jdbcType=INTEGER}
+    </if>
+    <if test="billDtlType != null" >
+          and billDtlType = #{billDtlType,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null" >
+          and amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="basePrice != null" >
+          and basePrice = #{basePrice,jdbcType=DECIMAL}
+    </if>
+
+ </where>
+    </delete>
+
+  <select id="selectByFeature" parameterType="com.mogoroom.service.newprice.domain.RoomPriceBillPkg" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_billpkg
+	where 1=1
+	    <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="roomPriceId != null" >
+          and roomPriceId = #{roomPriceId,jdbcType=INTEGER}
+    </if>
+    <if test="billType != null" >
+          and billType = #{billType,jdbcType=INTEGER}
+    </if>
+    <if test="billDtlType != null" >
+          and billDtlType = #{billDtlType,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null" >
+          and amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="basePrice != null" >
+          and basePrice = #{basePrice,jdbcType=DECIMAL}
+    </if>
+
+  </select>
+
+  <select id="selectByFieldList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_billpkg
+    where ${field} in
+    <foreach close=")" collection="values" item="val" open="(" separator=",">
+	        #{val}
+  </foreach>
+  </select>
+
+</mapper>

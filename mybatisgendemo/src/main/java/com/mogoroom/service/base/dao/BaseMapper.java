@@ -1,4 +1,4 @@
-package com.mogoroom.service.acct.dao;
+package com.mogoroom.service.base.dao;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 * @date 2014-1-9 下午7:18:04
 * @param <T>
  */
-public interface BaseAcctMapper<T> {
+public interface BaseMapper<T> {
 
 	public String PO_KEY = "po";
 	public static interface Page<T>{}

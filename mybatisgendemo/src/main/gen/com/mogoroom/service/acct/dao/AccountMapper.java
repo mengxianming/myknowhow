@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.Account;
+import com.mogoroom.service.acct.domain.Account;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AccountMapper extends BaseAcctMapper<Account> {
+public interface AccountMapper extends BaseMapper<Account> {
     int delete(Integer id);
 
     int insert(Account record);

@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.AcctBillType;
+import com.mogoroom.service.acct.domain.AcctBillType;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AcctBillTypeMapper extends BaseAcctMapper<AcctBillType> {
+public interface AcctBillTypeMapper extends BaseMapper<AcctBillType> {
     int delete(Integer id);
 
     int insert(AcctBillType record);

@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.AccountBusiFundDetail;
+import com.mogoroom.service.acct.domain.AccountBusiFundDetail;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface AccountBusiFundDetailMapper extends BaseAcctMapper<AccountBusiFundDetail> {
+public interface AccountBusiFundDetailMapper extends BaseMapper<AccountBusiFundDetail> {
     int delete(Integer id);
 
     int insert(AccountBusiFundDetail record);

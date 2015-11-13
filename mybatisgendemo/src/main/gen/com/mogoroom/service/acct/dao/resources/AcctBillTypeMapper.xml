@@ -1,80 +1,80 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mogoroom.service.acct.dao.AcctBillTypeMapper" >
-  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AcctBillType" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="billType" property="billType" jdbcType="INTEGER" />
-    <result column="billName" property="billName" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="penaltyRate" property="penaltyRate" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogoroom.service.acct.dao.AcctBillTypeMapper">
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AcctBillType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="billType" jdbcType="INTEGER" property="billType" />
+    <result column="billName" jdbcType="VARCHAR" property="billName" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="penaltyRate" jdbcType="INTEGER" property="penaltyRate" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, billType, billName, status, sort, penaltyRate
   </sql>
-  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from acct_billtype
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete parameterType="java.lang.Integer" id="delete" >
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from acct_billtype
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert parameterType="com.mogoroom.service.acct.domain.AcctBillType" useGeneratedKeys="true" keyProperty="id" id="insert" >
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.AcctBillType" useGeneratedKeys="true">
     insert into acct_billtype
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="billType != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billType != null">
         billType,
       </if>
-      <if test="billName != null" >
+      <if test="billName != null">
         billName,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
-      <if test="sort != null" >
+      <if test="sort != null">
         sort,
       </if>
-      <if test="penaltyRate != null" >
+      <if test="penaltyRate != null">
         penaltyRate,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="billType != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billType != null">
         #{billType,jdbcType=INTEGER},
       </if>
-      <if test="billName != null" >
+      <if test="billName != null">
         #{billName,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
-      <if test="sort != null" >
+      <if test="sort != null">
         #{sort,jdbcType=INTEGER},
       </if>
-      <if test="penaltyRate != null" >
+      <if test="penaltyRate != null">
         #{penaltyRate,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update parameterType="com.mogoroom.service.acct.domain.AcctBillType" id="update" >
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.AcctBillType">
     update acct_billtype
-    <set >
-      <if test="billType != null" >
+    <set>
+      <if test="billType != null">
         billType = #{billType,jdbcType=INTEGER},
       </if>
-      <if test="billName != null" >
+      <if test="billName != null">
         billName = #{billName,jdbcType=VARCHAR},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=TINYINT},
       </if>
-      <if test="sort != null" >
+      <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
       </if>
-      <if test="penaltyRate != null" >
+      <if test="penaltyRate != null">
         penaltyRate = #{penaltyRate,jdbcType=INTEGER},
       </if>
     </set>
@@ -91,22 +91,132 @@
     <include refid="Base_Column_List" />
     from acct_billtype
 	where 1=1
-	    <if test="po.id != null" >
+	    <if test="po.id != null">
           and id = #{po.id,jdbcType=INTEGER}
     </if>
-    <if test="po.billType != null" >
+    <if test="po.billType != null">
           and billType = #{po.billType,jdbcType=INTEGER}
     </if>
-    <if test="po.billName != null" >
+    <if test="po.billName != null">
           and billName = #{po.billName,jdbcType=VARCHAR}
     </if>
-    <if test="po.status != null" >
+    <if test="po.status != null">
           and status = #{po.status,jdbcType=TINYINT}
     </if>
-    <if test="po.sort != null" >
+    <if test="po.sort != null">
           and sort = #{po.sort,jdbcType=INTEGER}
     </if>
-    <if test="po.penaltyRate != null" >
+    <if test="po.penaltyRate != null">
+          and penaltyRate = #{po.penaltyRate,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AcctBillType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="billType" jdbcType="INTEGER" property="billType" />
+    <result column="billName" jdbcType="VARCHAR" property="billName" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="penaltyRate" jdbcType="INTEGER" property="penaltyRate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, billType, billName, status, sort, penaltyRate
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from acct_billtype
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from acct_billtype
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.AcctBillType" useGeneratedKeys="true">
+    insert into acct_billtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="billType != null">
+        billType,
+      </if>
+      <if test="billName != null">
+        billName,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="penaltyRate != null">
+        penaltyRate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="billType != null">
+        #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="billName != null">
+        #{billName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="penaltyRate != null">
+        #{penaltyRate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.AcctBillType">
+    update acct_billtype
+    <set>
+      <if test="billType != null">
+        billType = #{billType,jdbcType=INTEGER},
+      </if>
+      <if test="billName != null">
+        billName = #{billName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="penaltyRate != null">
+        penaltyRate = #{penaltyRate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_billtype
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_billtype
+	where 1=1
+	    <if test="po.id != null">
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.billType != null">
+          and billType = #{po.billType,jdbcType=INTEGER}
+    </if>
+    <if test="po.billName != null">
+          and billName = #{po.billName,jdbcType=VARCHAR}
+    </if>
+    <if test="po.status != null">
+          and status = #{po.status,jdbcType=TINYINT}
+    </if>
+    <if test="po.sort != null">
+          and sort = #{po.sort,jdbcType=INTEGER}
+    </if>
+    <if test="po.penaltyRate != null">
           and penaltyRate = #{po.penaltyRate,jdbcType=INTEGER}
     </if>
 

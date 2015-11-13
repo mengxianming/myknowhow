@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mogoroom.service.newprice.dao.RoomPriceBizTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.newprice.domain.RoomPriceBizType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="payTypeId" property="payTypeId" jdbcType="INTEGER" />
+    <result column="payStage" property="payStage" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, payTypeId, payStage
+  </sql>
+  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+    select 
+    <include refid="Base_Column_List" />
+    from room_price_biztype
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete parameterType="java.lang.Integer" id="delete" >
+    delete from room_price_biztype
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert parameterType="com.mogoroom.service.newprice.domain.RoomPriceBizType" useGeneratedKeys="true" keyProperty="id" id="insert" >
+    insert into room_price_biztype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payTypeId != null" >
+        payTypeId,
+      </if>
+      <if test="payStage != null" >
+        payStage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payTypeId != null" >
+        #{payTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="payStage != null" >
+        #{payStage,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update parameterType="com.mogoroom.service.newprice.domain.RoomPriceBizType" id="update" >
+    update room_price_biztype
+    <set >
+      <if test="payTypeId != null" >
+        payTypeId = #{payTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="payStage != null" >
+        payStage = #{payStage,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_biztype
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_biztype
+	where 1=1
+	    <if test="po.id != null" >
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.payTypeId != null" >
+          and payTypeId = #{po.payTypeId,jdbcType=INTEGER}
+    </if>
+    <if test="po.payStage != null" >
+          and payStage = #{po.payStage,jdbcType=TINYINT}
+    </if>
+
+  </select>
+
+  <delete id="deleteByFeature" parameterType="com.mogoroom.service.newprice.domain.RoomPriceBizType" >
+    delete from room_price_biztype
+	<where> 
+	      <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="payTypeId != null" >
+          and payTypeId = #{payTypeId,jdbcType=INTEGER}
+    </if>
+    <if test="payStage != null" >
+          and payStage = #{payStage,jdbcType=TINYINT}
+    </if>
+
+ </where>
+    </delete>
+
+  <select id="selectByFeature" parameterType="com.mogoroom.service.newprice.domain.RoomPriceBizType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_biztype
+	where 1=1
+	    <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="payTypeId != null" >
+          and payTypeId = #{payTypeId,jdbcType=INTEGER}
+    </if>
+    <if test="payStage != null" >
+          and payStage = #{payStage,jdbcType=TINYINT}
+    </if>
+
+  </select>
+
+  <select id="selectByFieldList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_price_biztype
+    where ${field} in
+    <foreach close=")" collection="values" item="val" open="(" separator=",">
+	        #{val}
+  </foreach>
+  </select>
+
+</mapper>

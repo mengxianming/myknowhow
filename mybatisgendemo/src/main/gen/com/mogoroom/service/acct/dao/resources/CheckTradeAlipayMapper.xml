@@ -1,50 +1,50 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mogoroom.service.acct.dao.CheckTradeAlipayMapper" >
-  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.CheckTradeAlipay" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="soDoneCode" property="soDoneCode" jdbcType="VARCHAR" />
-    <result column="fcDoneCode" property="fcDoneCode" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogoroom.service.acct.dao.CheckTradeAlipayMapper">
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.CheckTradeAlipay">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="soDoneCode" jdbcType="VARCHAR" property="soDoneCode" />
+    <result column="fcDoneCode" jdbcType="VARCHAR" property="fcDoneCode" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, soDoneCode, fcDoneCode
   </sql>
-  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from acct_checktradealipay
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete parameterType="java.lang.Integer" id="delete" >
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from acct_checktradealipay
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert parameterType="com.mogoroom.service.acct.domain.CheckTradeAlipay" useGeneratedKeys="true" keyProperty="id" id="insert" >
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.CheckTradeAlipay" useGeneratedKeys="true">
     insert into acct_checktradealipay
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="soDoneCode != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="soDoneCode != null">
         soDoneCode,
       </if>
-      <if test="fcDoneCode != null" >
+      <if test="fcDoneCode != null">
         fcDoneCode,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="soDoneCode != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="soDoneCode != null">
         #{soDoneCode,jdbcType=VARCHAR},
       </if>
-      <if test="fcDoneCode != null" >
+      <if test="fcDoneCode != null">
         #{fcDoneCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update parameterType="com.mogoroom.service.acct.domain.CheckTradeAlipay" id="update" >
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.CheckTradeAlipay">
     update acct_checktradealipay
-    <set >
-      <if test="soDoneCode != null" >
+    <set>
+      <if test="soDoneCode != null">
         soDoneCode = #{soDoneCode,jdbcType=VARCHAR},
       </if>
-      <if test="fcDoneCode != null" >
+      <if test="fcDoneCode != null">
         fcDoneCode = #{fcDoneCode,jdbcType=VARCHAR},
       </if>
     </set>
@@ -61,13 +61,84 @@
     <include refid="Base_Column_List" />
     from acct_checktradealipay
 	where 1=1
-	    <if test="po.id != null" >
+	    <if test="po.id != null">
           and id = #{po.id,jdbcType=INTEGER}
     </if>
-    <if test="po.soDoneCode != null" >
+    <if test="po.soDoneCode != null">
           and soDoneCode = #{po.soDoneCode,jdbcType=VARCHAR}
     </if>
-    <if test="po.fcDoneCode != null" >
+    <if test="po.fcDoneCode != null">
+          and fcDoneCode = #{po.fcDoneCode,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.CheckTradeAlipay">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="soDoneCode" jdbcType="VARCHAR" property="soDoneCode" />
+    <result column="fcDoneCode" jdbcType="VARCHAR" property="fcDoneCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, soDoneCode, fcDoneCode
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from acct_checktradealipay
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from acct_checktradealipay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.CheckTradeAlipay" useGeneratedKeys="true">
+    insert into acct_checktradealipay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="soDoneCode != null">
+        soDoneCode,
+      </if>
+      <if test="fcDoneCode != null">
+        fcDoneCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="soDoneCode != null">
+        #{soDoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcDoneCode != null">
+        #{fcDoneCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.CheckTradeAlipay">
+    update acct_checktradealipay
+    <set>
+      <if test="soDoneCode != null">
+        soDoneCode = #{soDoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fcDoneCode != null">
+        fcDoneCode = #{fcDoneCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_checktradealipay
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_checktradealipay
+	where 1=1
+	    <if test="po.id != null">
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.soDoneCode != null">
+          and soDoneCode = #{po.soDoneCode,jdbcType=VARCHAR}
+    </if>
+    <if test="po.fcDoneCode != null">
           and fcDoneCode = #{po.fcDoneCode,jdbcType=VARCHAR}
     </if>
 

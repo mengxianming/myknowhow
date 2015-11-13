@@ -9,7 +9,6 @@ import java.util.List;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
-import org.mybatis.generator.api.ShellRunner;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
@@ -33,6 +32,17 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	public boolean validate(List<String> arg0) {
 		return true;
 	}
+	
+	/**
+	 * @param introspectedTable
+	 * @return
+	 * @author admin-2015年11月12日
+	 */
+	protected CharSequence getBaseRecordShortName(IntrospectedTable introspectedTable) {
+		CharSequence entName = introspectedTable.getBaseRecordType().replaceAll("^.*\\.", "");
+		return entName;
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see org.mybatis.generator.api.PluginAdapter#modelBaseRecordClassGenerated(org.mybatis.generator.api.dom.java.TopLevelClass, org.mybatis.generator.api.IntrospectedTable)
@@ -189,9 +199,10 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass,
 			IntrospectedTable introspectedTable) {
-		String name = interfaze.getType().getShortName();
-		String entName = name.substring(0, name.length() - 6);
-		FullyQualifiedJavaType superInterface = new FullyQualifiedJavaType("com.mogoroom.acct.dao.mapper.BaseAcctMapper<?>".replace("?", entName));
+		interfaze.addImportedType(new FullyQualifiedJavaType("com.mogoroom.service.base.dao.BaseMapper"));
+		
+		
+		FullyQualifiedJavaType superInterface = new FullyQualifiedJavaType("com.mogoroom.service.base.dao.BaseMapper<?>".replace("?", getBaseRecordShortName(introspectedTable)));
 		interfaze.addSuperInterface(superInterface);
 
 		return super.clientGenerated(interfaze, topLevelClass, introspectedTable);
@@ -274,16 +285,5 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 			}
 		}
 		element.addAttribute(new Attribute("id", newId));
-	}
-
-	public static void generate() {  
-		String config = MyGenPluginForBaseMapper.class.getClassLoader().getResource(  
-				"generatorConfig.xml").getFile();  
-		String[] arg = { "-configfile", config, "-overwrite" };  
-		ShellRunner.main(arg);  
-	}  
-	public static void main(String[] args) {  
-		generate();  
-	}  
-
+	}		
 }

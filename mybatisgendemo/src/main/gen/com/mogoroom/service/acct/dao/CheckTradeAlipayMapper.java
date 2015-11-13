@@ -1,8 +1,9 @@
 package com.mogoroom.service.acct.dao;
 
-import com.mogoroom.service.acct.dao.domain.CheckTradeAlipay;
+import com.mogoroom.service.acct.domain.CheckTradeAlipay;
+import com.mogoroom.service.base.dao.BaseMapper;
 
-public interface CheckTradeAlipayMapper extends BaseAcctMapper<CheckTradeAlipay> {
+public interface CheckTradeAlipayMapper extends BaseMapper<CheckTradeAlipay> {
     int delete(Integer id);
 
     int insert(CheckTradeAlipay record);

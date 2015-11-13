@@ -1,212 +1,212 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mogoroom.service.acct.dao.AccountRefundWeiXinMapper" >
-  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AccountRefundWeiXin" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="appid" property="appid" jdbcType="VARCHAR" />
-    <result column="mch_id" property="mch_id" jdbcType="VARCHAR" />
-    <result column="device_info" property="device_info" jdbcType="VARCHAR" />
-    <result column="nonce_str" property="nonce_str" jdbcType="VARCHAR" />
-    <result column="sign" property="sign" jdbcType="VARCHAR" />
-    <result column="transaction_id" property="transaction_id" jdbcType="VARCHAR" />
-    <result column="out_trade_no" property="out_trade_no" jdbcType="VARCHAR" />
-    <result column="out_refund_no" property="out_refund_no" jdbcType="VARCHAR" />
-    <result column="refund_id" property="refund_id" jdbcType="VARCHAR" />
-    <result column="refund_channel" property="refund_channel" jdbcType="VARCHAR" />
-    <result column="refund_fee" property="refund_fee" jdbcType="INTEGER" />
-    <result column="total_fee" property="total_fee" jdbcType="INTEGER" />
-    <result column="fee_type" property="fee_type" jdbcType="VARCHAR" />
-    <result column="cash_fee" property="cash_fee" jdbcType="INTEGER" />
-    <result column="cash_refund_fee" property="cash_refund_fee" jdbcType="INTEGER" />
-    <result column="coupon_refund_fee" property="coupon_refund_fee" jdbcType="INTEGER" />
-    <result column="coupon_refund_count" property="coupon_refund_count" jdbcType="INTEGER" />
-    <result column="coupon_refund_id" property="coupon_refund_id" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mogoroom.service.acct.dao.AccountRefundWeiXinMapper">
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AccountRefundWeiXin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="mch_id" jdbcType="VARCHAR" property="mch_id" />
+    <result column="device_info" jdbcType="VARCHAR" property="device_info" />
+    <result column="nonce_str" jdbcType="VARCHAR" property="nonce_str" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="transaction_id" jdbcType="VARCHAR" property="transaction_id" />
+    <result column="out_trade_no" jdbcType="VARCHAR" property="out_trade_no" />
+    <result column="out_refund_no" jdbcType="VARCHAR" property="out_refund_no" />
+    <result column="refund_id" jdbcType="VARCHAR" property="refund_id" />
+    <result column="refund_channel" jdbcType="VARCHAR" property="refund_channel" />
+    <result column="refund_fee" jdbcType="INTEGER" property="refund_fee" />
+    <result column="total_fee" jdbcType="INTEGER" property="total_fee" />
+    <result column="fee_type" jdbcType="VARCHAR" property="fee_type" />
+    <result column="cash_fee" jdbcType="INTEGER" property="cash_fee" />
+    <result column="cash_refund_fee" jdbcType="INTEGER" property="cash_refund_fee" />
+    <result column="coupon_refund_fee" jdbcType="INTEGER" property="coupon_refund_fee" />
+    <result column="coupon_refund_count" jdbcType="INTEGER" property="coupon_refund_count" />
+    <result column="coupon_refund_id" jdbcType="VARCHAR" property="coupon_refund_id" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, appid, mch_id, device_info, nonce_str, sign, transaction_id, out_trade_no, out_refund_no, 
     refund_id, refund_channel, refund_fee, total_fee, fee_type, cash_fee, cash_refund_fee, 
     coupon_refund_fee, coupon_refund_count, coupon_refund_id
   </sql>
-  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from acct_refund_weixin
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete parameterType="java.lang.Integer" id="delete" >
+  <delete id="delete" parameterType="java.lang.Integer">
     delete from acct_refund_weixin
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert parameterType="com.mogoroom.service.acct.domain.AccountRefundWeiXin" useGeneratedKeys="true" keyProperty="id" id="insert" >
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.AccountRefundWeiXin" useGeneratedKeys="true">
     insert into acct_refund_weixin
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="appid != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
         appid,
       </if>
-      <if test="mch_id != null" >
+      <if test="mch_id != null">
         mch_id,
       </if>
-      <if test="device_info != null" >
+      <if test="device_info != null">
         device_info,
       </if>
-      <if test="nonce_str != null" >
+      <if test="nonce_str != null">
         nonce_str,
       </if>
-      <if test="sign != null" >
+      <if test="sign != null">
         sign,
       </if>
-      <if test="transaction_id != null" >
+      <if test="transaction_id != null">
         transaction_id,
       </if>
-      <if test="out_trade_no != null" >
+      <if test="out_trade_no != null">
         out_trade_no,
       </if>
-      <if test="out_refund_no != null" >
+      <if test="out_refund_no != null">
         out_refund_no,
       </if>
-      <if test="refund_id != null" >
+      <if test="refund_id != null">
         refund_id,
       </if>
-      <if test="refund_channel != null" >
+      <if test="refund_channel != null">
         refund_channel,
       </if>
-      <if test="refund_fee != null" >
+      <if test="refund_fee != null">
         refund_fee,
       </if>
-      <if test="total_fee != null" >
+      <if test="total_fee != null">
         total_fee,
       </if>
-      <if test="fee_type != null" >
+      <if test="fee_type != null">
         fee_type,
       </if>
-      <if test="cash_fee != null" >
+      <if test="cash_fee != null">
         cash_fee,
       </if>
-      <if test="cash_refund_fee != null" >
+      <if test="cash_refund_fee != null">
         cash_refund_fee,
       </if>
-      <if test="coupon_refund_fee != null" >
+      <if test="coupon_refund_fee != null">
         coupon_refund_fee,
       </if>
-      <if test="coupon_refund_count != null" >
+      <if test="coupon_refund_count != null">
         coupon_refund_count,
       </if>
-      <if test="coupon_refund_id != null" >
+      <if test="coupon_refund_id != null">
         coupon_refund_id,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="appid != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
         #{appid,jdbcType=VARCHAR},
       </if>
-      <if test="mch_id != null" >
+      <if test="mch_id != null">
         #{mch_id,jdbcType=VARCHAR},
       </if>
-      <if test="device_info != null" >
+      <if test="device_info != null">
         #{device_info,jdbcType=VARCHAR},
       </if>
-      <if test="nonce_str != null" >
+      <if test="nonce_str != null">
         #{nonce_str,jdbcType=VARCHAR},
       </if>
-      <if test="sign != null" >
+      <if test="sign != null">
         #{sign,jdbcType=VARCHAR},
       </if>
-      <if test="transaction_id != null" >
+      <if test="transaction_id != null">
         #{transaction_id,jdbcType=VARCHAR},
       </if>
-      <if test="out_trade_no != null" >
+      <if test="out_trade_no != null">
         #{out_trade_no,jdbcType=VARCHAR},
       </if>
-      <if test="out_refund_no != null" >
+      <if test="out_refund_no != null">
         #{out_refund_no,jdbcType=VARCHAR},
       </if>
-      <if test="refund_id != null" >
+      <if test="refund_id != null">
         #{refund_id,jdbcType=VARCHAR},
       </if>
-      <if test="refund_channel != null" >
+      <if test="refund_channel != null">
         #{refund_channel,jdbcType=VARCHAR},
       </if>
-      <if test="refund_fee != null" >
+      <if test="refund_fee != null">
         #{refund_fee,jdbcType=INTEGER},
       </if>
-      <if test="total_fee != null" >
+      <if test="total_fee != null">
         #{total_fee,jdbcType=INTEGER},
       </if>
-      <if test="fee_type != null" >
+      <if test="fee_type != null">
         #{fee_type,jdbcType=VARCHAR},
       </if>
-      <if test="cash_fee != null" >
+      <if test="cash_fee != null">
         #{cash_fee,jdbcType=INTEGER},
       </if>
-      <if test="cash_refund_fee != null" >
+      <if test="cash_refund_fee != null">
         #{cash_refund_fee,jdbcType=INTEGER},
       </if>
-      <if test="coupon_refund_fee != null" >
+      <if test="coupon_refund_fee != null">
         #{coupon_refund_fee,jdbcType=INTEGER},
       </if>
-      <if test="coupon_refund_count != null" >
+      <if test="coupon_refund_count != null">
         #{coupon_refund_count,jdbcType=INTEGER},
       </if>
-      <if test="coupon_refund_id != null" >
+      <if test="coupon_refund_id != null">
         #{coupon_refund_id,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update parameterType="com.mogoroom.service.acct.domain.AccountRefundWeiXin" id="update" >
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.AccountRefundWeiXin">
     update acct_refund_weixin
-    <set >
-      <if test="appid != null" >
+    <set>
+      <if test="appid != null">
         appid = #{appid,jdbcType=VARCHAR},
       </if>
-      <if test="mch_id != null" >
+      <if test="mch_id != null">
         mch_id = #{mch_id,jdbcType=VARCHAR},
       </if>
-      <if test="device_info != null" >
+      <if test="device_info != null">
         device_info = #{device_info,jdbcType=VARCHAR},
       </if>
-      <if test="nonce_str != null" >
+      <if test="nonce_str != null">
         nonce_str = #{nonce_str,jdbcType=VARCHAR},
       </if>
-      <if test="sign != null" >
+      <if test="sign != null">
         sign = #{sign,jdbcType=VARCHAR},
       </if>
-      <if test="transaction_id != null" >
+      <if test="transaction_id != null">
         transaction_id = #{transaction_id,jdbcType=VARCHAR},
       </if>
-      <if test="out_trade_no != null" >
+      <if test="out_trade_no != null">
         out_trade_no = #{out_trade_no,jdbcType=VARCHAR},
       </if>
-      <if test="out_refund_no != null" >
+      <if test="out_refund_no != null">
         out_refund_no = #{out_refund_no,jdbcType=VARCHAR},
       </if>
-      <if test="refund_id != null" >
+      <if test="refund_id != null">
         refund_id = #{refund_id,jdbcType=VARCHAR},
       </if>
-      <if test="refund_channel != null" >
+      <if test="refund_channel != null">
         refund_channel = #{refund_channel,jdbcType=VARCHAR},
       </if>
-      <if test="refund_fee != null" >
+      <if test="refund_fee != null">
         refund_fee = #{refund_fee,jdbcType=INTEGER},
       </if>
-      <if test="total_fee != null" >
+      <if test="total_fee != null">
         total_fee = #{total_fee,jdbcType=INTEGER},
       </if>
-      <if test="fee_type != null" >
+      <if test="fee_type != null">
         fee_type = #{fee_type,jdbcType=VARCHAR},
       </if>
-      <if test="cash_fee != null" >
+      <if test="cash_fee != null">
         cash_fee = #{cash_fee,jdbcType=INTEGER},
       </if>
-      <if test="cash_refund_fee != null" >
+      <if test="cash_refund_fee != null">
         cash_refund_fee = #{cash_refund_fee,jdbcType=INTEGER},
       </if>
-      <if test="coupon_refund_fee != null" >
+      <if test="coupon_refund_fee != null">
         coupon_refund_fee = #{coupon_refund_fee,jdbcType=INTEGER},
       </if>
-      <if test="coupon_refund_count != null" >
+      <if test="coupon_refund_count != null">
         coupon_refund_count = #{coupon_refund_count,jdbcType=INTEGER},
       </if>
-      <if test="coupon_refund_id != null" >
+      <if test="coupon_refund_id != null">
         coupon_refund_id = #{coupon_refund_id,jdbcType=VARCHAR},
       </if>
     </set>
@@ -223,61 +223,342 @@
     <include refid="Base_Column_List" />
     from acct_refund_weixin
 	where 1=1
-	    <if test="po.id != null" >
+	    <if test="po.id != null">
           and id = #{po.id,jdbcType=INTEGER}
     </if>
-    <if test="po.appid != null" >
+    <if test="po.appid != null">
           and appid = #{po.appid,jdbcType=VARCHAR}
     </if>
-    <if test="po.mch_id != null" >
+    <if test="po.mch_id != null">
           and mch_id = #{po.mch_id,jdbcType=VARCHAR}
     </if>
-    <if test="po.device_info != null" >
+    <if test="po.device_info != null">
           and device_info = #{po.device_info,jdbcType=VARCHAR}
     </if>
-    <if test="po.nonce_str != null" >
+    <if test="po.nonce_str != null">
           and nonce_str = #{po.nonce_str,jdbcType=VARCHAR}
     </if>
-    <if test="po.sign != null" >
+    <if test="po.sign != null">
           and sign = #{po.sign,jdbcType=VARCHAR}
     </if>
-    <if test="po.transaction_id != null" >
+    <if test="po.transaction_id != null">
           and transaction_id = #{po.transaction_id,jdbcType=VARCHAR}
     </if>
-    <if test="po.out_trade_no != null" >
+    <if test="po.out_trade_no != null">
           and out_trade_no = #{po.out_trade_no,jdbcType=VARCHAR}
     </if>
-    <if test="po.out_refund_no != null" >
+    <if test="po.out_refund_no != null">
           and out_refund_no = #{po.out_refund_no,jdbcType=VARCHAR}
     </if>
-    <if test="po.refund_id != null" >
+    <if test="po.refund_id != null">
           and refund_id = #{po.refund_id,jdbcType=VARCHAR}
     </if>
-    <if test="po.refund_channel != null" >
+    <if test="po.refund_channel != null">
           and refund_channel = #{po.refund_channel,jdbcType=VARCHAR}
     </if>
-    <if test="po.refund_fee != null" >
+    <if test="po.refund_fee != null">
           and refund_fee = #{po.refund_fee,jdbcType=INTEGER}
     </if>
-    <if test="po.total_fee != null" >
+    <if test="po.total_fee != null">
           and total_fee = #{po.total_fee,jdbcType=INTEGER}
     </if>
-    <if test="po.fee_type != null" >
+    <if test="po.fee_type != null">
           and fee_type = #{po.fee_type,jdbcType=VARCHAR}
     </if>
-    <if test="po.cash_fee != null" >
+    <if test="po.cash_fee != null">
           and cash_fee = #{po.cash_fee,jdbcType=INTEGER}
     </if>
-    <if test="po.cash_refund_fee != null" >
+    <if test="po.cash_refund_fee != null">
           and cash_refund_fee = #{po.cash_refund_fee,jdbcType=INTEGER}
     </if>
-    <if test="po.coupon_refund_fee != null" >
+    <if test="po.coupon_refund_fee != null">
           and coupon_refund_fee = #{po.coupon_refund_fee,jdbcType=INTEGER}
     </if>
-    <if test="po.coupon_refund_count != null" >
+    <if test="po.coupon_refund_count != null">
           and coupon_refund_count = #{po.coupon_refund_count,jdbcType=INTEGER}
     </if>
-    <if test="po.coupon_refund_id != null" >
+    <if test="po.coupon_refund_id != null">
+          and coupon_refund_id = #{po.coupon_refund_id,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.AccountRefundWeiXin">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="mch_id" jdbcType="VARCHAR" property="mch_id" />
+    <result column="device_info" jdbcType="VARCHAR" property="device_info" />
+    <result column="nonce_str" jdbcType="VARCHAR" property="nonce_str" />
+    <result column="sign" jdbcType="VARCHAR" property="sign" />
+    <result column="transaction_id" jdbcType="VARCHAR" property="transaction_id" />
+    <result column="out_trade_no" jdbcType="VARCHAR" property="out_trade_no" />
+    <result column="out_refund_no" jdbcType="VARCHAR" property="out_refund_no" />
+    <result column="refund_id" jdbcType="VARCHAR" property="refund_id" />
+    <result column="refund_channel" jdbcType="VARCHAR" property="refund_channel" />
+    <result column="refund_fee" jdbcType="INTEGER" property="refund_fee" />
+    <result column="total_fee" jdbcType="INTEGER" property="total_fee" />
+    <result column="fee_type" jdbcType="VARCHAR" property="fee_type" />
+    <result column="cash_fee" jdbcType="INTEGER" property="cash_fee" />
+    <result column="cash_refund_fee" jdbcType="INTEGER" property="cash_refund_fee" />
+    <result column="coupon_refund_fee" jdbcType="INTEGER" property="coupon_refund_fee" />
+    <result column="coupon_refund_count" jdbcType="INTEGER" property="coupon_refund_count" />
+    <result column="coupon_refund_id" jdbcType="VARCHAR" property="coupon_refund_id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, appid, mch_id, device_info, nonce_str, sign, transaction_id, out_trade_no, out_refund_no, 
+    refund_id, refund_channel, refund_fee, total_fee, fee_type, cash_fee, cash_refund_fee, 
+    coupon_refund_fee, coupon_refund_count, coupon_refund_id
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from acct_refund_weixin
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from acct_refund_weixin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.mogoroom.service.acct.domain.AccountRefundWeiXin" useGeneratedKeys="true">
+    insert into acct_refund_weixin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="mch_id != null">
+        mch_id,
+      </if>
+      <if test="device_info != null">
+        device_info,
+      </if>
+      <if test="nonce_str != null">
+        nonce_str,
+      </if>
+      <if test="sign != null">
+        sign,
+      </if>
+      <if test="transaction_id != null">
+        transaction_id,
+      </if>
+      <if test="out_trade_no != null">
+        out_trade_no,
+      </if>
+      <if test="out_refund_no != null">
+        out_refund_no,
+      </if>
+      <if test="refund_id != null">
+        refund_id,
+      </if>
+      <if test="refund_channel != null">
+        refund_channel,
+      </if>
+      <if test="refund_fee != null">
+        refund_fee,
+      </if>
+      <if test="total_fee != null">
+        total_fee,
+      </if>
+      <if test="fee_type != null">
+        fee_type,
+      </if>
+      <if test="cash_fee != null">
+        cash_fee,
+      </if>
+      <if test="cash_refund_fee != null">
+        cash_refund_fee,
+      </if>
+      <if test="coupon_refund_fee != null">
+        coupon_refund_fee,
+      </if>
+      <if test="coupon_refund_count != null">
+        coupon_refund_count,
+      </if>
+      <if test="coupon_refund_id != null">
+        coupon_refund_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="mch_id != null">
+        #{mch_id,jdbcType=VARCHAR},
+      </if>
+      <if test="device_info != null">
+        #{device_info,jdbcType=VARCHAR},
+      </if>
+      <if test="nonce_str != null">
+        #{nonce_str,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="transaction_id != null">
+        #{transaction_id,jdbcType=VARCHAR},
+      </if>
+      <if test="out_trade_no != null">
+        #{out_trade_no,jdbcType=VARCHAR},
+      </if>
+      <if test="out_refund_no != null">
+        #{out_refund_no,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_id != null">
+        #{refund_id,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_channel != null">
+        #{refund_channel,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_fee != null">
+        #{refund_fee,jdbcType=INTEGER},
+      </if>
+      <if test="total_fee != null">
+        #{total_fee,jdbcType=INTEGER},
+      </if>
+      <if test="fee_type != null">
+        #{fee_type,jdbcType=VARCHAR},
+      </if>
+      <if test="cash_fee != null">
+        #{cash_fee,jdbcType=INTEGER},
+      </if>
+      <if test="cash_refund_fee != null">
+        #{cash_refund_fee,jdbcType=INTEGER},
+      </if>
+      <if test="coupon_refund_fee != null">
+        #{coupon_refund_fee,jdbcType=INTEGER},
+      </if>
+      <if test="coupon_refund_count != null">
+        #{coupon_refund_count,jdbcType=INTEGER},
+      </if>
+      <if test="coupon_refund_id != null">
+        #{coupon_refund_id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.mogoroom.service.acct.domain.AccountRefundWeiXin">
+    update acct_refund_weixin
+    <set>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="mch_id != null">
+        mch_id = #{mch_id,jdbcType=VARCHAR},
+      </if>
+      <if test="device_info != null">
+        device_info = #{device_info,jdbcType=VARCHAR},
+      </if>
+      <if test="nonce_str != null">
+        nonce_str = #{nonce_str,jdbcType=VARCHAR},
+      </if>
+      <if test="sign != null">
+        sign = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="transaction_id != null">
+        transaction_id = #{transaction_id,jdbcType=VARCHAR},
+      </if>
+      <if test="out_trade_no != null">
+        out_trade_no = #{out_trade_no,jdbcType=VARCHAR},
+      </if>
+      <if test="out_refund_no != null">
+        out_refund_no = #{out_refund_no,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_id != null">
+        refund_id = #{refund_id,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_channel != null">
+        refund_channel = #{refund_channel,jdbcType=VARCHAR},
+      </if>
+      <if test="refund_fee != null">
+        refund_fee = #{refund_fee,jdbcType=INTEGER},
+      </if>
+      <if test="total_fee != null">
+        total_fee = #{total_fee,jdbcType=INTEGER},
+      </if>
+      <if test="fee_type != null">
+        fee_type = #{fee_type,jdbcType=VARCHAR},
+      </if>
+      <if test="cash_fee != null">
+        cash_fee = #{cash_fee,jdbcType=INTEGER},
+      </if>
+      <if test="cash_refund_fee != null">
+        cash_refund_fee = #{cash_refund_fee,jdbcType=INTEGER},
+      </if>
+      <if test="coupon_refund_fee != null">
+        coupon_refund_fee = #{coupon_refund_fee,jdbcType=INTEGER},
+      </if>
+      <if test="coupon_refund_count != null">
+        coupon_refund_count = #{coupon_refund_count,jdbcType=INTEGER},
+      </if>
+      <if test="coupon_refund_id != null">
+        coupon_refund_id = #{coupon_refund_id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_refund_weixin
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from acct_refund_weixin
+	where 1=1
+	    <if test="po.id != null">
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.appid != null">
+          and appid = #{po.appid,jdbcType=VARCHAR}
+    </if>
+    <if test="po.mch_id != null">
+          and mch_id = #{po.mch_id,jdbcType=VARCHAR}
+    </if>
+    <if test="po.device_info != null">
+          and device_info = #{po.device_info,jdbcType=VARCHAR}
+    </if>
+    <if test="po.nonce_str != null">
+          and nonce_str = #{po.nonce_str,jdbcType=VARCHAR}
+    </if>
+    <if test="po.sign != null">
+          and sign = #{po.sign,jdbcType=VARCHAR}
+    </if>
+    <if test="po.transaction_id != null">
+          and transaction_id = #{po.transaction_id,jdbcType=VARCHAR}
+    </if>
+    <if test="po.out_trade_no != null">
+          and out_trade_no = #{po.out_trade_no,jdbcType=VARCHAR}
+    </if>
+    <if test="po.out_refund_no != null">
+          and out_refund_no = #{po.out_refund_no,jdbcType=VARCHAR}
+    </if>
+    <if test="po.refund_id != null">
+          and refund_id = #{po.refund_id,jdbcType=VARCHAR}
+    </if>
+    <if test="po.refund_channel != null">
+          and refund_channel = #{po.refund_channel,jdbcType=VARCHAR}
+    </if>
+    <if test="po.refund_fee != null">
+          and refund_fee = #{po.refund_fee,jdbcType=INTEGER}
+    </if>
+    <if test="po.total_fee != null">
+          and total_fee = #{po.total_fee,jdbcType=INTEGER}
+    </if>
+    <if test="po.fee_type != null">
+          and fee_type = #{po.fee_type,jdbcType=VARCHAR}
+    </if>
+    <if test="po.cash_fee != null">
+          and cash_fee = #{po.cash_fee,jdbcType=INTEGER}
+    </if>
+    <if test="po.cash_refund_fee != null">
+          and cash_refund_fee = #{po.cash_refund_fee,jdbcType=INTEGER}
+    </if>
+    <if test="po.coupon_refund_fee != null">
+          and coupon_refund_fee = #{po.coupon_refund_fee,jdbcType=INTEGER}
+    </if>
+    <if test="po.coupon_refund_count != null">
+          and coupon_refund_count = #{po.coupon_refund_count,jdbcType=INTEGER}
+    </if>
+    <if test="po.coupon_refund_id != null">
           and coupon_refund_id = #{po.coupon_refund_id,jdbcType=VARCHAR}
     </if>
 
