@@ -58,168 +58,181 @@
 		<!-- <table tableName="navi_apkversion" domainObjectName="NaviApkVersion"> -->
 		<!-- <generatedKey column="id" sqlStatement="JDBC" /> -->
 		<!-- </table> -->
-		<table tableName="acct_bill" domainObjectName="AcctBill"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="billId" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_billType" domainObjectName="AcctBillType"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_billDtl" domainObjectName="AcctBillDtl"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="billDtlId" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_billDtlType" domainObjectName="AcctBillDtlType"
+<!-- 		<table tableName="acct_bill" domainObjectName="AcctBill" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="billId" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_bill_chghistory" domainObjectName="AcctBillChgHistory" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+		<table tableName="acct_billdtl_chghistory" domainObjectName="AcctBillDtlChgHistory"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
+		
+<!-- 		<table tableName="acct_billType" domainObjectName="AcctBillType" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_billDtl" domainObjectName="AcctBillDtl" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="billDtlId" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_billDtlType" domainObjectName="AcctBillDtlType" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
 
-		<table tableName="acct_billtypetofundtype" domainObjectName="AccountBillTypeToFundType"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-		</table>
-		<table tableName="acct_busiBillDtl" domainObjectName="AccountBusiBillDetail"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_busiFeeDtl" domainObjectName="AccountBusiFeeDetail"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_busiFundDtl" domainObjectName="AccountBusiFundDetail"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_busiRec" domainObjectName="AccountBusiRec"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="doneCode" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_busiType" domainObjectName="AccountBusiType"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_fund" domainObjectName="AccountFund"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_fundType" domainObjectName="AccountFundType"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_account" domainObjectName="Account"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_password" domainObjectName="AccountPassword"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_refund_alipay" domainObjectName="AccountRefundAlipay"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_refund_weixin" domainObjectName="AccountRefundWeiXin"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_thridrefund" domainObjectName="AccountThridRefund"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_tradelog" domainObjectName="AccountTradeLog"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_check" domainObjectName="AcctCheck"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_specialList" domainObjectName="AcctSpecialList"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_checkAcctFundDetail" domainObjectName="CheckAcctFundDetail"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_checkBillFundDetail" domainObjectName="CheckBillFundDetail"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_checkBillTradeDetail" domainObjectName="CheckBillTradeDetail"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_checkBizDetail" domainObjectName="CheckBizDetail"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_checkTradeAlipay" domainObjectName="CheckTradeAlipay"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_checkTradeDetail" domainObjectName="CheckTradeDetail"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="acct_checkTradeWeixin" domainObjectName="CheckTradeWeixin"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
+<!-- 		<table tableName="acct_billtypetofundtype" domainObjectName="AccountBillTypeToFundType" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_busiBillDtl" domainObjectName="AccountBusiBillDetail" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_busiFeeDtl" domainObjectName="AccountBusiFeeDetail" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_busiFundDtl" domainObjectName="AccountBusiFundDetail" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_busiRec" domainObjectName="AccountBusiRec" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="doneCode" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_busiType" domainObjectName="AccountBusiType" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_fund" domainObjectName="AccountFund" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_fundType" domainObjectName="AccountFundType" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_account" domainObjectName="Account" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_password" domainObjectName="AccountPassword" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_refund_alipay" domainObjectName="AccountRefundAlipay" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_refund_weixin" domainObjectName="AccountRefundWeiXin" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_thridrefund" domainObjectName="AccountThridRefund" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_tradelog" domainObjectName="AccountTradeLog" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_check" domainObjectName="AcctCheck" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_specialList" domainObjectName="AcctSpecialList" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_checkAcctFundDetail" domainObjectName="CheckAcctFundDetail" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_checkBillFundDetail" domainObjectName="CheckBillFundDetail" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_checkBillTradeDetail" domainObjectName="CheckBillTradeDetail" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_checkBizDetail" domainObjectName="CheckBizDetail" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_checkTradeAlipay" domainObjectName="CheckTradeAlipay" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_checkTradeDetail" domainObjectName="CheckTradeDetail" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="acct_checkTradeWeixin" domainObjectName="CheckTradeWeixin" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
 		
 		
 		

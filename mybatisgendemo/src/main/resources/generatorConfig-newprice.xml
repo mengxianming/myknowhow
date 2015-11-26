@@ -29,20 +29,20 @@
 
 
 
-		<javaModelGenerator targetPackage="com.mogoroom.service.newprice.domain"
+		<javaModelGenerator targetPackage="com.mogoroom.service.flat.domain"
 			targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 <!-- 			<property name="rootClass" value="com.mogoroom.service.ac.newpriceo.domain.BaseEntity" /> -->
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.mogoroom.service.newprice.dao.resources"
+		<sqlMapGenerator targetPackage="com.mogoroom.service.flat.dao.resources"
 			targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.mogoroom.service.newprice.dao" targetProject="src/main/gen">
+			targetPackage="com.mogoroom.service.flat.dao" targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
@@ -55,25 +55,31 @@
 		<!-- <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
 		<!-- </table> -->
 		
-		<table tableName="room_price_paytype" domainObjectName="RoomPricePayType"
+		<table schema="mogo_dev" tableName="flat_roomPricePayType" domainObjectName="RoomPricePayType"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
-		<table tableName="room_price_biztype" domainObjectName="RoomPriceBizType"
+		<table schema="mogo_dev" tableName="flat_roomPriceBizType" domainObjectName="RoomPriceBizType"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
-		<table tableName="room_price" domainObjectName="RoomPrice"
+		<table schema="mogo_dev" tableName="flat_roomPrice" domainObjectName="RoomPriceNew"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
-		<table tableName="room_price_billPkg" domainObjectName="RoomPriceBillPkg"
+		<table schema="mogo_dev" tableName="flat_roomBasePrice" domainObjectName="RoomBasePrice"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table schema="mogo_dev" tableName="flat_roomPriceDtl" domainObjectName="RoomPriceDtl"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
