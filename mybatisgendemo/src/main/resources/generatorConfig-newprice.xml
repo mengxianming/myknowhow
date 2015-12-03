@@ -55,36 +55,36 @@
 		<!-- <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
 		<!-- </table> -->
 		
-		<table schema="mogo_dev" tableName="flat_roomPricePayType" domainObjectName="RoomPricePayType"
+		<table schema="mogo_dev" tableName="comm_payType" domainObjectName="RoomPricePayType"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
-		<table schema="mogo_dev" tableName="flat_roomPriceBizType" domainObjectName="RoomPriceBizType"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table schema="mogo_dev" tableName="flat_roomPrice" domainObjectName="RoomPriceNew"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table schema="mogo_dev" tableName="flat_roomBasePrice" domainObjectName="RoomBasePrice"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table schema="mogo_dev" tableName="flat_roomPriceDtl" domainObjectName="RoomPriceDtl"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>			
+<!-- 		<table schema="mogo_dev" tableName="flat_roomPriceBizType" domainObjectName="RoomPriceBizType" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table schema="mogo_dev" tableName="flat_roomPrice" domainObjectName="RoomPriceNew" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table schema="mogo_dev" tableName="flat_roomBasePrice" domainObjectName="RoomBasePrice" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table schema="mogo_dev" tableName="flat_roomPriceDtl" domainObjectName="RoomPriceDtl" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table>			 -->
 		
 		
 
