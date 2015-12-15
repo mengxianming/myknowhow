@@ -15,7 +15,7 @@ public class MainNewAcct {
 	 */
 	public static void main(String[] args) {
 		MyGenPlugin.setUseBase(false);
-		Main.main(new String[]{"generatorConfig.xml"});
+		Main.main(new String[]{"generatorConfig-acct.xml"});
 
 	}
 

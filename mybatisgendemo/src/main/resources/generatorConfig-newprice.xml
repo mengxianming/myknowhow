@@ -12,8 +12,8 @@
 		<plugin type="my.demo.mybatisgendemo.MyGenPlugin">
 		</plugin>
 		
-		<commentGenerator>
-			<property name="suppressAllComments" value="true" />
+		<commentGenerator type="my.demo.mybatisgendemo.MyCommentGenerator">	
+			
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"

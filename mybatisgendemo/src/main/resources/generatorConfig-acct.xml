@@ -12,8 +12,8 @@
 		<plugin type="my.demo.mybatisgendemo.MyGenPlugin">
 		</plugin>
 		
-		<commentGenerator>
-			<property name="suppressAllComments" value="true" />
+		<commentGenerator type="my.demo.mybatisgendemo.MyCommentGenerator">	
+			
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
@@ -46,18 +46,21 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<!-- <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" 
-			> -->
-		<!-- <property name="useActualColumnNames" value="true"/> -->
-		<!-- <generatedKey column="ID" sqlStatement="DB2" identity="true" /> -->
-		<!-- <columnOverride column="DATE_FIELD" property="startDate" /> -->
-		<!-- <ignoreColumn column="FRED" /> -->
-		<!-- <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
-		<!-- </table> -->
+		
 
-		<!-- <table tableName="navi_apkversion" domainObjectName="NaviApkVersion"> -->
-		<!-- <generatedKey column="id" sqlStatement="JDBC" /> -->
-		<!-- </table> -->
+		<table tableName="acct_tradelog_unionpay" domainObjectName="AcctTradeLogUnionPay"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table tableName="acct_tradelog_unionpay_refund" domainObjectName="AcctTradeLogUnionPayRefund"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		
 <!-- 		<table tableName="acct_bill" domainObjectName="AcctBill" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
 <!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
@@ -70,12 +73,12 @@
 <!-- 			<property name="useActualColumnNames" value="true" /> -->
 <!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
 <!-- 		</table> -->
-		<table tableName="acct_billdtl_chghistory" domainObjectName="AcctBillDtlChgHistory"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
+<!-- 		<table tableName="acct_billdtl_chghistory" domainObjectName="AcctBillDtlChgHistory" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
 		
 <!-- 		<table tableName="acct_billType" domainObjectName="AcctBillType" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->

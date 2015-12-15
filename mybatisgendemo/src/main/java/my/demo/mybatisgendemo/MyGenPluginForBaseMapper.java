@@ -105,10 +105,7 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 			IntrospectedTable introspectedTable) {
 		method.setName("selectById");
 		return super.clientSelectByPrimaryKeyMethodGenerated(method, interfaze, introspectedTable);
-	}
-	
-	
-	
+	}		
 	
 	/* (non-Javadoc)
 	 * @see org.mybatis.generator.api.PluginAdapter#clientUpdateByPrimaryKeyWithBLOBsMethodGenerated(org.mybatis.generator.api.dom.java.Method, org.mybatis.generator.api.dom.java.Interface, org.mybatis.generator.api.IntrospectedTable)
