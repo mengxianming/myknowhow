@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import org.springframework.context.ApplicationListener;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
@@ -40,8 +41,9 @@ public class BookstoreWebApplicationInitializer implements WebApplicationInitial
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
 		ctx.register(WebContextConfig.class);
 
-		ServletRegistration.Dynamic dispatcher =
-				container.addServlet("dispatcher", new DispatcherServlet(ctx));
+		DispatcherServlet dpSvlt = new DispatcherServlet(ctx);
+//		dpSvlt.setContextInitializerClasses(contextInitializerClasses);
+		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dpSvlt);
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
 

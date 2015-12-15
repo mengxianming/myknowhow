@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.web.context.support.GenericWebApplicationContext;
 
 import my.study.spstudy.MvcTestBase;
 
@@ -14,6 +15,9 @@ public class UserControllerTest extends MvcTestBase{
 		mockMvc.perform(MockMvcRequestBuilders.get("/"))
 		.andDo(MockMvcResultHandlers.print())
         .andExpect(MockMvcResultMatchers.content().string("Hello"));
+		
+		System.out.println(((GenericWebApplicationContext)wac).getDefaultListableBeanFactory());
+		System.out.println(((GenericWebApplicationContext)wac.getParent()).getDefaultListableBeanFactory());
 	}
 
 }
