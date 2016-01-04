@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://cxf.apache.org/jaxws
+                        http://cxf.apache.org/schemas/jaxws.xsd
+                        http://cxf.apache.org/transports/http/configuration
+                        http://cxf.apache.org/schemas/configuration/http-conf.xsd
+                         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+    default-autowire="byName" default-lazy-init="true">
+    
+    <!-- MA系统 -->
+    <jaxws:client id="memberFacade" serviceClass="com.netfinworks.ma.service.facade.IMemberFacade" address="${sysconfig.mogoPlatUrl}/MemberFacade" /> 
+    <jaxws:client id="payPwdFacade" serviceClass="com.netfinworks.ma.service.facade.IPayPwdFacade" address="${sysconfig.mogoPlatUrl}/PayPwdFacade" />
+    <jaxws:client id="operatorFacade" serviceClass="com.netfinworks.ma.service.facade.IOperatorFacade" address="${sysconfig.mogoPlatUrl}/OperatorFacade" />
+    <jaxws:client id="accountFacade" serviceClass="com.netfinworks.ma.service.facade.IAccountFacade" address="${sysconfig.mogoPlatUrl}/AccountFacade" />
+    <jaxws:client id="bankAccountFacade" serviceClass="com.netfinworks.ma.service.facade.IBankAccountFacade" address="${sysconfig.mogoPlatUrl}/BankAccountFacade" />
+    
+    <!-- tss系统 -->
+    <jaxws:client id="tradeQueryFacade" serviceClass="com.netfinworks.tradeservice.facade.api.TradeQueryFacade" address="${sysconfig.tssUrl}/tradeQueryFacade" /> 
+    
+</beans>
