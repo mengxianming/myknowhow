@@ -1,0 +1,126 @@
+1. 在git或者gitoschina上下载lts:
+   git https://git.oschina.net/hugui/light-task-scheduler.git
+
+2. 使用maven构建lts各个模块的jar。
+   mvn package -Dmaven.test.skip=true  #忽略测试用例错误
+
+   注意：不要使用太新的jdk版本来编译。本人使用了jdk8来编译、然后在jre7下运行二次开发的
+         tasktracker、结果报错。
+
+3. 安装到本地maven库方便本地开发、测试
+   mvn install -Dmaven.test.skip=true  #安装到本地maven库
+
+4. 安装到私服maven仓库(sonatype nexus)
+   mvn deploy -Dmaven.test.skip=true
+
+   注意：
+   1）pom.xml配置私服仓库如下：
+   	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://192.168.12.8:8082/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://192.168.12.8:8082/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>Central</id>
+			<name>Central</name>
+			<url>http://192.168.12.8:8082/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+  2）maven的settings.xml文件配置服务器权限
+     	<servers>
+		<server>
+			<id>releases</id>
+			<username>admin</username>
+			<password>admin123</password>
+		</server>
+		<server>
+			<id>snapshots</id>
+			<username>admin</username>
+			<password>admin123</password>
+		</server>
+	</servers>
+
+5. 本地配置运行zookeeper服务器
+
+6. 运行构建成功的LTS管理平台：lts-admin-1.6.3-SNAPSHOT.war
+
+7. Eclipse中导入lts-example的maven工程、运行其中例子。
+   6.1. 运行JobTrackerTest例子。
+        -->需要修改某些配置：如zookeeper地址、日志存储引擎（如mysql），以及存储引擎配置（如mysql URL、username、password等）
+   6.2. 运行TaskTrackerTest例子。
+        -->需要修改某些配置：如zookeeper地址、failStore存储引擎（如leveldb(默认), rocksdb, berkeleydb）.
+	-->若failStore存储引擎选择leveldb、注意在windows下需要安装Microsoft Visual C++ 2010 SP1 Redistributable、否则报如下错误：
+	   Exception in thread "main" java.lang.UnsatisfiedLinkError: Could not load library. Reasons: [no leveldbjni64-1.7 in java.library.path, no leveldbjni-1.7 in java.library.path, no leveldbjni in java.library.path
+   6.3.  运行JobClientTest例子。
+        -->需要修改某些配置：如zookeeper地址、failStore存储引擎（如leveldb(默认), rocksdb, berkeleydb）.
+	-->若failStore存储引擎选择leveldb、注意在windows下需要安装Microsoft Visual C++ 2010 SP1 Redistributable、否则报如下错误：
+	   Exception in thread "main" java.lang.UnsatisfiedLinkError: Could not load library. Reasons: [no leveldbjni64-1.7 in java.library.path, no leveldbjni-1.7 in java.library.path, no leveldbjni in java.library.path
+
+========================================以上为研究阶段=============================
+
+========================================下面为二次开发所需========================
+1. 新建一个TaskTacker工程、该工程用于实现各种作业的处理逻辑。
+   1.1 依赖包设置（主要为以及其他第三方包）：
+        <dependency>
+			<groupId>com.lts</groupId>
+			<artifactId>lts-tasktracker</artifactId>
+			<version>1.6.3-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-core</artifactId>
+			<version>2.0.9</version>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.0.13.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>4.0.38</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapdb</groupId>
+			<artifactId>mapdb</artifactId>
+			<version>2.0-beta10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.41</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+		
+		 <dependency>
+                <groupId>org.fusesource.leveldbjni</groupId>
+                <artifactId>leveldbjni-all</artifactId>
+                <version>1.8</version>
+            </dependency>
+		 <dependency>
+   1.2 写一个JobRunner的实现类JobDispatcher，该类用于根据job参数的设置分发到不同的任务实现类来执行。
+   1.3 工程打包成一个可运行jar包
+
+       
