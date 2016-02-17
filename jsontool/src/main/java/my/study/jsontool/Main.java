@@ -47,7 +47,7 @@ public class Main{
 		}
 		
 		if(prettyFlg != null){			
-			Map<?, ?> bean = JsonUtil.fromJson(converted, Map.class);
+			Object bean = JsonUtil.fromJson(converted);
 			converted = JsonUtil.toJson(bean, null, null, prettyFlg);					
 		}
 		
