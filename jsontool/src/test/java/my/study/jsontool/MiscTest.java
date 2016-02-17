@@ -1,10 +1,16 @@
 package my.study.jsontool;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import junit.framework.Assert;
 
@@ -38,6 +44,34 @@ public class MiscTest{
 		
 		Map<?, ?> c2 = JsonUtil.fromJson(json, Map.class);
 		Assert.assertEquals(json, JsonUtil.toJson(c2));
+	}
+	
+	@Test
+	public void testFromJson2() throws JsonProcessingException, IOException{
+		Object[] beans = new Object[2];
+		Config c = new Config();
+		c.setStartColNum(2);
+		c.setSheetNum(1);
+		c.setMode(0);
+		beans[0] = c;
+		 c = new Config();
+		 c.setStartColNum(3);
+		 c.setSheetNum(11);
+		 c.setMode(22);
+		 beans[1] = c;
+
+		String json = JsonUtil.toJson(beans);
+		System.out.println(json);
+		
+		Object beans2 = null;
+		ObjectMapper om = new ObjectMapper();
+		JsonNode t = om.readTree(json);
+		if(t.isArray()){
+			beans2 = JsonUtil.fromJson(json, List.class);
+		}else{
+			beans2 = JsonUtil.fromJson(json, Map.class);
+		}
+		Assert.assertEquals(json, JsonUtil.toJson(beans2));
 	}
 	
 	
@@ -84,6 +118,18 @@ public class MiscTest{
 		String[] args = new String[1];
 		args[0] = "-x";
 		String input = "{\"excelFilePath\":\"D:/mengxm/账单详细类型管理表.xls\",\n\"sheetNum\":1,\"startRowNum\":3,\n\"startColNum\":2,\"maxColCount\":null,\"mode\":0,\"sqlGenOpt\":{\"i\":1},\"enumGenOpt\":null}";
+		System.out.println("source:" + input);
+		System.out.println("converted:");
+		InputStream bis = new ByteArrayInputStream(input.getBytes("utf8"));
+		System.setIn(bis);
+		Main.main(args);
+	}
+	
+	@Test
+	public void testMainJson2XmlArray() throws Exception{
+		String[] args = new String[1];
+		args[0] = "-x";
+		String input = "[{\"excelFilePath\":null,\"sheetNum\":1,\"startRowNum\":0,\"startColNum\":2,\"maxColCount\":null,\"mode\":0},{\"excelFilePath\":null,\"sheetNum\":11,\"startRowNum\":0,\"startColNum\":3,\"maxColCount\":null,\"mode\":22}]\n";
 		System.out.println("source:" + input);
 		System.out.println("converted:");
 		InputStream bis = new ByteArrayInputStream(input.getBytes("utf8"));

@@ -32,6 +32,8 @@ public class Main{
 			cReader = new SQLGenCellReader(config, System.out);
 		}else if(config.getMode() == 2){
 			cReader = new EnumGenCellReader(config, System.out);
+		}else if(config.getMode() == 3){
+			cReader = new JsonGenCellReader(config, System.out);
 		}else{
 			throw new IllegalArgumentException("配置项有误、只支持mode=[0, 1, 2], 实际mode=" + config.getMode());
 		}

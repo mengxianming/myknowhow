@@ -111,6 +111,14 @@ public class MiscTest{
 		Main.main(args);
 	}
 	
+	@Test
+	public void testMainJsonGen() throws Exception{
+		String[] args = new String[1];
+		args[0] = "{\"excelFilePath\":\"D:/mengxm/账单详细类型管理表.xls\",\"sheetNum\":1,\"startRowNum\":3,\"startColNum\":2,\"maxColCount\":null,\"mode\":3,\"sqlGenOpt\":null,\"enumGenOpt\":null}";;
+		
+		Main.main(args);
+	}
+	
 	
 
 }

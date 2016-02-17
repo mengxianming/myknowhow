@@ -4,9 +4,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -86,6 +88,20 @@ public class JsonUtil{
 	public static <T> T fromJson(String json, Class<T> type){
 		try {
 			return om.readValue(json, type);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} 
+	}
+	
+	public static Object fromJson(String json){
+		try {
+			JsonNode t = om.readTree(json);
+			if(t.isArray()){
+				return om.readValue(json, List.class);
+			}else{
+				return om.readValue(json, Map.class);
+			}
+			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} 

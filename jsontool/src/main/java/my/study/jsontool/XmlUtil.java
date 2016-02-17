@@ -72,8 +72,8 @@ public class XmlUtil {
 		xstream.alias("root", LinkedHashMap.class);
 	}
 
-	public static String toXml(Map<?, ?> map) {	
-        return xstream.toXML(map);
+	public static String toXml(Object bean) {	
+        return xstream.toXML(bean);
 	}
 	
 	public static Map<?, ?> fromXml(String xml) {	
@@ -81,8 +81,7 @@ public class XmlUtil {
 	}
 	
 	public static String jsonToXml(String json) {
-		Map<?, ?> map = JsonUtil.fromJson(json, LinkedHashMap.class);
-        return toXml(map);
+        return toXml(JsonUtil.fromJson(json));
 	}
 	
 	public static String xmlToJson(String xml) {		

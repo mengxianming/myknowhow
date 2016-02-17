@@ -6,7 +6,7 @@ public class Config {
 	int startRowNum;
 	int startColNum;
 	Integer maxColCount;
-	int mode; // 0: print, 1: sqlgen, 2: enumgen
+	int mode; // 0: print, 1: sqlgen, 2: enumgen, 3:jsongen
 	
 	SqlGenOpt sqlGenOpt;
 	EnumGenOpt enumGenOpt;
