@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+		location="E:\maven-repository\mysql\mysql-connector-java\5.1.27\mysql-connector-java-5.1.27.jar" />
+		<classPathEntry location="E:\maven-repository\my\demo\mybatisgendemo\0.0.1-SNAPSHOT\mybatisgendemo-0.0.1-SNAPSHOT.jar"/>
+
+	<context id="MysqlTables" targetRuntime="MyBatis3">
+		<plugin type="my.demo.mybatisgendemo.MyGenPlugin">
+		</plugin>
+		
+		<commentGenerator type="my.demo.mybatisgendemo.MyCommentGenerator">	
+			
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.31.2:3306/mogo_dev" userId="root"
+			password="123456" />
+<!-- 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
+<!-- 		connectionURL="jdbc:mysql://192.168.12.188:3306/mogo_dev" userId="mogodev" -->
+<!-- 		password="mogodev1234" /> -->
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="true" />
+		</javaTypeResolver>
+
+
+
+		<javaModelGenerator targetPackage="com.mogoroom.service.acct.domain"
+			targetProject="src/main/gen">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+<!-- 			<property name="rootClass" value="com.mogoroom.service.acct.dao.domain.BaseEntity" /> -->
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.mogoroom.service.acct.dao.resources"
+			targetProject="src/main/gen">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.mogoroom.service.acct.dao" targetProject="src/main/gen">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		
+		<table tableName="flat_roomStateTrans" domainObjectName="RoomStateTrans"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table tableName="flat_roomStateTransHis" domainObjectName="RoomStateTransHis"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+
+<!-- 		<table tableName="comm_picture_group" domainObjectName="CommPictureGroup" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="comm_picture" domainObjectName="CommPicture" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+
+		
+
+	</context>
+</generatorConfiguration>

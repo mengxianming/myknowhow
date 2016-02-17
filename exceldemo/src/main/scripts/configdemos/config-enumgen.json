@@ -1,0 +1,16 @@
+{
+    "excelFilePath": "D:/mengxm/账单详细类型管理表.xls",
+    "sheetNum": 1,
+    "startRowNum": 3,
+    "startColNum": 2,
+    "maxColCount": null,
+    "mode": 2,
+    "sqlGenOpt": null,
+    "enumGenOpt": {
+        "pkgName": "my.study",
+        "className": "BusiTypeEnum",
+        "keyIdx": 0,
+        "valIdx": 1,
+        "enumItemNameIdx": 2
+    }
+}

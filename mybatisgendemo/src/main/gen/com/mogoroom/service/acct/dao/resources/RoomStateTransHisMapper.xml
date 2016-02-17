@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mogoroom.service.acct.dao.RoomStateTransHisMapper" >
+  <resultMap id="BaseResultMap" type="com.mogoroom.service.acct.domain.RoomStateTransHis" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roomId" property="roomId" jdbcType="INTEGER" />
+    <result column="onlineStatus" property="onlineStatus" jdbcType="TINYINT" />
+    <result column="verifyStatus" property="verifyStatus" jdbcType="TINYINT" />
+    <result column="availableStatus" property="availableStatus" jdbcType="TINYINT" />
+    <result column="busiType" property="busiType" jdbcType="INTEGER" />
+    <result column="toOnlineStatus" property="toOnlineStatus" jdbcType="TINYINT" />
+    <result column="toVerifyStatus" property="toVerifyStatus" jdbcType="TINYINT" />
+    <result column="toAvailableStatus" property="toAvailableStatus" jdbcType="TINYINT" />
+    <result column="soDoneCode" property="soDoneCode" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roomId, onlineStatus, verifyStatus, availableStatus, busiType, toOnlineStatus, 
+    toVerifyStatus, toAvailableStatus, soDoneCode
+  </sql>
+  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
+    select 
+    <include refid="Base_Column_List" />
+    from flat_roomstatetranshis
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete parameterType="java.lang.Integer" id="delete" >
+    delete from flat_roomstatetranshis
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert parameterType="com.mogoroom.service.acct.domain.RoomStateTransHis" useGeneratedKeys="true" keyProperty="id" id="insert" >
+    insert into flat_roomstatetranshis
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roomId != null" >
+        roomId,
+      </if>
+      <if test="onlineStatus != null" >
+        onlineStatus,
+      </if>
+      <if test="verifyStatus != null" >
+        verifyStatus,
+      </if>
+      <if test="availableStatus != null" >
+        availableStatus,
+      </if>
+      <if test="busiType != null" >
+        busiType,
+      </if>
+      <if test="toOnlineStatus != null" >
+        toOnlineStatus,
+      </if>
+      <if test="toVerifyStatus != null" >
+        toVerifyStatus,
+      </if>
+      <if test="toAvailableStatus != null" >
+        toAvailableStatus,
+      </if>
+      <if test="soDoneCode != null" >
+        soDoneCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="onlineStatus != null" >
+        #{onlineStatus,jdbcType=TINYINT},
+      </if>
+      <if test="verifyStatus != null" >
+        #{verifyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="availableStatus != null" >
+        #{availableStatus,jdbcType=TINYINT},
+      </if>
+      <if test="busiType != null" >
+        #{busiType,jdbcType=INTEGER},
+      </if>
+      <if test="toOnlineStatus != null" >
+        #{toOnlineStatus,jdbcType=TINYINT},
+      </if>
+      <if test="toVerifyStatus != null" >
+        #{toVerifyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="toAvailableStatus != null" >
+        #{toAvailableStatus,jdbcType=TINYINT},
+      </if>
+      <if test="soDoneCode != null" >
+        #{soDoneCode,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update parameterType="com.mogoroom.service.acct.domain.RoomStateTransHis" id="update" >
+    update flat_roomstatetranshis
+    <set >
+      <if test="roomId != null" >
+        roomId = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="onlineStatus != null" >
+        onlineStatus = #{onlineStatus,jdbcType=TINYINT},
+      </if>
+      <if test="verifyStatus != null" >
+        verifyStatus = #{verifyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="availableStatus != null" >
+        availableStatus = #{availableStatus,jdbcType=TINYINT},
+      </if>
+      <if test="busiType != null" >
+        busiType = #{busiType,jdbcType=INTEGER},
+      </if>
+      <if test="toOnlineStatus != null" >
+        toOnlineStatus = #{toOnlineStatus,jdbcType=TINYINT},
+      </if>
+      <if test="toVerifyStatus != null" >
+        toVerifyStatus = #{toVerifyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="toAvailableStatus != null" >
+        toAvailableStatus = #{toAvailableStatus,jdbcType=TINYINT},
+      </if>
+      <if test="soDoneCode != null" >
+        soDoneCode = #{soDoneCode,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from flat_roomstatetranshis
+  </select>
+
+  <select id="selectListPageInfo" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from flat_roomstatetranshis
+	where 1=1
+	    <if test="po.id != null" >
+          and id = #{po.id,jdbcType=INTEGER}
+    </if>
+    <if test="po.roomId != null" >
+          and roomId = #{po.roomId,jdbcType=INTEGER}
+    </if>
+    <if test="po.onlineStatus != null" >
+          and onlineStatus = #{po.onlineStatus,jdbcType=TINYINT}
+    </if>
+    <if test="po.verifyStatus != null" >
+          and verifyStatus = #{po.verifyStatus,jdbcType=TINYINT}
+    </if>
+    <if test="po.availableStatus != null" >
+          and availableStatus = #{po.availableStatus,jdbcType=TINYINT}
+    </if>
+    <if test="po.busiType != null" >
+          and busiType = #{po.busiType,jdbcType=INTEGER}
+    </if>
+    <if test="po.toOnlineStatus != null" >
+          and toOnlineStatus = #{po.toOnlineStatus,jdbcType=TINYINT}
+    </if>
+    <if test="po.toVerifyStatus != null" >
+          and toVerifyStatus = #{po.toVerifyStatus,jdbcType=TINYINT}
+    </if>
+    <if test="po.toAvailableStatus != null" >
+          and toAvailableStatus = #{po.toAvailableStatus,jdbcType=TINYINT}
+    </if>
+    <if test="po.soDoneCode != null" >
+          and soDoneCode = #{po.soDoneCode,jdbcType=INTEGER}
+    </if>
+
+  </select>
+
+  <delete id="deleteByFeature" parameterType="com.mogoroom.service.acct.domain.RoomStateTransHis" >
+    delete from flat_roomstatetranshis
+	<where> 
+	      <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="roomId != null" >
+          and roomId = #{roomId,jdbcType=INTEGER}
+    </if>
+    <if test="onlineStatus != null" >
+          and onlineStatus = #{onlineStatus,jdbcType=TINYINT}
+    </if>
+    <if test="verifyStatus != null" >
+          and verifyStatus = #{verifyStatus,jdbcType=TINYINT}
+    </if>
+    <if test="availableStatus != null" >
+          and availableStatus = #{availableStatus,jdbcType=TINYINT}
+    </if>
+    <if test="busiType != null" >
+          and busiType = #{busiType,jdbcType=INTEGER}
+    </if>
+    <if test="toOnlineStatus != null" >
+          and toOnlineStatus = #{toOnlineStatus,jdbcType=TINYINT}
+    </if>
+    <if test="toVerifyStatus != null" >
+          and toVerifyStatus = #{toVerifyStatus,jdbcType=TINYINT}
+    </if>
+    <if test="toAvailableStatus != null" >
+          and toAvailableStatus = #{toAvailableStatus,jdbcType=TINYINT}
+    </if>
+    <if test="soDoneCode != null" >
+          and soDoneCode = #{soDoneCode,jdbcType=INTEGER}
+    </if>
+
+ </where>
+    </delete>
+
+  <select id="selectByFeature" parameterType="com.mogoroom.service.acct.domain.RoomStateTransHis" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from flat_roomstatetranshis
+	where 1=1
+	    <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="roomId != null" >
+          and roomId = #{roomId,jdbcType=INTEGER}
+    </if>
+    <if test="onlineStatus != null" >
+          and onlineStatus = #{onlineStatus,jdbcType=TINYINT}
+    </if>
+    <if test="verifyStatus != null" >
+          and verifyStatus = #{verifyStatus,jdbcType=TINYINT}
+    </if>
+    <if test="availableStatus != null" >
+          and availableStatus = #{availableStatus,jdbcType=TINYINT}
+    </if>
+    <if test="busiType != null" >
+          and busiType = #{busiType,jdbcType=INTEGER}
+    </if>
+    <if test="toOnlineStatus != null" >
+          and toOnlineStatus = #{toOnlineStatus,jdbcType=TINYINT}
+    </if>
+    <if test="toVerifyStatus != null" >
+          and toVerifyStatus = #{toVerifyStatus,jdbcType=TINYINT}
+    </if>
+    <if test="toAvailableStatus != null" >
+          and toAvailableStatus = #{toAvailableStatus,jdbcType=TINYINT}
+    </if>
+    <if test="soDoneCode != null" >
+          and soDoneCode = #{soDoneCode,jdbcType=INTEGER}
+    </if>
+
+  </select>
+
+  <select id="selectByFieldList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from flat_roomstatetranshis
+    where ${field} in
+    <foreach close=")" collection="values" item="val" open="(" separator=",">
+	        #{val}
+  </foreach>
+  </select>
+
+<select id="selectByCriteria" resultMap="BaseResultMap" parameterType="com.mogoroom.service.base.dao.QCriteria">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM flat_roomstatetranshis
+		<where>
+			<if test="conditionAndRelations != null and conditionAndRelations.size() > 0">
+				<foreach collection="conditionAndRelations" item="cr">
+					${cr.andOr}
+					<foreach collection="cr.conditions" item="c" open="(" separator="AND" close=")">
+						${c.field} ${c.op}
+						<choose>
+							<when test="c.valueList != null">
+								<foreach collection="c.valueList" item="val" separator="," open="(" close=")">
+									#{val}
+								</foreach>
+							</when>
+							<when test="c.value != null">
+								#{c.value}
+							</when>
+						</choose>
+
+					</foreach>
+
+				</foreach>
+			</if>
+		</where>
+		<if test="orderBys != null and orderBys.size() > 0">
+			ORDER BY
+			<foreach collection="orderBys" item="ob" separator="," >
+				${ob.orderBySql}
+			</foreach>
+		</if>
+		<if test="limit != null">
+		   LIMIT #{limit}
+		   <if test="offset != null">
+		   OFFSET #{offset}
+		   </if>
+		</if>
+	</select>
+
+</mapper>
