@@ -1,7 +1,7 @@
 package my.study.exceldemo;
 
-import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +21,15 @@ public class ReadXls{
 	}
 	
 	public void readXls(String filePath, int sheetNum, int startRowNum, int startColNum, Integer maxColCount) throws Exception {
-		File file = new File(filePath);
-		POIFSFileSystem poifsFileSystem = new POIFSFileSystem(new FileInputStream(file));
+		InputStream file;
+		if(filePath.startsWith("classpath")){
+			String path = filePath.substring(filePath.indexOf(":") + 1);
+			file = getClass().getResourceAsStream(path);			
+		}else{
+			file = new FileInputStream(filePath);
+		}
+		
+		POIFSFileSystem poifsFileSystem = new POIFSFileSystem(file);
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(poifsFileSystem);
 		
 		
@@ -45,7 +52,9 @@ public class ReadXls{
 					cells.add(cell);
 					cellReader.readCell(cell);
 				}
-				cellReader.readRow(i, cells.toArray(new HSSFCell[0]));
+				if(cells != null && cells.size() > 0){
+					cellReader.readRow(i, cells.toArray(new HSSFCell[0]));
+				}
 			}
 			cellReader.finishRead();
 		}finally{

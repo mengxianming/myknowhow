@@ -51,6 +51,9 @@ public class SQLGenCellReader extends AbstractCellReader {
 			this.sqlTpl = sb.toString();
 			
 		}else{
+			if(rowCells.length < maxColIdx + 1){
+				return;
+			}
 			List<Object> vals = new ArrayList<Object>();
 			for(int i = 0; i < rowCells.length && i <= maxColIdx; i++){
 				vals.add(getCellAsString(rowCells[i]));
@@ -59,6 +62,7 @@ public class SQLGenCellReader extends AbstractCellReader {
 			out.println(sql);
 		}
 	}
+	
 
 	
 }

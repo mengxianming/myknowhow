@@ -78,7 +78,7 @@ public class MiscTest{
 	@Test
 	public void testMainPrintOnly() throws Exception{
 		String[] args = new String[1];
-		args[0] = "{\"excelFilePath\":\"D:/mengxm/账单详细类型管理表.xls\",\"sheetNum\":1,\"startRowNum\":3,\"startColNum\":2,\"maxColCount\":null,\"mode\":0,\"sqlGenOpt\":null,\"enumGenOpt\":null}";;
+		args[0] = "{\"excelFilePath\":\"classpath:/input.xls\",\"sheetNum\":1,\"startRowNum\":2,\"startColNum\":2,\"maxColCount\":null,\"mode\":0,\"sqlGenOpt\":null,\"enumGenOpt\":null}";;
 		
 		Main.main(args);
 	}
@@ -87,7 +87,7 @@ public class MiscTest{
 	@Test
 	public void testMainSqlGen() throws Exception{
 		String[] args = new String[1];
-		args[0] = "{\"excelFilePath\":\"D:/mengxm/账单详细类型管理表.xls\",\"sheetNum\":1,\"startRowNum\":3,\"startColNum\":2,"
+		args[0] = "{\"excelFilePath\":\"classpath:/input.xls\",\"sheetNum\":1,\"startRowNum\":2,\"startColNum\":2,"
 				+ "\"maxColCount\":null,\"mode\":1,\"sqlGenOpt\":{\"tableName\":\"acct.acct_billdtltype\"},\"enumGenOpt\":null}";;
 		
 		Main.main(args);
@@ -96,7 +96,7 @@ public class MiscTest{
 	@Test
 	public void testMainSqlGen2() throws Exception{
 		String[] args = new String[1];
-		args[0] = "{\"excelFilePath\":\"D:/mengxm/账单详细类型管理表.xls\",\"sheetNum\":1,\"startRowNum\":3,\"startColNum\":2,"
+		args[0] = "{\"excelFilePath\":\"classpath:/input.xls\",\"sheetNum\":1,\"startRowNum\":2,\"startColNum\":2,"
 				+ "\"maxColCount\":4,\"mode\":1,\"sqlGenOpt\":{\"tableName\":\"acct.acct_billdtltype\"},\"enumGenOpt\":null}";;
 		
 		Main.main(args);
@@ -105,7 +105,7 @@ public class MiscTest{
 	@Test
 	public void testMainEnumGen() throws Exception{
 		String[] args = new String[1];
-		args[0] = "{\"excelFilePath\":\"D:/mengxm/账单详细类型管理表.xls\",\"sheetNum\":1,\"startRowNum\":17,\"startColNum\":3,"
+		args[0] = "{\"excelFilePath\":\"classpath:/账单详细类型管理表.xls\",\"sheetNum\":1,\"startRowNum\":17,\"startColNum\":3,"
 				+ "\"maxColCount\":null,\"mode\":2,\"sqlGenOpt\":null,\"enumGenOpt\":{\"pkgName\":\"my.study\",\"className\":\"BusiTypeEnum\",\"keyIdx\":0,\"valIdx\":1,\"enumItemNameIdx\":1}}";
 		
 		Main.main(args);
@@ -114,7 +114,7 @@ public class MiscTest{
 	@Test
 	public void testMainJsonGen() throws Exception{
 		String[] args = new String[1];
-		args[0] = "{\"excelFilePath\":\"D:/mengxm/账单详细类型管理表.xls\",\"sheetNum\":1,\"startRowNum\":3,\"startColNum\":2,\"maxColCount\":null,\"mode\":3,\"sqlGenOpt\":null,\"enumGenOpt\":null}";;
+		args[0] = "{\"excelFilePath\":\"classpath:/账单详细类型管理表.xls\",\"sheetNum\":1,\"startRowNum\":3,\"startColNum\":2,\"maxColCount\":null,\"mode\":3,\"sqlGenOpt\":null,\"enumGenOpt\":null}";;
 		
 		Main.main(args);
 	}
