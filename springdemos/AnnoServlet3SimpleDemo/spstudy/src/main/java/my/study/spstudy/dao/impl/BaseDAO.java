@@ -1,8 +1,6 @@
 package my.study.spstudy.dao.impl;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -51,20 +49,9 @@ public abstract class BaseDAO<T, Mapper> extends SqlSessionDaoSupport implements
 	}
 	@Override
 	public List<T> selectByFieldList(String field, List<?> values) {		
-		return getSqlSession().selectList(getStatement("selectByFieldList"), toMap("field", field, "values", values));
+		return getSqlSession().selectList(getStatement("selectByFieldList"), TestUtil.toMap("field", field, "values", values));
 	}
-	
-	private Map<String, Object> toMap(Object... keyvals) {
-		Map<String, Object> res = new LinkedHashMap<String, Object>();
-		for(int i =0; i < keyvals.length; i +=2){
-			String key = String.valueOf(keyvals[i]);
-			Object val = i + 1 < keyvals.length ? keyvals[i + 1] : null;
-			res.put(key, val);
-			
-		}
-		return res;
-	}
-	
+		
 	@Override
 	public int deleteByFeature(T feature) {
 		return getSqlSession().delete(getStatement("deleteByFeature"), feature);

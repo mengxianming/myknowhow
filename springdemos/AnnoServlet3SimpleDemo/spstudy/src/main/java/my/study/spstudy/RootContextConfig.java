@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -18,15 +19,24 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import my.study.spstudy.service.IUserService;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages="my.study.spstudy",
 excludeFilters={@Filter(type=FilterType.ANNOTATION, value=Controller.class)})
+@EnableAspectJAutoProxy
+@EnableTransactionManagement//不需要指定txManager、自动检查
 public class RootContextConfig implements ApplicationContextAware{
 	
 	private ApplicationContext appCtx;
+	
+//	@Bean
+//	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+//	    PropertySourcesPlaceholderConfigurer placeholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+//	    ClassPathResource resource = new ClassPathResource("/META-INF/spring/database.properties");
+//	    placeholderConfigurer.setLocation(resource);
+//	    return placeholderConfigurer;
+//	}
 
 	@Bean
 	public DataSource dataSource(){
@@ -51,12 +61,7 @@ public class RootContextConfig implements ApplicationContextAware{
 		sb.setMapperLocations(appCtx.getResources("classpath:/my/study/spstudy/dao/resource/*Mapper.xml"));		
 		
 		return sb.getObject();
-	}
-	
-	@Bean
-	public IUserService userService(){
-		return new UserServiceImpl();
-	}
+	}	
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

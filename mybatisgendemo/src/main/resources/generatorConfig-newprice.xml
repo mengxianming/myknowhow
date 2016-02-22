@@ -17,7 +17,7 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.31.2:3306/newprice" userId="root"
+			connectionURL="jdbc:mysql://192.168.31.2:3306/stumng" userId="root"
 			password="123456" />
 <!-- 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
 <!-- 		connectionURL="jdbc:mysql://192.168.12.188:3306/acct" userId="mogodev" -->
@@ -55,10 +55,22 @@
 		<!-- <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
 		<!-- </table> -->
 		
-		<table schema="mogo_dev" tableName="comm_payType" domainObjectName="RoomPricePayType"
+		<table tableName="student" domainObjectName="Student"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table tableName="course" domainObjectName="Course"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table tableName="stucourse" domainObjectName="StuCourse"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
 <!-- 		<table schema="mogo_dev" tableName="flat_roomPriceBizType" domainObjectName="RoomPriceBizType" -->

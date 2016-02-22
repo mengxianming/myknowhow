@@ -1,8 +1,7 @@
 package my.study.spstudy.service;
 
-import java.util.Map;
+import my.study.spstudy.domain.Student;
 
-public interface IUserService {
-	Map<String, Object> getUserByName(String name);
-
+public interface IUserService extends ICrudService<Student>{
+	void testException(Integer type) throws Exception;
 }

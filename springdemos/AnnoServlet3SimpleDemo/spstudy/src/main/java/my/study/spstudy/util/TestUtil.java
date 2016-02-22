@@ -6,6 +6,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
@@ -98,5 +100,16 @@ public class TestUtil{
 			genericTypes[i] = (Class<?>) (generics[i]);
 		}		
 		return genericTypes;
+	}
+
+	public static Object toMap(Object... keyvals) {
+		Map<String, Object> res = new LinkedHashMap<String, Object>();
+		for(int i =0; i < keyvals.length; i +=2){
+			String key = String.valueOf(keyvals[i]);
+			Object val = i + 1 < keyvals.length ? keyvals[i + 1] : null;
+			res.put(key, val);
+			
+		}
+		return res;
 	}
 }
