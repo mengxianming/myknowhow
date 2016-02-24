@@ -1,13 +1,15 @@
-package my.study.exceldemo;
+package my.study.exceldemo.write;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.poi.util.IOUtils;
 
 import my.study.exceldemo.vo.Config;
+import my.study.jsontool.JsonUtil;
 
-public class Main{
+public class WriteMain{
 	public static void main(String[] args) throws Exception{
 		if(args.length == 0){
 			System.out.println("usage cmd {[-f configFilePath] | [configJson]}]");
@@ -24,22 +26,23 @@ public class Main{
 		}
 		Config config = JsonUtil.fromJson(configJson, Config.class);
 
-		ReadXls readXls = new ReadXls();
-		CellReader cReader;
-		if(config.getMode() == 0){
-			cReader = new PrintCellReader();
-		}else if(config.getMode() == 1){
-			cReader = new SQLGenCellReader(config, System.out);
-		}else if(config.getMode() == 2){
-			cReader = new EnumGenCellReader(config, System.out);
-		}else if(config.getMode() == 3){
-			cReader = new JsonGenCellReader(config, System.out);
+		WriteXls writeXls = new WriteXls();
+		ContentProvider cp;
+		if(config.getWriteOpt().getMode() == 0){
+			cp = new TabDelimStringContentProvider(getInput(System.in), null);
+		}else if(config.getWriteOpt().getMode() == 1){
+			cp = new JsonContentProvider(getInput(System.in), null);
+		}else if(config.getWriteOpt().getMode() == 2){
+			cp = new DBContentProvider(config, null);
 		}else{
 			throw new IllegalArgumentException("配置项有误、只支持mode=[0, 1, 2], 实际mode=" + config.getMode());
 		}
-		readXls.setCellReader(cReader);
-		readXls.readXls(config.getExcelFilePath(), config.getSheetNum() - 1, 
-				config.getStartRowNum() - 1, config.getStartColNum() - 1, config.getMaxColCount());
 		
+		writeXls.writeXls(config.getExcelFilePath(), config.getWriteOpt().getSheetName(), cp);		
+	}
+
+	private static String getInput(InputStream is) throws IOException {
+		byte[] content = IOUtils.toByteArray(is);
+		return new String(content, "utf8");
 	}
 }

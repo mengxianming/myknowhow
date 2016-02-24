@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+
+<root statement="select * from acct.acct_billtype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <row>
+	<field name="id">421</field>
+	<field name="billType">1001</field>
+	<field name="billName">充值账单,对应旧业务类型224001,3001,411001</field>
+	<field name="status">1</field>
+	<field name="sort">1</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">422</field>
+	<field name="billType">1002</field>
+	<field name="billName">支付定金,对应旧业务类型216001</field>
+	<field name="status">1</field>
+	<field name="sort">2</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">423</field>
+	<field name="billType">1003</field>
+	<field name="billName">租客支付首期款房租账单,对应旧业务类型216002</field>
+	<field name="status">1</field>
+	<field name="sort">3</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">424</field>
+	<field name="billType">1004</field>
+	<field name="billName">租客支付常规款房租账单,对应旧业务类型216003</field>
+	<field name="status">1</field>
+	<field name="sort">4</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">425</field>
+	<field name="billType">1005</field>
+	<field name="billName">租客支付水电煤账单,对应旧业务类型216004</field>
+	<field name="status">1</field>
+	<field name="sort">5</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">426</field>
+	<field name="billType">1006</field>
+	<field name="billName">退款账单,对应旧业务类型3007,3008</field>
+	<field name="status">1</field>
+	<field name="sort">6</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">427</field>
+	<field name="billType">1007</field>
+	<field name="billName">房东赔违约金,对应旧业务类型3009</field>
+	<field name="status">1</field>
+	<field name="sort">7</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">428</field>
+	<field name="billType">1008</field>
+	<field name="billName">房东买回房租,对应旧业务类型3015</field>
+	<field name="status">1</field>
+	<field name="sort">8</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">429</field>
+	<field name="billType">1009</field>
+	<field name="billName">公司租金贷款给房东,对应旧业务类型111002</field>
+	<field name="status">1</field>
+	<field name="sort">9</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">430</field>
+	<field name="billType">1010</field>
+	<field name="billName">白条账单,白条账单</field>
+	<field name="status">1</field>
+	<field name="sort">10</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">431</field>
+	<field name="billType">1011</field>
+	<field name="billName">房东保证金充值,对应旧业务类型3003,311002</field>
+	<field name="status">1</field>
+	<field name="sort">11</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">432</field>
+	<field name="billType">1012</field>
+	<field name="billName">转账账单,对应旧业务类型311003</field>
+	<field name="status">1</field>
+	<field name="sort">12</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">433</field>
+	<field name="billType">10001</field>
+	<field name="billName">逾期手续费,对应旧业务类型3013</field>
+	<field name="status">1</field>
+	<field name="sort">13</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">434</field>
+	<field name="billType">10002</field>
+	<field name="billName">租客支付尾款账单,租客支付尾款账单</field>
+	<field name="status">1</field>
+	<field name="sort">14</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">435</field>
+	<field name="billType">10003</field>
+	<field name="billName">蘑菇宝常规款房租账单,蘑菇宝常规款房租账单</field>
+	<field name="status">1</field>
+	<field name="sort">15</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+
+  <row>
+	<field name="id">436</field>
+	<field name="billType">10004</field>
+	<field name="billName">退房账单,退房账单</field>
+	<field name="status">1</field>
+	<field name="sort">16</field>
+	<field name="penaltyRate" xsi:nil="true" />
+  </row>
+</root>

@@ -2,15 +2,15 @@ package my.study.exceldemo.vo;
 
 public class Config {	
 	String excelFilePath;
-	int sheetNum;
-	int startRowNum;
-	int startColNum;
+	Integer sheetNum;
+	Integer startRowNum;
+	Integer startColNum;
 	Integer maxColCount;
-	int mode; // 0: print, 1: sqlgen, 2: enumgen, 3:jsongen
+	Integer mode; // 0: print, 1: sqlgen, 2: enumgen, 3:jsongen
 	
 	SqlGenOpt sqlGenOpt;
 	EnumGenOpt enumGenOpt;
-	
+	XlsWriteOpt writeOpt;
 	
 	
 	public String getExcelFilePath() {
@@ -19,22 +19,22 @@ public class Config {
 	public void setExcelFilePath(String excelFilePath) {
 		this.excelFilePath = excelFilePath;
 	}
-	public int getSheetNum() {
+	public Integer getSheetNum() {
 		return sheetNum;
 	}
-	public void setSheetNum(int sheetNum) {
+	public void setSheetNum(Integer sheetNum) {
 		this.sheetNum = sheetNum;
 	}
-	public int getStartRowNum() {
+	public Integer getStartRowNum() {
 		return startRowNum;
 	}
-	public void setStartRowNum(int startRowNum) {
+	public void setStartRowNum(Integer startRowNum) {
 		this.startRowNum = startRowNum;
 	}
-	public int getStartColNum() {
+	public Integer getStartColNum() {
 		return startColNum;
 	}
-	public void setStartColNum(int startColNum) {
+	public void setStartColNum(Integer startColNum) {
 		this.startColNum = startColNum;
 	}
 	public Integer getMaxColCount() {
@@ -43,10 +43,10 @@ public class Config {
 	public void setMaxColCount(Integer maxColCount) {
 		this.maxColCount = maxColCount;
 	}
-	public int getMode() {
+	public Integer getMode() {
 		return mode;
 	}
-	public void setMode(int mode) {
+	public void setMode(Integer mode) {
 		this.mode = mode;
 	}
 	public SqlGenOpt getSqlGenOpt() {
@@ -62,7 +62,12 @@ public class Config {
 		this.enumGenOpt = enumGenOpt;
 	}
 	
-	
+	public XlsWriteOpt getWriteOpt() {
+		return writeOpt;
+	}
+	public void setWriteOpt(XlsWriteOpt writeOpt) {
+		this.writeOpt = writeOpt;
+	}
 	
 	
 

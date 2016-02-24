@@ -1,11 +1,16 @@
 package my.study.exceldemo;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
 import junit.framework.Assert;
 import my.study.exceldemo.vo.Config;
 import my.study.exceldemo.vo.EnumGenOpt;
 import my.study.exceldemo.vo.SqlGenOpt;
+import my.study.jsontool.JsonUtil;
+import my.study.jsontool.Main;
 
 public class MiscTest{
 	
@@ -32,6 +37,22 @@ public class MiscTest{
 		
 		Config c2 = JsonUtil.fromJson(json, Config.class);
 		Assert.assertEquals(json, JsonUtil.toJson(c2));
+	}
+	
+	@Test
+	public void testConfigs2Json(){
+		Config c = new Config();
+		c.setExcelFilePath("D:/mengxm/账单详细类型管理表.xls");
+		c.setStartRowNum(3);
+		c.setStartColNum(2);
+		c.setSheetNum(1);
+		c.setMode(0);
+		String json = JsonUtil.toJsonExcludeNull(Arrays.asList(c, c));
+		System.out.println(json);
+		
+		List<Config> list = JsonUtil.fromJsonToList(json, Config.class);
+		Assert.assertEquals(2, list.size());
+		Assert.assertEquals(json, JsonUtil.toJsonExcludeNull(list));
 	}
 	
 	@Test

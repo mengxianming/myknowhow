@@ -1,6 +1,5 @@
-package my.study.exceldemo;
+package my.study.exceldemo.read;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +9,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
+import my.study.exceldemo.FileUtil;
 
 public class ReadXls{	
 	private CellReader cellReader;
@@ -21,13 +22,7 @@ public class ReadXls{
 	}
 	
 	public void readXls(String filePath, int sheetNum, int startRowNum, int startColNum, Integer maxColCount) throws Exception {
-		InputStream file;
-		if(filePath.startsWith("classpath")){
-			String path = filePath.substring(filePath.indexOf(":") + 1);
-			file = getClass().getResourceAsStream(path);			
-		}else{
-			file = new FileInputStream(filePath);
-		}
+		InputStream file = FileUtil.loadFile(filePath);
 		
 		POIFSFileSystem poifsFileSystem = new POIFSFileSystem(file);
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(poifsFileSystem);

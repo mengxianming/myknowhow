@@ -1,10 +1,29 @@
 package my.study.jsontool;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 public class XmlUtilTest {
+	public static class TestBean{
+		int id;
+		String name;
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+	}
 
 	@Test
     public void testToXml() {
@@ -20,6 +39,21 @@ public class XmlUtilTest {
         map.put("boss", map2);
       
         System.out.println(XmlUtil.toXml(map));
+
+    }
+	
+	@Test
+    public void testListToXml() {
+		TestBean b1 = new TestBean();
+		b1.setId(1);
+		b1.setName("bean1");
+		
+		TestBean b2 = new TestBean();
+		b2.setId(2);
+		b2.setName("bean2");
+		
+
+        System.out.println(XmlUtil.toXml(Arrays.asList(b1, b2)));
 
     }
 	
@@ -83,6 +117,14 @@ public class XmlUtilTest {
         System.out.println(XmlUtil.xmlToJson(xml));
 
     }
+	
+//	@Test
+//    public void testXmlToJson2() throws IOException {
+//        String xml = IOUtils.toString(getClass().getResourceAsStream("beans.xml"), "utf8");
+//               
+//        System.out.println(XmlUtil.xmlToJson(xml));
+//
+//    }
 
 
     
