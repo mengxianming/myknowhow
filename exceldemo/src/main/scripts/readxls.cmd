@@ -5,5 +5,5 @@ if not "%1%" equ "" (
    echo output to %1%
 )
 
-java -cp lib/*.jar; my.study.exceldemo.read.ReadMain -f config.json %OUTF%
+java -Djava.ext.dirs=lib my.study.exceldemo.read.ReadMain -f config.json %OUTF%
 pause

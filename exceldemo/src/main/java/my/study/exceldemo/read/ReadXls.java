@@ -21,7 +21,7 @@ public class ReadXls{
 		this.cellReader = cellReader;
 	}
 	
-	public void readXls(String filePath, int sheetNum, int startRowNum, int startColNum, Integer maxColCount) throws Exception {
+	public void readXls(String filePath, Integer sheetNum, String sheetName, int startRowNum, int startColNum, Integer maxColCount) throws Exception {
 		InputStream file = FileUtil.loadFile(filePath);
 		
 		POIFSFileSystem poifsFileSystem = new POIFSFileSystem(file);
@@ -29,7 +29,12 @@ public class ReadXls{
 		
 		
 		try{
-			HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(sheetNum);
+			HSSFSheet hssfSheet;
+			if(sheetNum != null){
+				hssfSheet = hssfWorkbook.getSheetAt(sheetNum);
+			}else{
+				hssfSheet = hssfWorkbook.getSheet(sheetName);
+			}
 			int rowEnd = hssfSheet.getLastRowNum();
 			for (int i = startRowNum; i <= rowEnd; i++) {
 				HSSFRow row = hssfSheet.getRow(i);

@@ -6,7 +6,6 @@ public class XlsWriteOpt{
 	String jdbcPassword;
 	String sql;
 	Integer mode; //0: from tabstring, 1: from jsonstring, 2: from db
-	private String sheetName;
 	
 	
 	public String getJdbcDriver() {
@@ -46,14 +45,4 @@ public class XlsWriteOpt{
 	public void setMode(int mode) {
 		this.mode = mode;
 	}
-	public String getSheetName() {
-		return sheetName;
-	}
-	public void setSheetName(String sheetName) {
-		this.sheetName = sheetName;
-	}
-	
-	
-	
-	
 }

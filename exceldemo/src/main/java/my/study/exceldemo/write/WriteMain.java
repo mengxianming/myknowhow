@@ -38,7 +38,7 @@ public class WriteMain{
 			throw new IllegalArgumentException("配置项有误、只支持mode=[0, 1, 2], 实际mode=" + config.getMode());
 		}
 		
-		writeXls.writeXls(config.getExcelFilePath(), config.getWriteOpt().getSheetName(), cp);		
+		writeXls.writeXls(config.getExcelFilePath(), config.getSheetName(), cp);		
 	}
 
 	private static String getInput(InputStream is) throws IOException {

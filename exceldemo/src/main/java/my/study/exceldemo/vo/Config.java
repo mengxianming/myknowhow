@@ -2,7 +2,8 @@ package my.study.exceldemo.vo;
 
 public class Config {	
 	String excelFilePath;
-	Integer sheetNum;
+	Integer sheetNum; //sheetNum比sheetNum优先
+	private String sheetName;
 	Integer startRowNum;
 	Integer startColNum;
 	Integer maxColCount;
@@ -68,7 +69,12 @@ public class Config {
 	public void setWriteOpt(XlsWriteOpt writeOpt) {
 		this.writeOpt = writeOpt;
 	}
-	
+	public String getSheetName() {
+		return sheetName;
+	}
+	public void setSheetName(String sheetName) {
+		this.sheetName = sheetName;
+	}
 	
 
 }

@@ -57,7 +57,7 @@ public class WriteXlsTest{
 	
 	@Test
 	public void testWriteXlsFromTabStr() throws Exception{		
-		InputStream src = getClass().getResourceAsStream("tabstrsource.txt");
+		InputStream src = getClass().getResourceAsStream("/tabstrsource.txt");
 		String ct = IOUtils.toString(src, "utf8");
 		ContentProvider cp = new TabDelimStringContentProvider(ct, null);
 		new WriteXls().writeXls("d:/tmp/my4.xls", "datafromdb", cp);;

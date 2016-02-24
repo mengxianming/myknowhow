@@ -18,13 +18,13 @@ public class WriteMainTest{
 		c.setExcelFilePath("D:/tmp/testWriteXlsFromBeanList.xls");
 		XlsWriteOpt wo = new XlsWriteOpt();
 		wo.setMode(0);
-		wo.setSheetName("testSheet");
+		c.setSheetName("testSheet");
 		c.setWriteOpt(wo);
 				
 		String[] args = new String[1];
 		args[0] = JsonUtil.toJson(c);
 		System.out.print("config:\n" + args[0]);
-		InputStream is = getClass().getResourceAsStream("tabstrsource.txt");
+		InputStream is = getClass().getResourceAsStream("/tabstrsource.txt");
 		System.setIn(is);
 		WriteMain.main(args);		
 		
@@ -36,7 +36,7 @@ public class WriteMainTest{
 		c.setExcelFilePath("D:/tmp/testWriteXlsFromJson.xls");
 		XlsWriteOpt wo = new XlsWriteOpt();
 		wo.setMode(1);
-		wo.setSheetName("testSheet");
+		c.setSheetName("testSheet");
 		c.setWriteOpt(wo);
 				
 		String[] args = new String[1];
@@ -60,7 +60,7 @@ public class WriteMainTest{
 		wo.setJdbcPassword("123456");
 		wo.setSql("select * from acct.acct_billtype");
 		wo.setMode(2);
-		wo.setSheetName("testSheet");
+		c.setSheetName("testSheet");
 		c.setWriteOpt(wo);
 		
 		String[] args = new String[1];

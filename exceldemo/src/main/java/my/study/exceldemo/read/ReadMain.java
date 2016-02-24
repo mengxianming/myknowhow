@@ -39,7 +39,9 @@ public class ReadMain{
 			throw new IllegalArgumentException("配置项有误、只支持mode=[0, 1, 2], 实际mode=" + config.getMode());
 		}
 		readXls.setCellReader(cReader);
-		readXls.readXls(config.getExcelFilePath(), config.getSheetNum() - 1, 
+		readXls.readXls(config.getExcelFilePath(),
+				config.getSheetNum() == null? null : config.getSheetNum(),
+				config.getSheetName(),
 				config.getStartRowNum() - 1, config.getStartColNum() - 1, config.getMaxColCount());
 		
 	}
