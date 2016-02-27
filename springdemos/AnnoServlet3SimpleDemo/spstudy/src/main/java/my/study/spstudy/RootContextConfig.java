@@ -1,5 +1,7 @@
 package my.study.spstudy;
 
+import java.io.IOException;
+
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,6 +15,9 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -24,19 +29,21 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages="my.study.spstudy",
 excludeFilters={@Filter(type=FilterType.ANNOTATION, value=Controller.class)})
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy  //为了使用@Aspect注解
 @EnableTransactionManagement//不需要指定txManager、自动检查
 public class RootContextConfig implements ApplicationContextAware{
 	
+	private static final String CONFIG_PATAH = "classpath:application.properties";
 	private ApplicationContext appCtx;
 	
-//	@Bean
-//	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-//	    PropertySourcesPlaceholderConfigurer placeholderConfigurer = new PropertySourcesPlaceholderConfigurer();
-//	    ClassPathResource resource = new ClassPathResource("/META-INF/spring/database.properties");
-//	    placeholderConfigurer.setLocation(resource);
-//	    return placeholderConfigurer;
-//	}
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() throws IOException {
+	    PropertySourcesPlaceholderConfigurer placeholderConfigurer = new PropertySourcesPlaceholderConfigurer();
+	    ResourcePatternResolver rsLoader = new PathMatchingResourcePatternResolver();
+	    
+	    placeholderConfigurer.setLocations(rsLoader.getResources(CONFIG_PATAH));
+	    return placeholderConfigurer;
+	}
 
 	@Bean
 	public DataSource dataSource(){

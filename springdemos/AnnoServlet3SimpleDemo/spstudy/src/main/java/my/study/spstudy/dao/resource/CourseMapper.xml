@@ -1,96 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="my.study.spstudy.dao.CourseMapper" >
-  <resultMap id="BaseResultMap" type="my.study.spstudy.domain.Course" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name
-  </sql>
-  <select resultMap="BaseResultMap" parameterType="java.lang.Integer" id="selectById" >
-    select 
-    <include refid="Base_Column_List" />
-    from course
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete parameterType="java.lang.Integer" id="delete" >
-    delete from course
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert parameterType="my.study.spstudy.domain.Course" useGeneratedKeys="true" keyProperty="id" id="insert" >
-    insert into course
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update parameterType="my.study.spstudy.domain.Course" id="update" >
-    update course
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="my.study.spstudy.dao.CourseMapper">
+	<cache type="my.study.spstudy.dao.impl.CustomCache">
+		<property name="clearIntervalInSec" value="1"/>
+	</cache>
+	<resultMap id="BaseResultMap" type="my.study.spstudy.domain.Course">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name
+	</sql>
+	<select resultMap="BaseResultMap" parameterType="java.lang.Integer"
+		id="selectById">
+		select
+		<include refid="Base_Column_List" />
+		from course
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete parameterType="java.lang.Integer" id="delete">
+		delete from course
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert parameterType="my.study.spstudy.domain.Course"
+		useGeneratedKeys="true" keyProperty="id" id="insert">
+		insert into course
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update parameterType="my.study.spstudy.domain.Course" id="update">
+		update course
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<delete id="deleteByFeature" parameterType="my.study.spstudy.domain.Course">
+		delete from course
+		<where>
+			<if test="id != null">
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="name != null">
+				and name = #{name,jdbcType=VARCHAR}
+			</if>
 
-  <delete id="deleteByFeature" parameterType="my.study.spstudy.domain.Course" >
-    delete from course
-	<where> 
-	      <if test="id != null" >
-          and id = #{id,jdbcType=INTEGER}
-    </if>
-    <if test="name != null" >
-          and name = #{name,jdbcType=VARCHAR}
-    </if>
+		</where>
+	</delete>
+	<select id="selectByFeature" parameterType="my.study.spstudy.domain.Course"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from course
+		where 1=1
+		<if test="id != null">
+			and id = #{id,jdbcType=INTEGER}
+		</if>
+		<if test="name != null">
+			and name = #{name,jdbcType=VARCHAR}
+		</if>
 
- </where>
-    </delete>
-
-  <select id="selectByFeature" parameterType="my.study.spstudy.domain.Course" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from course
-	where 1=1
-	    <if test="id != null" >
-          and id = #{id,jdbcType=INTEGER}
-    </if>
-    <if test="name != null" >
-          and name = #{name,jdbcType=VARCHAR}
-    </if>
-
-  </select>
-
-  <select id="selectByFieldList" parameterType="map" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from course
-    where ${field} in
-    <foreach close=")" collection="values" item="val" open="(" separator=",">
-	        #{val}
-  </foreach>
-  </select>
-
-<select id="selectByCriteria" resultMap="BaseResultMap" parameterType="my.study.spstudy.dao.QCriteria">
+	</select>
+	<select id="selectByFieldList" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from course
+		where ${field} in
+		<foreach close=")" collection="values" item="val" open="("
+			separator=",">
+			#{val}
+		</foreach>
+	</select>
+	<select id="selectByCriteria" resultMap="BaseResultMap"
+		parameterType="my.study.spstudy.dao.QCriteria">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM course
 		<where>
-			<if test="conditionAndRelations != null and conditionAndRelations.size() > 0">
+			<if
+				test="conditionAndRelations != null and conditionAndRelations.size() > 0">
 				<foreach collection="conditionAndRelations" item="cr">
 					${cr.andOr}
-					<foreach collection="cr.conditions" item="c" open="(" separator="AND" close=")">
+					<foreach collection="cr.conditions" item="c" open="("
+						separator="AND" close=")">
 						${c.field} ${c.op}
 						<choose>
 							<when test="c.valueList != null">
-								<foreach collection="c.valueList" item="val" separator="," open="(" close=")">
+								<foreach collection="c.valueList" item="val" separator=","
+									open="(" close=")">
 									#{val}
 								</foreach>
 							</when>
@@ -106,16 +113,15 @@
 		</where>
 		<if test="orderBys != null and orderBys.size() > 0">
 			ORDER BY
-			<foreach collection="orderBys" item="ob" separator="," >
+			<foreach collection="orderBys" item="ob" separator=",">
 				${ob.orderBySql}
 			</foreach>
 		</if>
 		<if test="limit != null">
-		   LIMIT #{limit}
-		   <if test="offset != null">
-		   OFFSET #{offset}
-		   </if>
+			LIMIT #{limit}
+			<if test="offset != null">
+				OFFSET #{offset}
+			</if>
 		</if>
 	</select>
-
 </mapper>
