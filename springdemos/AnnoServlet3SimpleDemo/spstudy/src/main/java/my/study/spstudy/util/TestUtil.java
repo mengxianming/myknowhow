@@ -102,7 +102,7 @@ public class TestUtil{
 		return genericTypes;
 	}
 
-	public static Object toMap(Object... keyvals) {
+	public static Map<String, Object> toMap(Object... keyvals) {
 		Map<String, Object> res = new LinkedHashMap<String, Object>();
 		for(int i =0; i < keyvals.length; i +=2){
 			String key = String.valueOf(keyvals[i]);

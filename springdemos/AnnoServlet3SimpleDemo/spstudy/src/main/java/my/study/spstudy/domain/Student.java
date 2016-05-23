@@ -1,6 +1,7 @@
 package my.study.spstudy.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -10,6 +11,15 @@ public class Student implements Serializable {
     private String name;
 
     private Integer age;
+    
+    private List<StuCourse> stuCourseList;
+    
+    public List<StuCourse> getStuCourseList() {
+		return stuCourseList;
+	}
+    public void setStuCourseList(List<StuCourse> stuCourseList) {
+		this.stuCourseList = stuCourseList;
+	}
 
     public Integer getId() {
         return id;

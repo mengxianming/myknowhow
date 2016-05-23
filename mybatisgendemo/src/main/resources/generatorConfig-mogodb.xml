@@ -16,12 +16,12 @@
 			
 		</commentGenerator>
 
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.31.2:3306/mogo_dev" userId="root"
-			password="123456" />
 <!-- 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
-<!-- 		connectionURL="jdbc:mysql://192.168.12.188:3306/mogo_dev" userId="mogodev" -->
-<!-- 		password="mogodev1234" /> -->
+<!-- 			connectionURL="jdbc:mysql://192.168.31.2:3306/mogo_dev" userId="root" -->
+<!-- 			password="123456" /> -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+		connectionURL="jdbc:mysql://192.168.12.188:3306/mogo_dev" userId="mogodev"
+		password="mogodev1234" />
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="true" />
@@ -46,19 +46,37 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
+		<table tableName="comm_sysconfig_his" domainObjectName="SysConfigHistory"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
 		
-		<table tableName="flat_roomStateTrans" domainObjectName="RoomStateTrans"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="flat_roomStateTransHis" domainObjectName="RoomStateTransHis"
-			enableCountByExample="false" enableDeleteByExample="false"
-			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
+<!-- 		<table tableName="user_favorite" domainObjectName="UserFavorite" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="flat_flat_tag" domainObjectName="FlatTag" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="flat_flattag_history" domainObjectName="FlatTagHistory" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="user_user_memo" domainObjectName="UserMemo" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
 
 <!-- 		<table tableName="comm_picture_group" domainObjectName="CommPictureGroup" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->

@@ -12,6 +12,22 @@ public class StuCourse implements Serializable {
     private Integer courseId;
 
     private String grade;
+    
+    private Student student;
+    private Course course;
+    
+    public Course getCourse() {
+		return course;
+	}
+    public void setCourse(Course course) {
+		this.course = course;
+	}
+    public Student getStudent() {
+		return student;
+	}
+    public void setStudent(Student student) {
+		this.student = student;
+	}
 
     public Integer getId() {
         return id;

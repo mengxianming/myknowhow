@@ -3,6 +3,8 @@ package my.study.jsontool;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -172,6 +174,21 @@ public class MiscTest{
 		InputStream bis = new ByteArrayInputStream(input.getBytes("utf8"));
 		System.setIn(bis);
 		Main.main(args);
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testGenericCast(){
+		List<Number> nums;
+		List<? extends Number> ints = new ArrayList<Integer>(Arrays.asList(new Integer(1)));
+		nums = (List<Number>) ints;
+		System.out.println(nums);
+		
+
+		List<? extends Number> floats = Arrays.asList(new Float(1.1));
+		nums.addAll(floats);
+		System.out.println(nums);
 	}
 	
 }

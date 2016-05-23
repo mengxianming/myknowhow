@@ -1,5 +1,7 @@
 package my.study.exceldemo;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +13,6 @@ import my.study.exceldemo.vo.Config;
 import my.study.exceldemo.vo.EnumGenOpt;
 import my.study.exceldemo.vo.SqlGenOpt;
 import my.study.jsontool.JsonUtil;
-import my.study.jsontool.Main;
 
 public class MiscTest{
 
@@ -24,6 +25,33 @@ public class MiscTest{
 		d = 11.0;
 		System.out.println(d - ((long)d) == 0);
 	}
+	
+	@Test
+	public void testDouble(){		
+		System.out.println(new BigDecimal(4.015 * 100).setScale(0, RoundingMode.HALF_UP));
+	}
+	
+	@Test
+	public void testStringFormat(){		
+		System.out.println(format("hello, %s, now is %s", "meng", 20));
+		System.out.println(format("hello, %s, now is %s", "meng"));
+	}
+	
+	
+	
+	private String format(String tpl, Object... args) {		
+		for(Object arg : args){
+			tpl = tpl.replaceFirst("%s", String.valueOf(arg));
+		}
+		return tpl;
+	}
+
+	@Test
+	public void testBigDecimal(){		
+		Assert.assertEquals(BigDecimal.ZERO,  new BigDecimal("0.0"));
+	}
+	
+	
 
 	@Test
 	public void testConfig2Json0(){
