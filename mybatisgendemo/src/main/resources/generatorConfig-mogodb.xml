@@ -20,8 +20,8 @@
 <!-- 			connectionURL="jdbc:mysql://192.168.31.2:3306/mogo_dev" userId="root" -->
 <!-- 			password="123456" /> -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-		connectionURL="jdbc:mysql://192.168.12.188:3306/mogo_dev" userId="mogodev"
-		password="mogodev1234" />
+		connectionURL="jdbc:mysql://192.168.30.53:3306/mogo_dev" userId="root"
+		password="123456" />
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="true" />
@@ -45,13 +45,27 @@
 			targetPackage="com.mogoroom.service.acct.dao" targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-
-		<table tableName="comm_sysconfig_his" domainObjectName="SysConfigHistory"
+		
+		<table tableName="coms_model" domainObjectName="CmsModel"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
+		<table tableName="coms_model_field" domainObjectName="CmsModelField"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		
+
+<!-- 		<table tableName="comm_sysconfig_his" domainObjectName="SysConfigHistory" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
 		
 <!-- 		<table tableName="user_favorite" domainObjectName="UserFavorite" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->

@@ -124,7 +124,13 @@ public class ListUtilTest {
 	public void testSelectDistinct() {
 		List<Student> stuList = stuList();
 		stuList.add(student(10, "meng", 201));
+		stuList.add(student(11, null, 201));
 		List<Object> result = ListUtil.selectDistinct(stuList, "name");
+		System.out.println(JsonUtil.toJson(result));
+		
+		//对null值的distinct
+		stuList.add(student(12, null, 201));
+		result = ListUtil.selectDistinct(stuList, "name");
 		System.out.println(JsonUtil.toJson(result));
 	}
 
@@ -136,6 +142,8 @@ public class ListUtilTest {
 		List<Object> result = ListUtil.selectDistinctExcludeEmptyValue(stuList, "name");
 		System.out.println(JsonUtil.toJson(result));
 	}
+	
+	
 
 	@Test
 	public void testToNumbers() {

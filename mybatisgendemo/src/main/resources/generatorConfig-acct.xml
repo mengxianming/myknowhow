@@ -20,7 +20,7 @@
 <!-- 			connectionURL="jdbc:mysql://192.168.31.2:3306/acct" userId="root" -->
 <!-- 			password="123456" /> -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-		connectionURL="jdbc:mysql://192.168.60.60:3307/acct" userId="root"
+		connectionURL="jdbc:mysql://192.168.30.53:3306/newcms" userId="root"
 		password="123456" />
 
 		<javaTypeResolver>
@@ -46,13 +46,70 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		
-		<table tableName="acct_shouldpaybill" domainObjectName="AcctShouldPayBill"
+<table tableName="ncms_contentcat_define" domainObjectName="CmsContentCatDefine"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
+		<table tableName="ncms_contentcat" domainObjectName="CmsContentCat"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+<!-- <table tableName="ncms_menu_city" domainObjectName="CmsMenuCity" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+		
+<!-- 		<table tableName="ncms_dict" domainObjectName="CmsDict" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+
+<!-- 		<table tableName="ncms_content" domainObjectName="CmsContent" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="ncms_content_city" domainObjectName="CmsContentCity" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="ncms_contentmenu" domainObjectName="CmsContentMenu" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="ncms_contentnode" domainObjectName="CmsContentNode" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="ncms_contentnode_content" domainObjectName="CmsContentNodeContent" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+		
+		
+<!-- 		<table tableName="acct_shouldpaybill" domainObjectName="AcctShouldPayBill" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
 		
 
 <!-- 		<table tableName="acct_tradelog_unionpay" domainObjectName="AcctTradeLogUnionPay" -->

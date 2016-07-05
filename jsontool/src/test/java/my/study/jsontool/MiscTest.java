@@ -17,7 +17,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import junit.framework.Assert;
 
 public class MiscTest{
-	
+	@Test
+	public void test(){
+		System.out.println(null == null);
+	}
 	@Test
 	public void testConfig2Json0(){
 		Config c = new Config();
