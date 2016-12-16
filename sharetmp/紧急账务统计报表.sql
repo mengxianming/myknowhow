@@ -77,3 +77,127 @@ INNER JOIN bill_salebill sb ON sb.`id`=bam.`orderId`
 LEFT JOIN oder_signedorder so ON so.`id`=sb.`signedOrderId`
 LEFT JOIN user_renter ur ON ur.id=so.renterId
 WHERE abr.`createTime`<'2016-06-01' ;
+
+
+-- 查询201506月底到201605月底，每个月底的空置房间价格
+select 
+tmp.roomId '房间id',
+tmp.checkTime '检查时间',
+tmp.salePrice '销售价格'
+from(
+select 
+tmp1.roomId,
+tmp1.checkTime,
+tmp1.defPrice,
+ifnull(tmp2.amount, tmp1.defPrice) salePrice,
+tmp2.amount,
+tmp2.startTime,
+tmp2.endTime
+ from (
+	select 
+	fr.id roomId,
+	ct.checkTime,
+	(
+	 select  rpd.amount from
+	flat_roomprice rp
+	join flat_roompricedtl rpd on rpd.priceId = rp.id
+	join flat_roompricebiztype bt on bt.bizType = rp.bizType
+	join comm_paytype pt on pt.id = bt.payTypeId
+	where pt.payTypeGroup='1'
+	and bt.payStage=3
+	and rpd.billDtlType=10002
+	and rp.goodsIdType=1 and rp.goodsId=fr.id
+	order by rp.startTime limit 1
+	) defPrice 
+	from flat_room fr
+	join flat_flats ff on fr.flatsId=ff.id
+	join (
+	select '2015-06-30' checkTime
+	union select '2015-07-31' checkTime
+	union select '2015-08-31' checkTime
+	union select '2015-09-30' checkTime
+	union select '2015-10-31' checkTime
+	union select '2015-11-30' checkTime
+	union select '2015-12-31' checkTime
+	union select '2016-01-31' checkTime
+	union select '2016-02-29' checkTime
+	union select '2016-03-31' checkTime
+	union select '2016-04-30' checkTime
+	union select '2016-05-31' checkTime
+	) ct on 1=1 
+	where
+	ff.rentType=1
+	and not exists (
+	select * from
+	flat_room fr2 join flat_flats ff2 on fr2.flatsId=ff2.id
+	join oder_signedorder oso on fr2.id=oso.roomId
+	join cntr_salecontract csc on csc.id=oso.saleContractId
+	where ff2.rentType=1 and fr.id=fr2.id and ct.checkTime>=date(csc.beginDate) and ct.checkTime<=date(ifnull(csc.loseEfficacyDate, csc.endDate))
+	)
+) tmp1
+left join(
+	select rp.goodsId roomId,
+	pt.payTypeGroup payTypeGroup,
+	ct.checkTime ,
+	rpd.amount ,
+	rp.startTime,
+	rp.endTime
+	from flat_roomprice rp 
+	join flat_roompricedtl rpd on rpd.priceId = rp.id
+	join flat_roompricebiztype bt on bt.bizType = rp.bizType
+	join comm_paytype pt on pt.id=bt.payTypeId
+	join (
+	select '2015-06-30' checkTime
+	union select '2015-07-31' checkTime
+	union select '2015-08-31' checkTime
+	union select '2015-09-30' checkTime
+	union select '2015-10-31' checkTime
+	union select '2015-11-30' checkTime
+	union select '2015-12-31' checkTime
+	union select '2016-01-31' checkTime
+	union select '2016-02-29' checkTime
+	union select '2016-03-31' checkTime
+	union select '2016-04-30' checkTime
+	union select '2016-05-31' checkTime
+	) ct on rp.startTime <= ct.checkTime and (rp.endTime > ct.checkTime or rp.endTime is null)
+	where
+	rp.goodsIdType=1
+	and bt.payStage=3
+	and rpd.billDtlType=10002
+) tmp2 on tmp1.roomId=tmp2.roomId and tmp1.checkTime=tmp2.checkTime
+order by tmp1.roomId, tmp1.checkTime, tmp2.amount
+) tmp
+group by tmp.roomId, tmp.checkTime;
+
+
+-- 从201506月底到201605月底，每个月底的逾期租金账单
+select 
+oso.roomId '房间id',
+csc.realRentPrice '月租',
+sb.amount '账单金额',
+sb.dueDate '应交日期',
+sb.payTime '最终交款日期',
+ct.checkTime '检查日期'
+from 
+bill_salebill sb 
+join oder_signedorder oso on sb.signedOrderId=oso.id
+join cntr_salecontract csc on csc.id=oso.saleContractId
+join flat_room fr on fr.id=oso.roomId
+join flat_flats ff on fr.flatsId=ff.id
+join (
+select '2015-06-30' checkTime
+union select '2015-07-31' checkTime
+union select '2015-08-31' checkTime
+union select '2015-09-30' checkTime
+union select '2015-10-31' checkTime
+union select '2015-11-30' checkTime
+union select '2015-12-31' checkTime
+union select '2016-01-31' checkTime
+union select '2016-02-29' checkTime
+union select '2016-03-31' checkTime
+union select '2016-04-30' checkTime
+union select '2016-05-31' checkTime
+) ct on last_day(sb.dueDate) = last_day(ct.checkTime) and date(sb.dueDate) < date(sb.payTime)
+where sb.bill_type in (1004, 10003)
+and ff.rentType=1
+order by oso.roomId, ct.checkTime;

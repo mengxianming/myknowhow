@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+<sql id="selectByCriteria">
+<![CDATA[  
+ SELECT
+		<include refid="Base_Column_List" />
+ 
+ 
+ 
+  ]]>
+</sql></sqls>

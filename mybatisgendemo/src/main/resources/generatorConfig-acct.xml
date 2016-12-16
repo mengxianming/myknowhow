@@ -20,7 +20,7 @@
 <!-- 			connectionURL="jdbc:mysql://192.168.31.2:3306/acct" userId="root" -->
 <!-- 			password="123456" /> -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-		connectionURL="jdbc:mysql://192.168.30.53:3306/newcms" userId="root"
+		connectionURL="jdbc:mysql://192.168.40.81/test" userId="root"
 		password="123456" />
 
 		<javaTypeResolver>
@@ -29,35 +29,52 @@
 
 
 
-		<javaModelGenerator targetPackage="com.mogoroom.service.acct.domain"
+		<javaModelGenerator targetPackage="com.mogoroom.service.repo.roomstatus.vo"
 			targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 <!-- 			<property name="rootClass" value="com.mogoroom.service.acct.dao.domain.BaseEntity" /> -->
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.mogoroom.service.acct.dao.resources"
+		<sqlMapGenerator targetPackage="com.mogoroom.service.repo.roomstatus.resources"
 			targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.mogoroom.service.acct.dao" targetProject="src/main/gen">
+			targetPackage="com.mogoroom.service.repo.roomstatus.mapper" targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-<table tableName="ncms_contentcat_define" domainObjectName="CmsContentCatDefine"
+		<table tableName="rsci_rschartinfo_base" domainObjectName="RoomStatusChartInfoBase"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
+			<property name="useActualColumnNames" value="true" />			
+			<generatedKey column="rsid" sqlStatement="JDBC" />
 		</table>
-		<table tableName="ncms_contentcat" domainObjectName="CmsContentCat"
+		<table tableName="rsci_rschartinfo_sale" domainObjectName="RoomStatusChartInfoSale"
 			enableCountByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" enableUpdateByExample="false">
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="JDBC" />
+			<property name="useActualColumnNames" value="true" />	
 		</table>
+		<table tableName="rsci_rschartinfo_stat" domainObjectName="RoomStatusChartInfoStat"
+			enableCountByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="true" />	
+		</table>
+
+<!-- <table tableName="ncms_contentcat_define" domainObjectName="CmsContentCatDefine" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
+<!-- 		<table tableName="ncms_contentcat" domainObjectName="CmsContentCat" -->
+<!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
+<!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
+<!-- 			<property name="useActualColumnNames" value="true" /> -->
+<!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
+<!-- 		</table> -->
 <!-- <table tableName="ncms_menu_city" domainObjectName="CmsMenuCity" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
 <!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->

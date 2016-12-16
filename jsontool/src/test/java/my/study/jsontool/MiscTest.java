@@ -3,6 +3,8 @@ package my.study.jsontool;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +21,10 @@ import junit.framework.Assert;
 public class MiscTest{
 	@Test
 	public void test(){
-		System.out.println(null == null);
+		BigDecimal newPrice = new BigDecimal("11.5");
+		newPrice = newPrice.setScale(0, RoundingMode.HALF_UP);
+		System.out.println(newPrice);
+		
 	}
 	@Test
 	public void testConfig2Json0(){

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqls>
+<sql id="selectByCriteria">
+<![CDATA[  
+	SELECT
+		${columnNamesString}
+		FROM ${tableName}
+		<where>
+			<if test="conditionAndRelations != null and conditionAndRelations.size() > 0">
+				<foreach collection="conditionAndRelations" item="cr">
+					${cr.andOr}
+					<trim prefix="(" suffix=")" suffixOverrides="AND | OR" >
+						<foreach collection="cr.conditions" item="c">
+							${c.field} ${c.op}
+							<choose>
+								<when test="c.valueList != null">
+									<foreach collection="c.valueList" item="val" separator="," open="(" close=")">
+										#{val}
+									</foreach>
+								</when>
+								<when test="c.value != null">
+									#{c.value}
+								</when>		
+							</choose>
+							
+							${cr.innerAndOr}										
+						</foreach>
+					</trim>
+
+				</foreach>
+			</if>			
+		</where>
+		<if test="orderBys != null and orderBys.size() > 0">
+			ORDER BY 
+			<foreach collection="orderBys" item="ob" separator="," >
+				${ob.orderBySql}
+			</foreach>
+		</if>
+		<if test="limit != null">
+		   LIMIT #{limit}
+		   <if test="offset != null">
+		   OFFSET #{offset}
+		   </if>
+		</if>  
+  ]]>
+</sql>
+
+</sqls>
