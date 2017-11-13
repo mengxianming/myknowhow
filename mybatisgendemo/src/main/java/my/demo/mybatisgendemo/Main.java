@@ -20,6 +20,7 @@ public class Main {
 		if(args.length > 0){
 			configFile = args[0];
 		}
+		MyGenPlugin.setUseBase(false);
 		String config = Main.class.getClassLoader().getResource(  
 				configFile).getFile();  
 		String[] arg = { "-configfile", config, "-overwrite" };  

@@ -25,7 +25,17 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  *
  */
 public class MyGenPluginForBaseMapper extends PluginAdapter {
+	private boolean useBaseMapper = true;
 
+	public boolean getUseBaseMapper() {
+		return this.useBaseMapper;
+	}
+	
+	public void setUseBaseMapper(boolean useBaseMapper) {
+		this.useBaseMapper = useBaseMapper;
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see org.mybatis.generator.api.Plugin#validate(java.util.List)
 	 */
@@ -69,14 +79,14 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean clientInsertMethodGenerated(Method method, Interface interfaze,
 			IntrospectedTable introspectedTable) {
-		return false;
+		return true;
 	}
 	/* (non-Javadoc)
 	 * @see org.mybatis.generator.api.PluginAdapter#sqlMapInsertElementGenerated(org.mybatis.generator.api.dom.xml.XmlElement, org.mybatis.generator.api.IntrospectedTable)
 	 */
 	@Override
 	public boolean sqlMapInsertElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-		return false;
+		return true;
 	}
 	
 	/* (non-Javadoc)
@@ -85,7 +95,7 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean clientInsertSelectiveMethodGenerated(Method method, Interface interfaze,
 			IntrospectedTable introspectedTable) {
-		method.setName("insert");
+		method.setName("insertSelective");
 		return super.clientInsertSelectiveMethodGenerated(method, interfaze, introspectedTable);
 	}
 	/* (non-Javadoc)
@@ -93,7 +103,7 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	 */
 	@Override
 	public boolean sqlMapInsertSelectiveElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-		changeXmlId(element, "insert");
+		changeXmlId(element, "insertSelective");
 		return super.sqlMapInsertSelectiveElementGenerated(element, introspectedTable);
 	}
 	
@@ -121,7 +131,8 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean clientUpdateByPrimaryKeyWithoutBLOBsMethodGenerated(Method method, Interface interfaze,
 			IntrospectedTable introspectedTable) {
-		return false;
+		method.setName("update");
+		return super.clientUpdateByPrimaryKeyWithoutBLOBsMethodGenerated(method, interfaze, introspectedTable);
 	}
 	
 	/* (non-Javadoc)
@@ -139,7 +150,9 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean sqlMapUpdateByPrimaryKeyWithoutBLOBsElementGenerated(XmlElement element,
 			IntrospectedTable introspectedTable) {
-		return false;
+		
+		changeXmlId(element, "update");
+		return super.sqlMapUpdateByPrimaryKeyWithoutBLOBsElementGenerated(element, introspectedTable);
 	}
 	
 	/* (non-Javadoc)
@@ -159,7 +172,7 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean clientUpdateByPrimaryKeySelectiveMethodGenerated(Method method, Interface interfaze,
 			IntrospectedTable introspectedTable) {
-		method.setName("update");
+		method.setName("updateSelective");
 		return super.clientUpdateByPrimaryKeySelectiveMethodGenerated(method, interfaze, introspectedTable);
 	}
 	/* (non-Javadoc)
@@ -168,7 +181,7 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean sqlMapUpdateByPrimaryKeySelectiveElementGenerated(XmlElement element,
 			IntrospectedTable introspectedTable) {
-		changeXmlId(element, "update");
+		changeXmlId(element, "updateSelective");
 		return super.sqlMapUpdateByPrimaryKeySelectiveElementGenerated(element, introspectedTable);
 	}
 
@@ -178,7 +191,7 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean clientDeleteByPrimaryKeyMethodGenerated(Method method, Interface interfaze,
 			IntrospectedTable introspectedTable) {
-		method.setName("delete");
+		method.setName("deleteById");
 		return super.clientDeleteByPrimaryKeyMethodGenerated(method, interfaze, introspectedTable);
 	}
 	/* (non-Javadoc)
@@ -186,7 +199,7 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	 */
 	@Override
 	public boolean sqlMapDeleteByPrimaryKeyElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
-		changeXmlId(element, "delete");
+		changeXmlId(element, "deleteById");
 		return super.sqlMapDeleteByPrimaryKeyElementGenerated(element, introspectedTable);
 	}
 
@@ -196,12 +209,14 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	@Override
 	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass,
 			IntrospectedTable introspectedTable) {
-		interfaze.addImportedType(new FullyQualifiedJavaType("com.mogoroom.service.base.dao.BaseMapper"));
+		if(useBaseMapper){
+			interfaze.addImportedType(new FullyQualifiedJavaType("com.mogoroom.service.base.dao.BaseMapper"));
+			
+			
+			FullyQualifiedJavaType superInterface = new FullyQualifiedJavaType("com.mogoroom.service.base.dao.BaseMapper<?, Integer>".replace("?", getBaseRecordShortName(introspectedTable)));
+			interfaze.addSuperInterface(superInterface);
+		}
 		
-		
-		FullyQualifiedJavaType superInterface = new FullyQualifiedJavaType("com.mogoroom.service.base.dao.BaseMapper<?>".replace("?", getBaseRecordShortName(introspectedTable)));
-		interfaze.addSuperInterface(superInterface);
-
 		return super.clientGenerated(interfaze, topLevelClass, introspectedTable);
 	}
 
@@ -209,63 +224,7 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	 * @see org.mybatis.generator.api.PluginAdapter#sqlMapDocumentGenerated(org.mybatis.generator.api.dom.xml.Document, org.mybatis.generator.api.IntrospectedTable)
 	 */
 	@Override
-	public boolean sqlMapDocumentGenerated(Document document, final IntrospectedTable introspectedTable) {		
-
-		//add selectAll element
-		Element selectAll = new Element() {
-
-			@Override
-			public String getFormattedContent(int indentLevel) {
-				String xml= 	"  <select id=\"selectAll\" resultMap=\"BaseResultMap\">\n"
-						+ "    select\n"
-						+ "    <include refid=\"Base_Column_List\" />\n"
-						+ "    from {1}\n"
-						+ "  </select>\n";
-
-				xml = xml.replace("{1}", introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime());
-				return xml;
-
-
-			}
-		};
-		document.getRootElement().addElement(selectAll);
-
-		//add selectListPageInfo element
-		Element selectListPageInfo = new Element() {
-
-			@Override
-			public String getFormattedContent(int indentLevel) {
-				String xml= 	"  <select id=\"selectListPageInfo\" parameterType=\"{1}\" resultMap=\"BaseResultMap\">\n"
-						+ "    select\n"
-						+ "    <include refid=\"Base_Column_List\" />\n"
-						+ "    from {2}\n"
-						+ "	where 1=1\n"
-						+ "	{3}\n"
-						+ "  </select>\n";
-				xml = xml.replace("{1}", "map");
-				xml =  xml.replace("{2}", introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime());
-
-				StringBuilder conds = new StringBuilder();
-				String tpl = 	"    <if test=\"po.{1} != null\" >\n"
-						+ "          and {2} = #{po.{1},jdbcType={3}}\n"
-						+ "    </if>\n";
-
-				for(IntrospectedColumn col : introspectedTable.getAllColumns()){
-					String cond = tpl.replace("{1}", col.getJavaProperty())
-							.replace("{2}", col.getActualColumnName())
-							.replace("{3}", col.getJdbcTypeName());
-					conds.append(cond);
-				}
-				xml = xml.replace("{3}", conds);
-
-				return xml;
-			}
-		};
-		document.getRootElement().addElement(selectListPageInfo);
-
-
-
-
+	public boolean sqlMapDocumentGenerated(Document document, final IntrospectedTable introspectedTable) {	
 		return super.sqlMapDocumentGenerated(document, introspectedTable);
 	}
 

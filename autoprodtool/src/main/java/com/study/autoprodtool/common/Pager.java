@@ -72,14 +72,14 @@ public class Pager {
 		if (page != null && limit != null) {
 			return (page - 1)* limit;
 		}
-		return null;
+		return 0;
 	}
 
 	public Integer getTotalPages() {
 		if (total != null && limit != null && limit > 0) {
 			return total / limit + 1;
 		}
-		return null;
+		return 0;
 	}
 	
 }

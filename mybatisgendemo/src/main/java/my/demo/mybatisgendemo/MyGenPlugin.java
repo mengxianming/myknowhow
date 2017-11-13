@@ -19,6 +19,11 @@ import org.mybatis.generator.api.dom.xml.Element;
  */
 public class MyGenPlugin extends MyGenPluginForBaseMapper {
 	private static boolean useBase = true;
+	
+	public MyGenPlugin() {
+		setUseBaseMapper(false);
+	}
+	
 	/**
 	 * @param useBase the useBase to set
 	 */
@@ -31,7 +36,7 @@ public class MyGenPlugin extends MyGenPluginForBaseMapper {
 	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass,
 			IntrospectedTable introspectedTable) {		
 		boolean ret = super.clientGenerated(interfaze, topLevelClass, introspectedTable);
-		if(useBase){
+		if(useBase || getUseBaseMapper()){
 			return ret;
 		}
 		
@@ -61,11 +66,18 @@ public class MyGenPlugin extends MyGenPluginForBaseMapper {
 		interfaze.addMethod(dbf);
 		
 		//add selectByCriteria		
-		interfaze.addImportedType(new FullyQualifiedJavaType("com.mogoroom.service.base.dao.QCriteria"));
+		interfaze.addImportedType(new FullyQualifiedJavaType("com.vipshop.adp.common.dao.QCriteria"));
 		Method selectByCriteria = new Method("selectByCriteria");		
 		selectByCriteria.setReturnType(new FullyQualifiedJavaType("java.util.List<?>".replace("?", getBaseRecordShortName(introspectedTable))));		
-		selectByCriteria.addParameter(new Parameter(new FullyQualifiedJavaType("com.mogoroom.service.base.dao.QCriteria"), "criteria"));
+		selectByCriteria.addParameter(new Parameter(new FullyQualifiedJavaType("com.vipshop.adp.common.dao.QCriteria"), "criteria"));
 		interfaze.addMethod(selectByCriteria);
+		
+		//add selectByCriteria		
+		interfaze.addImportedType(new FullyQualifiedJavaType("com.vipshop.adp.common.dao.SelectableCriteria"));
+		Method selectRawByCriteria = new Method("selectRawByCriteria");		
+		selectRawByCriteria.setReturnType(new FullyQualifiedJavaType("java.util.List<java.util.Map<String, Object>>"));		
+		selectRawByCriteria.addParameter(new Parameter(new FullyQualifiedJavaType("com.vipshop.adp.common.dao.SelectableCriteria"), "criteria"));
+		interfaze.addMethod(selectRawByCriteria);
 
 		return ret;
 	}
@@ -212,13 +224,71 @@ public class MyGenPlugin extends MyGenPluginForBaseMapper {
 						+ "		</if>\n"
 						+ "	</select>\n";
 
-				xml = xml.replace("{1}", "com.mogoroom.service.base.dao.QCriteria");
+				xml = xml.replace("{1}", "com.vipshop.adp.common.dao.QCriteria");
 				xml =  xml.replace("{2}", introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime());
 
 				return xml;
 			}
 		};
 		document.getRootElement().addElement(selectByCriteria);
+		
+		//add selectRawByCriteria element
+				Element selectRawByCriteria = new Element() {
+
+					@Override
+					public String getFormattedContent(int indentLevel) {
+						String xml= "<select id=\"selectRawByCriteria\" resultType=\"map\" parameterType=\"{1}\">\n"
+								+ "		SELECT\n"
+								+ "		<if test=\"selects != null\"> \n"
+								+ "			${selects} \n"
+								+ "		</if> \n"
+								+ "		<if test=\"selects == null\"> \n"
+								+ "			<include refid=\"Base_Column_List\" /> \n"
+								+ "		</if> \n"
+								+ "		FROM {2}\n"
+								+ "		<where>\n"
+								+ "			<if test=\"conditionAndRelations != null and conditionAndRelations.size() > 0\">\n"
+								+ "				<foreach collection=\"conditionAndRelations\" item=\"cr\">\n"
+								+ "					${cr.andOr}\n"
+								+ "					<foreach collection=\"cr.conditions\" item=\"c\" open=\"(\" separator=\"AND\" close=\")\">\n"
+								+ "						${c.field} ${c.op}\n"
+								+ "						<choose>\n"
+								+ "							<when test=\"c.valueList != null\">\n"
+								+ "								<foreach collection=\"c.valueList\" item=\"val\" separator=\",\" open=\"(\" close=\")\">\n"
+								+ "									#{val}\n"
+								+ "								</foreach>\n"
+								+ "							</when>\n"
+								+ "							<when test=\"c.value != null\">\n"
+								+ "								#{c.value}\n"
+								+ "							</when>\n"
+								+ "						</choose>\n"
+								+ "\n"
+								+ "					</foreach>\n"
+								+ "\n"
+								+ "				</foreach>\n"
+								+ "			</if>\n"
+								+ "		</where>\n"
+								+ "		<if test=\"orderBys != null and orderBys.size() > 0\">\n"
+								+ "			ORDER BY\n"
+								+ "			<foreach collection=\"orderBys\" item=\"ob\" separator=\",\" >\n"
+								+ "				${ob.orderBySql}\n"
+								+ "			</foreach>\n"
+								+ "		</if>\n"
+								+ "		<if test=\"limit != null\">\n"
+								+ "		   LIMIT #{limit}\n"
+								+ "		   <if test=\"offset != null\">\n"
+								+ "		   OFFSET #{offset}\n"
+								+ "		   </if>\n"
+								+ "		</if>\n"
+								+ "	</select>\n";
+
+						xml = xml.replace("{1}", "com.vipshop.adp.common.dao.SelectableCriteria");
+						xml =  xml.replace("{2}", introspectedTable.getAliasedFullyQualifiedTableNameAtRuntime());
+
+						return xml;
+					}
+				};
+				document.getRootElement().addElement(selectRawByCriteria);
 				
 
 		return ret;
