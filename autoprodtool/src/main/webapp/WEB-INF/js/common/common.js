@@ -6,159 +6,159 @@
  * @returns
  */
 function JqGridWrapper(containerId, loadAtOnce, options) {
-    var that = this;
-    this.selectedRowId = null;
-    this.datatype = options.datatype;
-    this.grid = jQuery("#" + containerId);
-    if (!loadAtOnce) {
-	options.datatype = "local";
-    }
-    if (!options.jsonReader) {
-	options.jsonReader = {
-	    root : "data",
-	    page : "pager.page",
-	    total : "pager.totalPages",
-	    records : "pager.total",
-	    cell : "",
-	    id : "id"
-	};
-    }
-    this.grid.bind("jqGridCellSelect", function(evt, rowid, index, content) {
-	that.selectedRowId = rowid;
-    });
-    this.grid.bind("jqGridLoadComplete", function(event, data) {
-	that.selectedRowId = null;
-
-	var gridParam = {};
-	if (data && data.pager) {
-	    gridParam.rowNum = data.pager.limit;
-	    gridParam.records = data.pager.total;
-	    gridParam.page = data.pager.page;
+	var that = this;
+	this.selectedRowId = null;
+	this.datatype = options.datatype;
+	this.grid = jQuery("#" + containerId);
+	if (!loadAtOnce) {
+		options.datatype = "local";
 	}
-	that.setGridParams(gridParam);
-    });
+	if (!options.jsonReader) {
+		options.jsonReader = {
+				root : "data",
+				page : "pager.page",
+				total : "pager.totalPages",
+				records : "pager.total",
+				cell : "",
+				id : "id"
+		};
+	}
+	this.grid.bind("jqGridCellSelect", function(evt, rowid, index, content) {
+		that.selectedRowId = rowid;
+	});
+	this.grid.bind("jqGridLoadComplete", function(event, data) {
+		that.selectedRowId = null;
 
-    this.grid.jqGrid(options);
+		var gridParam = {};
+		if (data && data.pager) {
+			gridParam.rowNum = data.pager.limit;
+			gridParam.records = data.pager.total;
+			gridParam.page = data.pager.page;
+		}
+		that.setGridParams(gridParam);
+	});
+
+	this.grid.jqGrid(options);
 };
 
 JqGridWrapper.prototype.reloadTable = function(postData, resetPager) {
-    var gridParam = {
-	datatype : this.datatype
-    };
-    if (postData) {
-	gridParam.postData = postData;
-    }
-    if (resetPager) {
-	gridParam.page = 1;
-    }
-    this.grid.jqGrid('setGridParam', gridParam);
-    this.grid.trigger("reloadGrid");
+	var gridParam = {
+			datatype : this.datatype
+	};
+	if (postData) {
+		gridParam.postData = postData;
+	}
+	if (resetPager) {
+		gridParam.page = 1;
+	}
+	this.grid.jqGrid('setGridParam', gridParam);
+	this.grid.trigger("reloadGrid");
 
 };
 
 JqGridWrapper.prototype.getGridParam = function(key) {
-    return this.grid.jqGrid('getGridParam', key);
+	return this.grid.jqGrid('getGridParam', key);
 };
 JqGridWrapper.prototype.setGridParam = function(key, value) {
-    var params = {};
-    if (key) {
-	params[key] = value;
-    }
-    this.grid.jqGrid('setGridParam', params);
+	var params = {};
+	if (key) {
+		params[key] = value;
+	}
+	this.grid.jqGrid('setGridParam', params);
 };
 
 JqGridWrapper.prototype.getGridParams = function() {
-    return this.grid.jqGrid('getGridParam');
+	return this.grid.jqGrid('getGridParam');
 };
 
 JqGridWrapper.prototype.setGridParams = function(params) {
-    params = params && typeof (params) === "object" ? params : {};
-    this.grid.jqGrid('setGridParam', params);
+	params = params && typeof (params) === "object" ? params : {};
+	this.grid.jqGrid('setGridParam', params);
 };
 
 JqGridWrapper.prototype.getWrapped = function() {
-    return this.grid;
+	return this.grid;
 };
 
 JqGridWrapper.prototype.getSelectedRowId = function() {
-    return this.selectedRowId;
+	return this.selectedRowId;
 };
 
 JqGridWrapper.prototype.getSelectedRowData = function() {
-    if (this.selectedRowId) {
-	return this.grid.jqGrid('getRowData', this.selectedRowId);
-    }
-    return null;
+	if (this.selectedRowId) {
+		return this.grid.jqGrid('getRowData', this.selectedRowId);
+	}
+	return null;
 };
 
 JqGridWrapper.prototype.enableInlineEdit = function(addUrl, editUrl, delUrl, addSuccessfunc, editSuccessfunc,
-	delSuccessfunc) {
-    var that = this;
-    var pager = this.getGridParam("pager");
-    this.grid.navGrid(pager, {
-	edit : false,
-	add : false,
-	del : false,
-	search : false
-    }).inlineNav(pager, {
-	addParams : {
-	    rowID : "0",
-	    addRowParams : {
-		url : addUrl,
-		successfunc : function() {
-		    if (addSuccessfunc) {
-			addSuccessfunc();
-		    }
-		    that.reloadTable();
-		}
-	    }
-	},
-	editParams : {
-	    url : editUrl,
-	    successfunc : function() {
-		if (editSuccessfunc) {
-		    editSuccessfunc();
-		}
-		that.reloadTable();
-	    }
-	}
-    });
-
-    //add delete button
-    this.grid.navButtonAdd(pager, {
-	caption : "",
-	buttonicon : "ui-icon-close",
-	onClickButton : function() {
-	    if (!that.getSelectedRowData()) {
-		util.alertDialog("メッセージ", "一行のデータを選択してください。");
-		return;
-	    }
-
-	    util.confirmDialog('削除確認', "データを削除してよろしいですか？", function() {
-		$.ajax({
-		    url : delUrl,
-		    type : 'POST',
-		    dataType : 'json',
-		    data : {
-			ids : that.getSelectedRowData().id
-		    },
-		    success : function(data) {
-			if (data && data.code === 'S00') {
-			    util.alertDialog("メッセージ", "選択したデータを削除しました。");
-			    that.reloadTable();
-			    return;
+		delSuccessfunc) {
+	var that = this;
+	var pager = this.getGridParam("pager");
+	this.grid.navGrid(pager, {
+		edit : false,
+		add : false,
+		del : false,
+		search : false
+	}).inlineNav(pager, {
+		addParams : {
+			rowID : "0",
+			addRowParams : {
+				url : addUrl,
+				successfunc : function() {
+					if (addSuccessfunc) {
+						addSuccessfunc();
+					}
+					that.reloadTable();
+				}
 			}
-			util.alertDialog("メッセージ", "選択したデータの削除が失敗しました。");
-		    },
-		    error : function(status) {
-			util.alertDialog("メッセージ", "選択したデータの削除が失敗しました。");
-		    }
-		});
-	    });
+		},
+		editParams : {
+			url : editUrl,
+			successfunc : function() {
+				if (editSuccessfunc) {
+					editSuccessfunc();
+				}
+				that.reloadTable();
+			}
+		}
+	});
 
-	},
-	position : "last"
-    });
+	//add delete button
+	this.grid.navButtonAdd(pager, {
+		caption : "",
+		buttonicon : "ui-icon-close",
+		onClickButton : function() {
+			if (!that.getSelectedRowData()) {
+				util.alertDialog("メッセージ", "一行のデータを選択してください。");
+				return;
+			}
+
+			util.confirmDialog('削除確認', "データを削除してよろしいですか？", function() {
+				$.ajax({
+					url : delUrl,
+					type : 'POST',
+					dataType : 'json',
+					data : {
+						ids : that.getSelectedRowData().id
+					},
+					success : function(data) {
+						if (data && data.code === 'S00') {
+							util.alertDialog("メッセージ", "選択したデータを削除しました。");
+							that.reloadTable();
+							return;
+						}
+						util.alertDialog("メッセージ", "選択したデータの削除が失敗しました。");
+					},
+					error : function(status) {
+						util.alertDialog("メッセージ", "選択したデータの削除が失敗しました。");
+					}
+				});
+			});
+
+		},
+		position : "last"
+	});
 };
 
 /**
@@ -175,7 +175,7 @@ var util = {
  * return true or false to indicate the test result.
  */
 util.filterList = function(list, filterFunc) {
-    return $.grep(list, filterFunc);
+	return $.grep(list, filterFunc);
 };
 
 /**
@@ -186,8 +186,8 @@ util.filterList = function(list, filterFunc) {
  * if no result, return null
  */
 util.filterListUnique = function(list, filterFunc) {
-    var ret = $.grep(list, filterFunc);
-    return ret.length > 0 ? ret[0] : null;
+	var ret = $.grep(list, filterFunc);
+	return ret.length > 0 ? ret[0] : null;
 };
 
 /**
@@ -196,99 +196,99 @@ util.filterListUnique = function(list, filterFunc) {
  * 
  */
 util.projectList = function(list, prop, distinct) {
-    var ret = [];
-    for ( var i = 0; i < list.length; i++) {
-	ret.push(list[i][prop]);
-    }
-    if (distinct) {
-	ret = $.unique(ret);
-    }
-    return ret;
+	var ret = [];
+	for ( var i = 0; i < list.length; i++) {
+		ret.push(list[i][prop]);
+	}
+	if (distinct) {
+		ret = $.unique(ret);
+	}
+	return ret;
 };
 
 /**
  * Ajax呼び出す返却値を取得する
  */
 util.getAjaxData = function(url, postdata) {
-    var list = null;
-    postdata = postdata ? postdata : {
-	ts : new Date().getTime()
-    };
+	var list = null;
+	postdata = postdata ? postdata : {
+		ts : new Date().getTime()
+	};
 
-    $.ajax({
-	url : url,
-	type : "POST",
-	data : postdata,
-	dataType : 'json',
-	async : false,
-	success : function(data, status) {
-	    if (data.data) {
-		list = data.data;
-	    }
-	}
-    });
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : postdata,
+		dataType : 'json',
+		async : false,
+		success : function(data, status) {
+			if (data.data) {
+				list = data.data;
+			}
+		}
+	});
 
-    return list;
+	return list;
 };
 
 util.fillOptionList = function(selector, dataList, keyProp, labelProp, selected) {
-    $(selector).val("");
-    $(selector).empty();
-    //add empty option
-    $(selector).append('<option value="">--未選択--</option>');
+	$(selector).val("");
+	$(selector).empty();
+	//add empty option
+	$(selector).append('<option value="">--未選択--</option>');
 
-    for ( var index in dataList) {
-	var dataEle = dataList[index];
-	var key, label;
-	if (typeof (dataEle) === "object") {
-	    key = dataEle[keyProp];
-	    label = dataEle[labelProp];	    
-	} else {
-	    key = dataEle;
-	    label = dataEle;
+	for ( var index in dataList) {
+		var dataEle = dataList[index];
+		var key, label;
+		if (typeof (dataEle) === "object") {
+			key = dataEle[keyProp];
+			label = dataEle[labelProp];	    
+		} else {
+			key = dataEle;
+			label = dataEle;
+		}
+		var option = $("<option/>").attr("value", key).text(label);
+		if (key == selected) {
+			option.attr("selected", "selected");
+		}
+		$(selector).append(option);
 	}
-	var option = $("<option/>").attr("value", key).text(label);
-	if (key == selected) {
-	    option.attr("selected", "selected");
-	}
-	$(selector).append(option);
-    }
 
 };
 
 util.listToMap = function(list, keyProp, valueProp) {
-    var map = {};
-    for ( var index = 0; index < list.length; index++) {
-	var dataEle = list[index];
-	var key, label;
-	if (typeof (dataEle) === "string") {
-	    key = dataEle;
-	    label = dataEle;
-	} else {
-	    key = dataEle[keyProp];
-	    label = dataEle[valueProp];
+	var map = {};
+	for ( var index = 0; index < list.length; index++) {
+		var dataEle = list[index];
+		var key, label;
+		if (typeof (dataEle) === "string") {
+			key = dataEle;
+			label = dataEle;
+		} else {
+			key = dataEle[keyProp];
+			label = dataEle[valueProp];
+		}
+		map[key] = label;
 	}
-	map[key] = label;
-    }
-    return map;
+	return map;
 };
 
 util.getJqGridOptionsString = function(list, keyProp, valueProp) {
-    var str = "";
-    for ( var index = 0; index < list.length; index++) {
-	var dataEle = list[index];
-	var key, label;
-	if (typeof (dataEle) === "string") {
-	    key = dataEle;
-	    label = dataEle;
-	} else {
-	    key = dataEle[keyProp];
-	    label = dataEle[valueProp];
+	var str = "";
+	for ( var index = 0; index < list.length; index++) {
+		var dataEle = list[index];
+		var key, label;
+		if (typeof (dataEle) === "string") {
+			key = dataEle;
+			label = dataEle;
+		} else {
+			key = dataEle[keyProp];
+			label = dataEle[valueProp];
+		}
+		str += index > 0 ? ";" : '';
+		str += key + ":" + label;
 	}
-	str += index > 0 ? ";" : '';
-	str += key + ":" + label;
-    }
-    return str;
+	return str;
 };
 
 /*
@@ -308,97 +308,97 @@ util.getJqGridOptionsString = function(list, keyProp, valueProp) {
  * 
  */
 util.paginator = function(container, totalRecords, recordsPerpage, currentPage, pageBtnCount, pageChangedCallBack) {
-    $(container).paginator({
-	totalrecords : totalRecords,
-	recordsperpage : recordsPerpage,
-	pagebtncount : pageBtnCount,
-	initval : currentPage,
-	next : '次へ',
-	prev : '前へ',
-	first : '',
-	last : '',
-	theme : '',
-	controlsalways : false,
-	onchange : function(newPage) {
-	    if (pageChangedCallBack)
-		pageChangedCallBack(newPage);
-	}
-    });
+	$(container).paginator({
+		totalrecords : totalRecords,
+		recordsperpage : recordsPerpage,
+		pagebtncount : pageBtnCount,
+		initval : currentPage,
+		next : '次へ',
+		prev : '前へ',
+		first : '',
+		last : '',
+		theme : '',
+		controlsalways : false,
+		onchange : function(newPage) {
+			if (pageChangedCallBack)
+				pageChangedCallBack(newPage);
+		}
+	});
 };
 
 util.alertDialog = function(title, content, closeCallback) {
-    title = title || "メッセージ";
-    var width = content.length > 20 ? 'auto' : 350;
+	title = title || "メッセージ";
+	var width = content.length > 20 ? 'auto' : 350;
 
-    var html = [ '<div id="dialog-alert" title="' + title + '">', '<p>', content, '</p></div>' ].join(" ");
+	var html = [ '<div id="dialog-alert" title="' + title + '">', '<p>', content, '</p></div>' ].join(" ");
 
-    var buttons = [ {
-	text : "OK",
-	click : function() {
-	    $(this).dialog('close');
-	}
-    } ];
+	var buttons = [ {
+		text : "OK",
+		click : function() {
+			$(this).dialog('close');
+		}
+	} ];
 
-    $(html).dialog({
-	resizable : false,
-	minWidth : 350,
-	width : width,
-	modal : true,
-	buttons : buttons,
-	close : function() {
-	    if (closeCallback) {
-		closeCallback();
-	    }
-	}
-    });
+	$(html).dialog({
+		resizable : false,
+		minWidth : 350,
+		width : width,
+		modal : true,
+		buttons : buttons,
+		close : function() {
+			if (closeCallback) {
+				closeCallback();
+			}
+		}
+	});
 
 };
 
 util.confirmDialog = function(title, content, okCallback, closeCallback, cancelCallback, okCaption) {
-    title = title || "確認";
-    okCaption = okCaption || "OK";
+	title = title || "確認";
+	okCaption = okCaption || "OK";
 
-    var width = content.length > 20 ? 'auto' : 350;
+	var width = content.length > 20 ? 'auto' : 350;
 
-    var buttons = [ {
-	text : okCaption,
-	click : function(eventObject) {
-	    $(this).dialog('close');
-	    if (okCallback) {
-		okCallback(eventObject);
-	    }
-	}
-    }, {
-	text : "キャンセル",
-	click : function(eventObject) {
-	    $(this).dialog('close');
-	    if (cancelCallback) {
-		cancelCallback(eventObject);
-	    }
-	}
-    } ];
+	var buttons = [ {
+		text : okCaption,
+		click : function(eventObject) {
+			$(this).dialog('close');
+			if (okCallback) {
+				okCallback(eventObject);
+			}
+		}
+	}, {
+		text : "キャンセル",
+		click : function(eventObject) {
+			$(this).dialog('close');
+			if (cancelCallback) {
+				cancelCallback(eventObject);
+			}
+		}
+	} ];
 
-    content = content ? content : "";
-    var html = [ '<div id="dialog-confirm" title="' + title + '">', '<p>', content, '</p></div>' ].join(" ");
+	content = content ? content : "";
+	var html = [ '<div id="dialog-confirm" title="' + title + '">', '<p>', content, '</p></div>' ].join(" ");
 
-    $(html).dialog({
-	resizable : false,
-	minWidth : 350,
-	width : width,
-	modal : true,
-	buttons : buttons,
-	close : function(event, ui) {
-	    if (closeCallback) {
-		closeCallback(event, ui);
-	    }
-	}
-    });
+	$(html).dialog({
+		resizable : false,
+		minWidth : 350,
+		width : width,
+		modal : true,
+		buttons : buttons,
+		close : function(event, ui) {
+			if (closeCallback) {
+				closeCallback(event, ui);
+			}
+		}
+	});
 };
 
 util.bindRadioButtons = function(containerSelector, bindVal) {
-    $(containerSelector).find(":radio").each(function(index, elem) {
-	elem.checked = $(elem).val() == bindVal;
-    });
+	$(containerSelector).find(":radio").each(function(index, elem) {
+		elem.checked = $(elem).val() == bindVal;
+	});
 };
 
 
@@ -407,35 +407,35 @@ util.bindRadioButtons = function(containerSelector, bindVal) {
  * maybe not safe for one name and multi values case
  */
 util.getFormData = function(obj) {
-    var result = {};
+	var result = {};
 
-    var arrData = $(obj).serializeArray();
+	var arrData = $(obj).serializeArray();
 
-    // convert to name:value format
-    for ( var i in arrData) {
-	if (typeof (result[arrData[i].name]) == 'undefined')
-	    result[arrData[i].name] = arrData[i].value;
-	else
-	    result[arrData[i].name] += "," + arrData[i].value;
-    }
-    return result;
+	// convert to name:value format
+	for ( var i in arrData) {
+		if (typeof (result[arrData[i].name]) == 'undefined')
+			result[arrData[i].name] = arrData[i].value;
+		else
+			result[arrData[i].name] += "," + arrData[i].value;
+	}
+	return result;
 };
 
 util.createCustomSelectEditoptions = function(dataUrl, keyProp, valProp){
-    var opt = {};
-    opt.custom_element = function(value, options) {
-	    var list = util.getAjaxData(dataUrl);
-	    var selector = $("<select/>");
-	    util.fillOptionList(selector, list, keyProp, valProp, value);
-	    return selector.get(0);
+	var opt = {};
+	opt.custom_element = function(value, options) {
+		var list = util.getAjaxData(dataUrl);
+		var selector = $("<select/>");
+		util.fillOptionList(selector, list, keyProp, valProp, value);
+		return selector.get(0);
 	};
 	opt.custom_value = function(elem, operation, value) {
-	    if (operation === 'get') {
-		return $(elem).val();
-	    } else if (operation === 'set') {
-		$(elem).val(value);
-	    }
+		if (operation === 'get') {
+			return $(elem).val();
+		} else if (operation === 'set') {
+			$(elem).val(value);
+		}
 	};
-	
+
 	return opt;
 };

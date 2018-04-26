@@ -42,12 +42,12 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<!-- <table tableName="adp_monitor_spot" domainObjectName="AdpMonitorSpot" enableCountByExample="false"
+		 <!-- <table tableName="adp_monitor_spot" domainObjectName="AdpMonitorSpot" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
-		<table tableName="adp_dict" domainObjectName="AdpDict" enableCountByExample="false"
+		</table> -->
+		<!--<table tableName="adp_dict" domainObjectName="AdpDict" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="JDBC" />
@@ -75,11 +75,11 @@
 		</table>
 		 -->
 		 
-		 <table tableName="adp_promote_activity" domainObjectName="AdpPromoteActivity" enableCountByExample="false"
+		 <!-- <table tableName="adp_promote_activity" domainObjectName="AdpPromoteActivity" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="false" />
 			<generatedKey column="id" sqlStatement="JDBC" />
-		</table>
+		</table> -->
 		<!--  <table tableName="adp_promote_activity_brand" domainObjectName="AdpPromoteActivityBrand" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="false" />
@@ -132,7 +132,66 @@
 			<generatedKey column="id" sqlStatement="JDBC" />
 			
 		</table> -->
+		
+		<!-- <table tableName="cps_a_banner_platform" domainObjectName="CpsABannerPlatform" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+			</table> -->
+		
+		<!-- <table tableName="adp_user_nameauth" domainObjectName="AdpUserNameAuth" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+		</table> -->
 		 
+		<!--  <table tableName="cps_w_payout_tax" domainObjectName="CpsWPayoutTax" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+		</table> -->
+		
+		<!--  <table tableName="adp_inviteincome_sum_period" domainObjectName="AdpInviteIncomeSumPeriod" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+		</table> -->
+		
+		 <!-- <table tableName="adp_user_configs" domainObjectName="AdpUserConfigs" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+		</table> -->
+<!-- <table tableName="adp_store_goods" domainObjectName="AdpStoreGoods" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+		</table>
+		<table tableName="adp_store_info" domainObjectName="AdpStoreInfo" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+		</table> -->
+		
+		<table tableName="adp_batchpay_mgmt" domainObjectName="AdpBatchPayMgmt" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+		</table>
+		<table tableName="adp_batchpay_detail" domainObjectName="AdpBatchPayDetail" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+			
+		</table>
 
 
 	</context>

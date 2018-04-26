@@ -87,6 +87,12 @@
          <version>2.4</version>
       </dependency>
       
+      <dependency>
+<groupId>com.vip.finance.member</groupId>
+<artifactId>vip-finance-member-gateway-service-api</artifactId>
+<version>1.0.0</version>
+</dependency>
+
 	</dependencies>
 
 	<build>
