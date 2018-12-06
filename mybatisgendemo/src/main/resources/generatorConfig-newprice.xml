@@ -20,8 +20,8 @@
 			connectionURL="jdbc:mysql://192.168.31.2:3306/stumng" userId="root"
 			password="123456" />
 <!-- 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" -->
-<!-- 		connectionURL="jdbc:mysql://192.168.12.188:3306/acct" userId="mogodev" -->
-<!-- 		password="mogodev1234" /> -->
+<!-- 		connectionURL="jdbc:mysql://192.168.12.188:3306/acct" userId="mxmdev" -->
+<!-- 		password="mxmdev1234" /> -->
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="true" />
@@ -72,25 +72,25 @@
 <!-- 			<property name="useActualColumnNames" value="true" /> -->
 			<generatedKey column="id" sqlStatement="JDBC" />
 		</table>
-<!-- 		<table schema="mogo_dev" tableName="flat_roomPriceBizType" domainObjectName="RoomPriceBizType" -->
+<!-- 		<table schema="mxm_dev" tableName="flat_roomPriceBizType" domainObjectName="RoomPriceBizType" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
 <!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
 <!-- 			<property name="useActualColumnNames" value="true" /> -->
 <!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
 <!-- 		</table> -->
-<!-- 		<table schema="mogo_dev" tableName="flat_roomPrice" domainObjectName="RoomPriceNew" -->
+<!-- 		<table schema="mxm_dev" tableName="flat_roomPrice" domainObjectName="RoomPriceNew" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
 <!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
 <!-- 			<property name="useActualColumnNames" value="true" /> -->
 <!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
 <!-- 		</table> -->
-<!-- 		<table schema="mogo_dev" tableName="flat_roomBasePrice" domainObjectName="RoomBasePrice" -->
+<!-- 		<table schema="mxm_dev" tableName="flat_roomBasePrice" domainObjectName="RoomBasePrice" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
 <!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
 <!-- 			<property name="useActualColumnNames" value="true" /> -->
 <!-- 			<generatedKey column="id" sqlStatement="JDBC" /> -->
 <!-- 		</table> -->
-<!-- 		<table schema="mogo_dev" tableName="flat_roomPriceDtl" domainObjectName="RoomPriceDtl" -->
+<!-- 		<table schema="mxm_dev" tableName="flat_roomPriceDtl" domainObjectName="RoomPriceDtl" -->
 <!-- 			enableCountByExample="false" enableDeleteByExample="false" -->
 <!-- 			enableSelectByExample="false" enableUpdateByExample="false"> -->
 <!-- 			<property name="useActualColumnNames" value="true" /> -->

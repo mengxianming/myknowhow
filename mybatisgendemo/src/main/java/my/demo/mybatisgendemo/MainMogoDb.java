@@ -7,7 +7,7 @@ package my.demo.mybatisgendemo;
  * @author admin-2015年11月12日
  *
  */
-public class MainMogoDb {
+public class MainmxmDb {
 
 	/**
 	 * @param args
@@ -15,7 +15,7 @@ public class MainMogoDb {
 	 */
 	public static void main(String[] args) {
 		MyGenPlugin.setUseBase(false);
-		Main.main(new String[]{"generatorConfig-mogodb.xml"});
+		Main.main(new String[]{"generatorConfig-mxmdb.xml"});
 
 	}
 

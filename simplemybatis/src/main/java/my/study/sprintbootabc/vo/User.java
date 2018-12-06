@@ -70,7 +70,7 @@ public class User{
 	public void setName(String name) {
 		this.name = name;
 	}
-	@Min(value=18, message="{mogo.validmesg.User.age.min}")
+	@Min(value=18, message="{mxm.validmesg.User.age.min}")
 	@Max(value=30, message="{propertyPath}不能大于{value}, inval={invalidValue}")
 	public Integer getAge() {
 		return age;
