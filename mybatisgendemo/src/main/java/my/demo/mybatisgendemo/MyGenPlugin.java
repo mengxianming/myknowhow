@@ -192,7 +192,8 @@ public class MyGenPlugin extends MyGenPluginForBaseMapper {
 						+ "			<if test=\"conditionAndRelations != null and conditionAndRelations.size() > 0\">\n"
 						+ "				<foreach collection=\"conditionAndRelations\" item=\"cr\">\n"
 						+ "					${cr.andOr}\n"
-						+ "					<foreach collection=\"cr.conditions\" item=\"c\" open=\"(\" separator=\"AND\" close=\")\">\n"
+						+ "				  <trim prefix=\"(\"  suffix=\")\" suffixOverrides=\"AND|OR\" >\n"
+						+ "					<foreach collection=\"cr.conditions\" item=\"c\" open=\"\" separator=\"\" close=\"\">\n"
 						+ "						${c.field} ${c.op}\n"
 						+ "						<choose>\n"
 						+ "							<when test=\"c.valueList != null\">\n"
@@ -204,8 +205,10 @@ public class MyGenPlugin extends MyGenPluginForBaseMapper {
 						+ "								#{c.value}\n"
 						+ "							</when>\n"
 						+ "						</choose>\n"
+						+ "						${cr.conditionAndOr}\n"
 						+ "\n"
 						+ "					</foreach>\n"
+						+ "				  </trim>\n"
 						+ "\n"
 						+ "				</foreach>\n"
 						+ "			</if>\n"
@@ -232,6 +235,7 @@ public class MyGenPlugin extends MyGenPluginForBaseMapper {
 		};
 		document.getRootElement().addElement(selectByCriteria);
 		
+			
 		//add selectRawByCriteria element
 				Element selectRawByCriteria = new Element() {
 
@@ -250,7 +254,8 @@ public class MyGenPlugin extends MyGenPluginForBaseMapper {
 								+ "			<if test=\"conditionAndRelations != null and conditionAndRelations.size() > 0\">\n"
 								+ "				<foreach collection=\"conditionAndRelations\" item=\"cr\">\n"
 								+ "					${cr.andOr}\n"
-								+ "					<foreach collection=\"cr.conditions\" item=\"c\" open=\"(\" separator=\"AND\" close=\")\">\n"
+								+ "				  <trim prefix=\"(\"  suffix=\")\" suffixOverrides=\"AND|OR\" >\n"
+								+ "					<foreach collection=\"cr.conditions\" item=\"c\" open=\"\" separator=\"\" close=\"\">\n"
 								+ "						${c.field} ${c.op}\n"
 								+ "						<choose>\n"
 								+ "							<when test=\"c.valueList != null\">\n"
@@ -262,8 +267,10 @@ public class MyGenPlugin extends MyGenPluginForBaseMapper {
 								+ "								#{c.value}\n"
 								+ "							</when>\n"
 								+ "						</choose>\n"
+								+ "						${cr.conditionAndOr}\n"
 								+ "\n"
 								+ "					</foreach>\n"
+								+ "				  </trim>\n"
 								+ "\n"
 								+ "				</foreach>\n"
 								+ "			</if>\n"

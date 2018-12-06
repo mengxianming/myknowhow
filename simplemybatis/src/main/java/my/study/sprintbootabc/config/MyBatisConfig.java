@@ -35,6 +35,7 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		EmbeddedDatabase db = builder
 			.setType(EmbeddedDatabaseType.H2) //.H2 or .DERBY
+			.setName("test;MODE=MYSQL")
 			.addScript("db/schema.sql")
 			.build();
 		return db;
