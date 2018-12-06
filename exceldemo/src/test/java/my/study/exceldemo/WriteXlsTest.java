@@ -45,7 +45,7 @@ public class WriteXlsTest{
 		Config c = new Config();
 		XlsWriteOpt wo = new XlsWriteOpt();
 		wo.setJdbcDriver("com.mysql.jdbc.Driver");
-		wo.setJdbcUrl("jdbc:mysql://192.168.31.3:3306/mogo_dev?useUnicode=true&characterEncoding=UTF-8");
+		wo.setJdbcUrl("jdbc:mysql://192.168.31.3:3306/mxm_dev?useUnicode=true&characterEncoding=UTF-8");
 		wo.setJdbcUsername("root");
 		wo.setJdbcPassword("123456");
 		wo.setSql("select * from acct.acct_billtype");
