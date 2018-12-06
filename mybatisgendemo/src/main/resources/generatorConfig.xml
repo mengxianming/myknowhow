@@ -30,7 +30,7 @@
 		<javaModelGenerator targetPackage="com.vipshop.adp.common.entity" targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
-			<!-- <property name="rootClass" value="com.mogoroom.service.acct.dao.domain.BaseEntity" /> -->
+			<!-- <property name="rootClass" value="com.abc.service.acct.dao.domain.BaseEntity" /> -->
 		</javaModelGenerator>
 
 		<sqlMapGenerator targetPackage="mapper.common" targetProject="src/main/gen">

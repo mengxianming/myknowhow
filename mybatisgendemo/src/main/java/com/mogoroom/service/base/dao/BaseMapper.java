@@ -1,4 +1,4 @@
-package com.mogoroom.service.base.dao;
+package com.abc.service.base.dao;
 
 import java.util.List;
 import java.util.Map;

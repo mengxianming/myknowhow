@@ -29,20 +29,20 @@
 
 
 
-		<javaModelGenerator targetPackage="com.mogoroom.service.acct.domain"
+		<javaModelGenerator targetPackage="com.abc.service.acct.domain"
 			targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
-<!-- 			<property name="rootClass" value="com.mogoroom.service.acct.dao.domain.BaseEntity" /> -->
+<!-- 			<property name="rootClass" value="com.abc.service.acct.dao.domain.BaseEntity" /> -->
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.mogoroom.service.acct.dao.resources"
+		<sqlMapGenerator targetPackage="com.abc.service.acct.dao.resources"
 			targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.mogoroom.service.acct.dao" targetProject="src/main/gen">
+			targetPackage="com.abc.service.acct.dao" targetProject="src/main/gen">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		

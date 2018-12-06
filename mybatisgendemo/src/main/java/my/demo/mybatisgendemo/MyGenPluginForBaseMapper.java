@@ -210,10 +210,10 @@ public class MyGenPluginForBaseMapper extends PluginAdapter {
 	public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass,
 			IntrospectedTable introspectedTable) {
 		if(useBaseMapper){
-			interfaze.addImportedType(new FullyQualifiedJavaType("com.mogoroom.service.base.dao.BaseMapper"));
+			interfaze.addImportedType(new FullyQualifiedJavaType("com.abc.service.base.dao.BaseMapper"));
 			
 			
-			FullyQualifiedJavaType superInterface = new FullyQualifiedJavaType("com.mogoroom.service.base.dao.BaseMapper<?, Integer>".replace("?", getBaseRecordShortName(introspectedTable)));
+			FullyQualifiedJavaType superInterface = new FullyQualifiedJavaType("com.abc.service.base.dao.BaseMapper<?, Integer>".replace("?", getBaseRecordShortName(introspectedTable)));
 			interfaze.addSuperInterface(superInterface);
 		}
 		
